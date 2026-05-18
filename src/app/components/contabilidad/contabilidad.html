@@ -1,0 +1,425 @@
+<div class="dashboard-layout">
+  <aside class="sidebar glass">
+  <div class="logo">
+    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <div class="nav-items">
+    <!-- SECCIÓN: INICIO -->
+    <div class="nav-section">
+      <div class="nav-section-title">Inicio</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: CLÍNICA -->
+    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: FINANZAS -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+      <div class="nav-section-title">Finanzas</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ADMINISTRACIÓN -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Administración</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombres }}</p>
+    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+      </select>
+    </div>
+    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+    <button (click)="toggleTheme()" class="btn-theme-toggle">
+      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+    </button>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</aside>
+
+  <main class="content">
+    <header>
+      <div class="header-main">
+        <h1>Control Diario de Cajas y Bancos</h1>
+        <p class="subtitle">ERP contable centralizado para la administración de flujos financieros y cuadres diarios</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-primary" (click)="openNewModal()">+ Registrar Movimiento</button>
+      </div>
+    </header>
+
+    <!-- Balanced Account Cards -->
+    <div class="balances-grid">
+      <!-- Bancolombia Card -->
+      <div 
+        class="balance-card glass colombia-card" 
+        [class.active]="selectedChannel === 'colombia'" 
+        (click)="selectChannel('colombia')"
+      >
+        <div class="card-glow"></div>
+        <div class="card-header">
+          <span class="card-icon">🏦</span>
+          <span class="card-tag">Bancolombia</span>
+        </div>
+        <div class="card-body">
+          <h3>{{ balances.colombia | currency:'COP':'symbol':'1.0-0' }}</h3>
+          <p>Saldo en Cuenta Corriente</p>
+        </div>
+        <div class="card-footer">
+          <span>Ver libro contable →</span>
+        </div>
+      </div>
+
+      <!-- Colpatria Card -->
+      <div 
+        class="balance-card glass colpatria-card" 
+        [class.active]="selectedChannel === 'colpatria'" 
+        (click)="selectChannel('colpatria')"
+      >
+        <div class="card-glow"></div>
+        <div class="card-header">
+          <span class="card-icon">💳</span>
+          <span class="card-tag">Colpatria</span>
+        </div>
+        <div class="card-body">
+          <h3>{{ balances.colpatria | currency:'COP':'symbol':'1.0-0' }}</h3>
+          <p>Saldo Ahorros Negocio</p>
+        </div>
+        <div class="card-footer">
+          <span>Ver libro contable →</span>
+        </div>
+      </div>
+
+      <!-- Caja Efectivo Card -->
+      <div 
+        class="balance-card glass efectivo-card" 
+        [class.active]="selectedChannel === 'efectivo'" 
+        (click)="selectChannel('efectivo')"
+      >
+        <div class="card-glow"></div>
+        <div class="card-header">
+          <span class="card-icon">💵</span>
+          <span class="card-tag">Caja General</span>
+        </div>
+        <div class="card-body">
+          <h3>{{ balances.efectivo | currency:'COP':'symbol':'1.0-0' }}</h3>
+          <p>Efectivo Físico Oficina</p>
+        </div>
+        <div class="card-footer">
+          <span>Ver libro contable →</span>
+        </div>
+      </div>
+
+      <!-- Cuenta Daniel (Externa) Card -->
+      <div 
+        class="balance-card glass externa-card" 
+        [class.active]="selectedChannel === 'externa'" 
+        (click)="selectChannel('externa')"
+      >
+        <div class="card-glow"></div>
+        <div class="card-header">
+          <span class="card-icon">👤</span>
+          <span class="card-tag">Cuenta Daniel</span>
+        </div>
+        <div class="card-body">
+          <h3>{{ balances.externa | currency:'COP':'symbol':'1.0-0' }}</h3>
+          <p>Libro Auxiliar Daniel / Externa</p>
+        </div>
+        <div class="card-footer">
+          <span>Ver libro contable →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters & Ledger Options -->
+    <div class="filters-bar glass">
+      <div class="filters-grid">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            [(ngModel)]="searchQuery" 
+            (ngModelChange)="onFilterChange()" 
+            placeholder="Buscar concepto o actor..." 
+            class="search-input"
+          >
+        </div>
+
+        <div class="date-filters">
+          <div class="date-group">
+            <label>Desde:</label>
+            <input 
+              type="date" 
+              [(ngModel)]="startDate" 
+              (ngModelChange)="onFilterChange()" 
+              class="date-input"
+            >
+          </div>
+          <div class="date-group">
+            <label>Hasta:</label>
+            <input 
+              type="date" 
+              [(ngModel)]="endDate" 
+              (ngModelChange)="onFilterChange()" 
+              class="date-input"
+            >
+          </div>
+          <button class="btn-clear" (click)="clearFilters()" *ngIf="searchQuery || startDate || endDate">
+            Limpiar Filtros
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bookkeeping Ledger Table -->
+    <div class="table-container glass">
+      <div class="table-header-info">
+        <h3>
+          Libro Diario: 
+          <span class="active-channel-name">
+            {{ 
+              selectedChannel === 'colombia' ? 'Bancolombia' : 
+              selectedChannel === 'colpatria' ? 'Colpatria' : 
+              selectedChannel === 'efectivo' ? 'Caja General Efectivo' : 
+              'Cuenta Daniel (Externa)' 
+            }}
+          </span>
+        </h3>
+        <span class="total-badge">{{ total }} transacciones</span>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Concepto</th>
+            <th>Detalle / Actor</th>
+            <th>Tipo</th>
+            <th class="numeric-header">Entrada (+)</th>
+            <th class="numeric-header">Salida (-)</th>
+            <th class="numeric-header">Saldo Acumulado</th>
+            <th class="actions-header">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (m of movements; track m.id) {
+            <tr>
+              <td><strong>{{ m.fecha }}</strong></td>
+              <td>{{ m.concepto }}</td>
+              <td>
+                <span class="actor-badge" [class.na]="m.detalle === 'N/A'">
+                  {{ m.detalle }}
+                </span>
+              </td>
+              <td>
+                @if (m.entrada > 0) {
+                  <span class="badge type-in">Debito / Entrada</span>
+                } @else {
+                  <span class="badge type-out">Credito / Salida</span>
+                }
+              </td>
+              <td class="numeric-cell">
+                @if (m.entrada > 0) {
+                  <span class="amount-in">+{{ m.entrada | currency:'COP':'symbol':'1.0-0' }}</span>
+                } @else {
+                  -
+                }
+              </td>
+              <td class="numeric-cell">
+                @if (m.salida > 0) {
+                  <span class="amount-out">-{{ m.salida | currency:'COP':'symbol':'1.0-0' }}</span>
+                } @else {
+                  -
+                }
+              </td>
+              <td class="numeric-cell font-bold balance-cell">
+                {{ m.acumulado | currency:'COP':'symbol':'1.0-0' }}
+              </td>
+              <td class="actions-cell">
+                <button class="btn-edit" (click)="openEditModal(m)">
+                  ✏️ Editar
+                </button>
+              </td>
+            </tr>
+          }
+          @if (movements.length === 0 && !loadingMovements) {
+            <tr>
+              <td colspan="8" class="empty-state">
+                <span class="empty-icon">📊</span>
+                <p>No se encontraron movimientos contables en este período</p>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      @if (loadingMovements) {
+        <div class="loader-overlay">
+          <div class="spinner"></div>
+          <p>Cargando libro diario de transacciones...</p>
+        </div>
+      }
+    </div>
+
+    <!-- Pagination -->
+    @if (lastPage > 1) {
+      <div class="pagination-bar glass">
+        <button [disabled]="page === 1" (click)="changePage(page - 1)" class="btn-page">◀ Anterior</button>
+        <span class="page-info">Página <strong>{{ page }}</strong> de {{ lastPage }}</span>
+        <button [disabled]="page === lastPage" (click)="changePage(page + 1)" class="btn-page">Siguiente ▶</button>
+      </div>
+    }
+
+    <!-- Add/Edit Transaction Modal -->
+    @if (showModal) {
+      <div class="modal-overlay">
+        <div class="modal-content glass">
+          <header class="modal-header">
+            <h3>{{ isEditing ? 'Editar Asiento Contable' : 'Registrar Transacción Contable' }}</h3>
+            <button class="btn-close" (click)="closeModal()">×</button>
+          </header>
+          
+          <form (submit)="submitForm()" #contableForm="ngForm" class="modal-form">
+            <div class="modal-indicator-bar" [class.editing]="isEditing">
+              <span>Cuenta: <strong>{{ selectedChannel | uppercase }}</strong></span>
+            </div>
+
+            <div class="grid">
+              <div class="form-group">
+                <label>Tipo de Movimiento</label>
+                <div class="radio-selector">
+                  <label class="radio-btn">
+                    <input type="radio" [(ngModel)]="formData.tipologia" name="tipologia" value="1" [disabled]="isEditing">
+                    <span class="radio-label green-glow">📥 Entrada / Débito</span>
+                  </label>
+                  <label class="radio-btn">
+                    <input type="radio" [(ngModel)]="formData.tipologia" name="tipologia" value="2" [disabled]="isEditing">
+                    <span class="radio-label red-glow">📤 Salida / Crédito</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Fecha del Movimiento</label>
+                <input 
+                  type="date" 
+                  [(ngModel)]="formData.fecha" 
+                  name="fecha" 
+                  required 
+                  class="form-control"
+                >
+              </div>
+            </div>
+
+            <div class="grid">
+              <div class="form-group">
+                <label>Concepto Contable</label>
+                <input 
+                  type="text" 
+                  [(ngModel)]="formData.concepto" 
+                  name="concepto" 
+                  list="conceptos-datalist"
+                  required 
+                  placeholder="Ej. Abono pension, pago nomina..."
+                  class="form-control"
+                >
+                <datalist id="conceptos-datalist">
+                  @for (c of conceptosComunes; track c) {
+                    <option [value]="c"></option>
+                  }
+                </datalist>
+              </div>
+
+              <div class="form-group autocomplete-container">
+                <label>Detalle / Actor Financiero (Opcional)</label>
+                <input 
+                  type="text" 
+                  [(ngModel)]="formData.detalle" 
+                  name="detalle" 
+                  (input)="onDetalleInput()" 
+                  autocomplete="off"
+                  placeholder="Nombre de residente, proveedor o tercero..."
+                  class="form-control"
+                >
+                @if (showResDropdown) {
+                  <ul class="autocomplete-dropdown glass">
+                    @for (r of filteredResidents; track r.idresidentes) {
+                      <li (click)="selectResident(r)">
+                        <strong>{{ r.nombresr }} {{ r.apellidosr }}</strong> - <span class="sub-ced">{{ r.documentor }}</span>
+                      </li>
+                    }
+                  </ul>
+                }
+              </div>
+            </div>
+
+            <div class="grid">
+              <div class="form-group">
+                <label>Monto de la Transacción ($ COP)</label>
+                <input 
+                  type="number" 
+                  [(ngModel)]="formData.valor" 
+                  name="valor" 
+                  required 
+                  min="1" 
+                  placeholder="Valor en pesos colombianos..."
+                  class="form-control"
+                >
+              </div>
+              
+              <div class="form-group explain-group">
+                @if (isEditing) {
+                  <p class="explain-text warn-glow">
+                    ⚠️ <strong>Recálculo en Cascada:</strong> Guardar esta edición recalculará automáticamente el saldo acumulado (`acumulado`) de todos los registros cronológicos posteriores.
+                  </p>
+                } @else {
+                  <p class="explain-text info-glow">
+                    💡 <strong>Registro Contable:</strong> La transacción se registrará de forma segura en la base de datos histórica, computando el acumulado correspondiente.
+                  </p>
+                }
+              </div>
+            </div>
+
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" (click)="closeModal()">Cancelar</button>
+              <button type="submit" [disabled]="!contableForm.form.valid" class="btn-primary">
+                {{ isEditing ? 'Guardar Cambios' : 'Confirmar Registro' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    }
+  </main>
+</div>

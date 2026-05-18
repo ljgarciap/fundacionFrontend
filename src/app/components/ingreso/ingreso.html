@@ -1,0 +1,410 @@
+<div class="dashboard-layout">
+  <aside class="sidebar glass">
+    <div class="logo">
+      <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+    </div>
+    <div class="nav-items">
+      <!-- SECCIÓN: INICIO -->
+      <div class="nav-section">
+        <div class="nav-section-title">Inicio</div>
+        <div class="nav-section-content">
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+        </div>
+      </div>
+
+      <!-- SECCIÓN: CLÍNICA -->
+      <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+        <div class="nav-section-title">Clínica</div>
+        <div class="nav-section-content">
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+        </div>
+      </div>
+
+      <!-- SECCIÓN: FINANZAS -->
+      <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+        <div class="nav-section-title">Finanzas</div>
+        <div class="nav-section-content">
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+        </div>
+      </div>
+
+      <!-- SECCIÓN: ADMINISTRACIÓN -->
+      <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+        <div class="nav-section-title">Administración</div>
+        <div class="nav-section-content">
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="user-info">
+      <p class="user-name">{{ user?.nombres }}</p>
+      <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+        <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+          <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+        </select>
+      </div>
+      <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+      <button (click)="toggleTheme()" class="btn-theme-toggle">
+        <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+        <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+      </button>
+      <button (click)="logout()" class="btn-logout">Salir</button>
+    </div>
+  </aside>
+
+  <main class="content" style="padding: 1.5rem; display: flex; justify-content: center; align-items: flex-start; min-height: calc(100vh - 3rem);">
+    <div class="form-card glass" style="width: 100%; max-width: 900px; padding: 2.5rem; border-radius: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-color); box-shadow: var(--shadow-premium);">
+      <div class="header" style="margin-bottom: 2rem; text-align: center;">
+        <h1 style="color: var(--primary); text-transform: uppercase; font-size: 16pt; letter-spacing: 0.5px; border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin: 0 0 1.5rem 0;">Formulario de Ingreso del Residente</h1>
+        <div class="stepper" style="display: flex; justify-content: center; align-items: center; gap: 15px; margin: 20px 0;">
+          <div class="step" [class.active]="currentStep >= 1" title="Información Personal">1</div>
+          <div class="line"></div>
+          <div class="step" [class.active]="currentStep >= 2" title="Acudiente">2</div>
+          <div class="line"></div>
+          <div class="step" [class.active]="currentStep >= 3" title="Antecedentes">3</div>
+          <div class="line"></div>
+          <div class="step" [class.active]="currentStep >= 4" title="Estado Físico">4</div>
+        </div>
+        <div style="text-align: center; font-size: 9.5pt; font-weight: bold; color: var(--primary); margin-top: -10px; margin-bottom: 20px; text-transform: uppercase;">
+          <span *ngIf="currentStep === 1">Paso 1: Información Personal y Demográfica</span>
+          <span *ngIf="currentStep === 2">Paso 2: Información del Acudiente</span>
+          <span *ngIf="currentStep === 3">Paso 3: Antecedentes y Consumo</span>
+          <span *ngIf="currentStep === 4">Paso 4: Estado Físico y Salud</span>
+        </div>
+      </div>
+
+      <!-- Banner para retomar borrador -->
+      <div *ngIf="hasDraft" class="glass" style="margin-bottom: 25px; padding: 15px 20px; border-radius: 12px; border: 1px solid rgba(148, 21, 36, 0.3); background: rgba(148, 21, 36, 0.05); display: flex; align-items: center; justify-content: space-between; gap: 15px; animation: slideDown 0.3s ease-out; box-shadow: var(--shadow-premium);">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 20px;">📝</span>
+          <div>
+            <h4 style="margin: 0; color: var(--text-main); font-weight: 700; font-size: 10pt; text-transform: uppercase; letter-spacing: 0.3px;">Registro Inconcluso Detectado</h4>
+            <p style="margin: 3px 0 0 0; color: var(--text-muted); font-size: 8.5pt; line-height: 1.4;">Detectamos que estabas completando un formulario de ingreso previamente. ¿Deseas retomar la información donde la dejaste?</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; flex-shrink: 0;">
+          <button type="button" (click)="resumeDraft()" class="btn-primary" style="padding: 7px 14px; font-size: 8.5pt; font-weight: 700; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; transition: all 0.2s;">Retomar</button>
+          <button type="button" (click)="discardDraft()" class="btn-secondary" style="padding: 7px 14px; font-size: 8.5pt; font-weight: 700; background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer; transition: all 0.2s;">Descartar</button>
+        </div>
+      </div>
+
+      <form [formGroup]="ingresoForm" (submit)="onSubmit()">
+        <!-- Step 1: Resident Personal Data -->
+        <div *ngIf="currentStep === 1" formGroupName="resident_data" class="step-content" style="animation: fadeIn 0.3s ease-out;">
+          <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 12pt; border-bottom: 1px solid var(--border-color); padding-bottom: 4px; border-left: 4px solid var(--primary); padding-left: 10px;">Información Personal</h3>
+          <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 16px; font-size: 9.5pt;">
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Fundación</label>
+              <select formControlName="nomfund" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="FUNDACIÓN JESÚS ES MI ROCA">Jesús es mi Roca</option>
+                <option value="CENTRO JOREC">Centro Jorec</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Pensión mensual ($)</label>
+              <input type="text" formControlName="pension" (input)="formatNumberInput('pension', $event)" placeholder="Ej: 500.000" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Valor Uniforme ($)</label>
+              <input type="text" formControlName="uniforme" (input)="formatNumberInput('uniforme', $event)" placeholder="Ej: 200.000" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Fecha de Ingreso</label>
+              <input type="date" formControlName="fechai" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Nombres</label>
+              <input type="text" formControlName="nombresr" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Apellidos</label>
+              <input type="text" formControlName="apellidosr" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Fecha de Nacimiento</label>
+              <input type="date" formControlName="fechan" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Seguro Social / EPS</label>
+              <input type="text" formControlName="eps" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Número de Documento</label>
+              <input type="text" formControlName="documentor" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Expedido en</label>
+              <select formControlName="expedicionr" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option *ngFor="let c of ciudades" [value]="c">{{ c }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Tipo Documento</label>
+              <select formControlName="tipodocumento" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="C.C">Cédula de Ciudadanía (C.C)</option>
+                <option value="T.I">Tarjeta de Identidad (T.I)</option>
+                <option value="R.C">Registro Civil (R.C)</option>
+                <option value="C.E">Cédula de Extranjería (C.E)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Teléfono Fijo</label>
+              <input type="text" formControlName="telefono" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Celular</label>
+              <input type="text" formControlName="celular" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Dirección de Residencia</label>
+              <input type="text" formControlName="direccionf" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Ciudad</label>
+              <select formControlName="ciudad" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option *ngFor="let c of ciudades" [value]="c">{{ c }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Nivel de Estudios</label>
+              <select formControlName="estudios" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="Ninguno">Ninguno</option>
+                <option value="Primaria">Primaria (1°-5°)</option>
+                <option value="Secundaria">Secundaria (6°-9°)</option>
+                <option value="Bachiller">Bachiller (10°-11°)</option>
+                <option value="Superior">Superior / Universitario</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Profesión u Oficio</label>
+              <input type="text" formControlName="profesion" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Correo Electrónico</label>
+              <input type="email" formControlName="email" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Estado Civil</label>
+              <select formControlName="estadocivil" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="Soltero">Soltero</option>
+                <option value="Casado">Casado</option>
+                <option value="Separado">Separado</option>
+                <option value="Unión libre">Unión libre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Nombre del Cónyuge</label>
+              <input type="text" formControlName="conyuge" placeholder="Si aplica..." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Nombre del Padre</label>
+              <input type="text" formControlName="padre" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Nombre de la Madre</label>
+              <input type="text" formControlName="madre" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Guardian Data -->
+        <div *ngIf="currentStep === 2" formGroupName="guardian_data" class="step-content" style="animation: fadeIn 0.3s ease-out;">
+          <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 12pt; border-bottom: 1px solid var(--border-color); padding-bottom: 4px; border-left: 4px solid var(--primary); padding-left: 10px;">Información del Acudiente</h3>
+          <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 16px; font-size: 9.5pt;">
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Nombres</label>
+              <input type="text" formControlName="nombres" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Apellidos</label>
+              <input type="text" formControlName="apellidos" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Número de Documento</label>
+              <input type="text" formControlName="documento" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Expedido en</label>
+              <select formControlName="expedicion" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option *ngFor="let c of ciudades" [value]="c">{{ c }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600; color: var(--primary); font-weight: bold;">Teléfono de Contacto (¡Muy Importante!)</label>
+              <input type="text" formControlName="telefono" placeholder="Fijo o celular" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 2px solid var(--primary); background: var(--bg-card); color: var(--text-main); font-weight: bold;">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Correo Electrónico</label>
+              <input type="email" formControlName="email" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Parentesco / Relación</label>
+              <input type="text" formControlName="parentesco" placeholder="Ej: Madre, Padre, Hermano, etc." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Autorización de uso de imagen</label>
+              <select formControlName="autorizacion" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="SI">SÍ autorizo el uso de imágenes en diversos medios.</option>
+                <option value="NO">NO autorizo el uso de imágenes en diversos medios.</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: History Data (Antecedentes y Consumo) -->
+        <div *ngIf="currentStep === 3" formGroupName="history_data" class="step-content" style="animation: fadeIn 0.3s ease-out;">
+          <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 12pt; border-bottom: 1px solid var(--border-color); padding-bottom: 4px; border-left: 4px solid var(--primary); padding-left: 10px;">Antecedentes y Consumo</h3>
+          <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 16px; font-size: 9.5pt;">
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Ingresa a</label>
+              <select formControlName="motivoi" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="Primer Ingreso">Primer Ingreso</option>
+                <option value="Reingreso">Reingreso</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Tiempo en la Adicción</label>
+              <div style="display: flex; gap: 8px;">
+                <input type="number" formControlName="tiempoadiccion" style="width: 40%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <select formControlName="medidatiempo" style="width: 60%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                  <option value="Dias">Días</option>
+                  <option value="Semanas">Semanas</option>
+                  <option value="Meses">Meses</option>
+                  <option value="Años">Años</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Sustancias / Drogas Usadas</label>
+              <input type="text" formControlName="drogasusadas" placeholder="Ej: Alcohol, Cocaína, Cannabis" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">¿Problemas con la justicia?</label>
+              <select formControlName="problemas" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="No">No</option>
+                <option value="Si">Sí</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">¿Ha estado preso?</label>
+              <select formControlName="carcel" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="No">No</option>
+                <option value="Si">Sí</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Fundaciones Anteriores</label>
+              <input type="text" formControlName="fundaciones" placeholder="Nombres de fundaciones previas..." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Motivo del Retiro (Previas)</label>
+              <input type="text" formControlName="motivos" placeholder="Ej: Alta voluntaria, fuga, etc." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">¿Cómo se enteró de nosotros?</label>
+              <input type="text" formControlName="referido" placeholder="Ej: Recomendado por amigo, internet..." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Medical Data (Estado Físico) -->
+        <div *ngIf="currentStep === 4" formGroupName="medical_data" class="step-content" style="animation: fadeIn 0.3s ease-out;">
+          <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 12pt; border-bottom: 1px solid var(--border-color); padding-bottom: 4px; border-left: 4px solid var(--primary); padding-left: 10px;">Estado Físico y Salud</h3>
+          <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 16px; font-size: 9.5pt;">
+            <div class="form-group" style="grid-column: span 2;">
+              <label style="color: var(--text-muted); font-weight: 600;">¿Padece el residente alguna enfermedad?</label>
+              <input type="text" formControlName="enfermedades" placeholder="Ej: Diabetes, Asma, ninguna" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Fecha de Último Examen Físico</label>
+              <input type="date" formControlName="fechaexamen" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">¿Cómo califica su salud en general?</label>
+              <select formControlName="estadosalud" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="Excelente">Excelente</option>
+                <option value="Buena">Buena</option>
+                <option value="Regular">Regular</option>
+                <option value="Pobre">Pobre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">¿Tiene sus vacunas al día?</label>
+              <select formControlName="vacunas" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="Si">Sí</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+              <label style="color: var(--text-muted); font-weight: 600;">Diagnóstico por el Médico</label>
+              <input type="text" formControlName="diagnosis" placeholder="Diagnóstico clínico del examen..." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">¿Toma algún medicamento?</label>
+              <input type="text" formControlName="medicamentos" placeholder="Medicamentos actuales y dosis..." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">¿Tiene alergias?</label>
+              <input type="text" formControlName="alergias" placeholder="Medicamentos, alimentos, etc." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">¿Ha estado hospitalizado?</label>
+              <select formControlName="hospitalizado" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="Si">Sí</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+              <label style="color: var(--text-muted); font-weight: 600;">Detalles de Hospitalización (Si aplica)</label>
+              <textarea formControlName="descripcion" rows="2" placeholder="Motivo, clínica y duración..." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-family: inherit; resize: vertical;"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions" style="margin-top: 30px; display: flex; justify-content: space-between; gap: 15px; border-top: 1px solid var(--border-color); padding-top: 18px;">
+          <button type="button" *ngIf="currentStep > 1" (click)="prevStep()" class="btn-secondary" style="min-width: 100px; padding: 10px 18px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 600; cursor: pointer;">Atrás</button>
+          <button type="button" *ngIf="currentStep === 1" (click)="goToDashboard()" class="btn-secondary" style="min-width: 100px; padding: 10px 18px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 600; cursor: pointer;">Cancelar</button>
+          <div style="flex-grow: 1;"></div>
+          <button type="button" *ngIf="currentStep < 4" (click)="nextStep()" class="btn-primary" style="min-width: 120px; padding: 10px 18px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: 600; cursor: pointer;">Siguiente</button>
+          <button type="submit" *ngIf="currentStep === 4" class="btn-primary" [disabled]="loading" style="min-width: 150px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; border-radius: 6px; border: none; background: var(--primary); color: white; font-weight: 600; cursor: pointer;">
+            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 15px; height: 15px;" *ngIf="!loading"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            {{ loading ? 'Registrando...' : 'Finalizar e Ingresar' }}
+          </button>
+        </div>
+      </form>
+
+      <div *ngIf="success" class="success-overlay glass" style="position: fixed; inset: 0; background: rgba(0,0,0,0.45); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; animation: fadeIn 0.3s ease-out;">
+        <div class="success-content" style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 2.5rem; border-radius: 1.2rem; text-align: center; max-width: 480px; width: 90%;">
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; justify-content: center; align-items: center; margin: 0 auto 15px auto; border: 2px solid rgba(16, 185, 129, 0.3);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h2 style="color: var(--text-main); font-size: 16pt; margin: 0 0 8px 0; text-transform: uppercase;">{{ isOffline ? '¡Guardado Localmente!' : '¡Ingreso Exitoso!' }}</h2>
+          <p style="color: var(--text-muted); font-size: 9.5pt; line-height: 1.5; margin-bottom: 25px;">{{ isOffline ? 'No hay conexión. El registro se sincronizará automáticamente al volver el internet.' : 'El residente y su acudiente han sido registrados con éxito en la base de datos.' }}</p>
+          <div class="actions-success" style="display: flex; gap: 12px; justify-content: center;">
+            <button *ngIf="!isOffline" (click)="downloadPdf()" class="btn-accent" style="min-width: 140px; padding: 10px 18px; border-radius: 6px; font-weight: 600; cursor: pointer; border: none; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; gap: 6px;">
+              <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+              Descargar PDF
+            </button>
+            <button (click)="goToDashboard()" class="btn-primary" style="min-width: 140px; padding: 10px 18px; border-radius: 6px; font-weight: 600; cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">Ir al Dashboard</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,81 @@
+<div class="login-wrapper">
+  <!-- Subtle overlay grid for tech feeling -->
+  <div class="tech-grid"></div>
+
+  <div class="login-container">
+    <div class="login-card glass">
+      <div class="header">
+        <div class="logo-wrapper-img">
+          <img src="assets/images/logob.png" alt="Logo Fundación" class="logo-img">
+        </div>
+        <h1>Fundación Jesús es mi Roca</h1>
+        <p class="subtitle">Sistema Integral de Gestión Administrativa</p>
+      </div>
+
+      <form (submit)="onLogin($event)" class="login-form" *ngIf="!showRoleSelection">
+        <div class="form-group">
+          <label for="docInput">Código de Usuario</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input 
+              type="text" 
+              id="docInput" 
+              [(ngModel)]="documento" 
+              name="documento" 
+              placeholder="Número de cédula o documento" 
+              required
+              autocomplete="username"
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="passInput">Contraseña</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input 
+              type="password" 
+              id="passInput" 
+              [(ngModel)]="password" 
+              name="password" 
+              placeholder="Ingrese su clave" 
+              required
+              autocomplete="current-password"
+            >
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" [disabled]="loading || !documento || !password">
+          <span *ngIf="!loading">Ingresar al Sistema</span>
+          <span *ngIf="loading" class="spinner-inline">Ingresando...</span>
+        </button>
+
+        <div class="error-banner" *ngIf="error">
+          <span class="error-icon">⚠️</span>
+          <p class="error-msg">{{ error }}</p>
+        </div>
+      </form>
+
+      <!-- Multi-Role Selection Card -->
+      <div class="role-selection-view" *ngIf="showRoleSelection">
+        <h2>Seleccione su Perfil de Ingreso</h2>
+        <p class="role-intro">Hemos detectado que tu usuario posee múltiples roles asociados:</p>
+        
+        <div class="roles-list">
+          <button 
+            *ngFor="let role of availableRoles" 
+            class="role-choice-btn" 
+            (click)="selectRole(role)"
+          >
+            <span class="role-badge-choice">🔑</span>
+            <span class="role-name-text">{{ role }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>&copy; 2026 Fundación Jesús es mi Roca &bull; Modernizado por Softclass</p>
+      </div>
+    </div>
+  </div>
+</div>

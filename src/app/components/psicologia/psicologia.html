@@ -1,0 +1,179 @@
+<div class="dashboard-layout">
+  <aside class="sidebar glass">
+  <div class="logo">
+    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <div class="nav-items">
+    <!-- SECCIÓN: INICIO -->
+    <div class="nav-section">
+      <div class="nav-section-title">Inicio</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: CLÍNICA -->
+    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: FINANZAS -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+      <div class="nav-section-title">Finanzas</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ADMINISTRACIÓN -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Administración</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombres }}</p>
+    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+      </select>
+    </div>
+    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+    <button (click)="toggleTheme()" class="btn-theme-toggle">
+      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+    </button>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</aside>
+
+  <main class="content">
+    <div class="psico-layout">
+      <section class="residents-list glass">
+        <header>
+          <h3>Residentes</h3>
+        </header>
+        <div class="list-container">
+          <div *ngFor="let res of residents" 
+               class="resident-item" 
+               [class.active]="selectedResident?.idresidentes === res.idresidentes"
+               (click)="viewSeguimientos(res)">
+            <p class="name">{{ res.nombresr }} {{ res.apellidosr }}</p>
+            <p class="meta">{{ res.documentor }} - {{ res.eps }}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="reports-section">
+        <div *ngIf="!selectedResident" class="empty-state glass">
+          <p>Seleccione un residente para ver sus informes psicológicos</p>
+        </div>
+
+        <div *ngIf="selectedResident" class="reports-container">
+          <header class="reports-header">
+            <div class="title-info">
+              <h2>Seguimientos de {{ selectedResident.nombresr }}</h2>
+              <p>Historial de atenciones psicológicas</p>
+            </div>
+            <button class="btn-primary" (click)="openModal()">+ Nueva Atención</button>
+          </header>
+
+          <div class="timeline">
+            <div *ngFor="let seg of seguimientos" class="timeline-item glass">
+              <div class="timeline-date">
+                <span class="date">{{ seg.fecha | date:'dd/MM/yyyy' }}</span>
+                <span class="hour">{{ seg.hora }}</span>
+                <button class="btn-print" (click)="printSeguimiento(seg)">🖨️</button>
+              </div>
+              <div class="timeline-content">
+                <div class="info-block">
+                  <label>Resumen de sesión:</label>
+                  <p>{{ seg.resumen }}</p>
+                </div>
+                <div class="info-block">
+                  <label>Evaluación:</label>
+                  <p>{{ seg.evaluacion }}</p>
+                </div>
+                <div class="grid">
+                  <div class="info-block">
+                    <label>Técnicas:</label>
+                    <p>{{ seg.tecnicas }}</p>
+                  </div>
+                  <div class="info-block">
+                    <label>Tareas:</label>
+                    <p>{{ seg.tarea }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modal for New Report -->
+  <div class="modal-overlay" *ngIf="showModal">
+    <div class="modal-content glass">
+      <h3>Nueva Atención Psicológica</h3>
+      <p class="residente-name">{{ selectedResident?.nombresr }} {{ selectedResident?.apellidosr }}</p>
+      
+      <div class="grid">
+        <div class="form-group">
+          <label>Fecha</label>
+          <input type="date" [(ngModel)]="formData.fecha">
+        </div>
+        <div class="form-group">
+          <label>Hora</label>
+          <input type="time" [(ngModel)]="formData.hora">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Resumen de Sesión</label>
+        <textarea [(ngModel)]="formData.resumen"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Evaluación</label>
+        <textarea [(ngModel)]="formData.evaluacion"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Técnicas Utilizadas</label>
+        <textarea [(ngModel)]="formData.tecnicas"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Tareas Asignadas</label>
+        <textarea [(ngModel)]="formData.tarea"></textarea>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button class="btn-primary" (click)="submitSeguimiento()">Guardar Informe</button>
+      </div>
+    </div>
+  </div>
+</div>

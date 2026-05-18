@@ -1,0 +1,312 @@
+<div class="dashboard-container">
+  <aside class="sidebar glass">
+  <div class="logo">
+    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <div class="nav-items">
+    <!-- SECCIÓN: INICIO -->
+    <div class="nav-section">
+      <div class="nav-section-title">Inicio</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: CLÍNICA -->
+    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: FINANZAS -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+      <div class="nav-section-title">Finanzas</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ADMINISTRACIÓN -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Administración</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombres }}</p>
+    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+      </select>
+    </div>
+    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+    <button (click)="toggleTheme()" class="btn-theme-toggle">
+      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+    </button>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</aside>
+
+  <main class="main-content">
+    <header class="top-header">
+      <div class="header-title">
+        <h1>Terapias Estructuradas</h1>
+        <p>Evolución cognitiva-conductual y acompañamiento espiritual</p>
+      </div>
+      
+    </header>
+
+    <!-- Tab Selection -->
+    <div class="tab-nav">
+      <button class="tab-btn" [class.active]="activeTab === 'cognitiva'" (click)="setTab('cognitiva')">
+        🧩 Terapia Cognitivo-Conductual
+      </button>
+      <button class="tab-btn" [class.active]="activeTab === 'espiritual'" (click)="setTab('espiritual')">
+        🕊️ Acompañamiento Espiritual
+      </button>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-card">
+      <div class="filter-grid">
+        <div class="filter-item">
+          <label>Buscar</label>
+          <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar por palabra clave...">
+        </div>
+        <div class="filter-item">
+          <label>Residente</label>
+          <select [(ngModel)]="filterResidente" class="filter-select">
+            <option value="">Todos los residentes</option>
+            <option *ngFor="let r of residents" [value]="r.idresidentes">
+              {{ r.nombresr }} {{ r.apellidosr }}
+            </option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label>Desde</label>
+          <input type="date" [(ngModel)]="filterDesde">
+        </div>
+        <div class="filter-item">
+          <label>Hasta</label>
+          <input type="date" [(ngModel)]="filterHasta">
+        </div>
+      </div>
+      <div class="filter-actions">
+        <button class="btn-filter" (click)="applyFilters()">🔍 Filtrar</button>
+        <button class="btn-clear" (click)="clearFilters()">✕ Limpiar</button>
+        <button class="btn-new" *ngIf="activeTab === 'cognitiva'" (click)="openNuevoCognitiva()">+ Nueva Sesión Cognitiva</button>
+        <button class="btn-new" *ngIf="activeTab === 'espiritual'" (click)="openNuevoEspiritual()">+ Nueva Sesión Espiritual</button>
+      </div>
+    </div>
+
+    <!-- 🧩 TAB: COGNITIVO-CONDUCTUAL -->
+    <div class="table-container" *ngIf="activeTab === 'cognitiva'">
+      <div class="loading-overlay" *ngIf="loading"><div class="spinner"></div></div>
+      <table class="premium-table">
+        <thead>
+          <tr>
+            <th>Residente</th>
+            <th>Sede</th>
+            <th>Fecha</th>
+            <th>Colíder / Facilitador</th>
+            <th>Fallas Reportadas</th>
+            <th>Ayudas y Observaciones</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of filteredCognitivas">
+            <td class="bold-td">{{ s.nombresr }} {{ s.apellidosr }}</td>
+            <td><span class="sede-badge">{{ s.nomfund || '—' }}</span></td>
+            <td class="date-td">{{ s.fecha | date:'dd/MM/yyyy' }}</td>
+            <td class="colider-td">{{ s.colider }}</td>
+            <td class="text-td truncate-text" [title]="s.fallas">{{ s.fallas || '—' }}</td>
+            <td class="text-td truncate-text" [title]="s.observaciones">{{ s.observaciones || '—' }}</td>
+            <td>
+              <button class="btn-edit" (click)="openEditCognitiva(s)">✏️ Editar</button>
+            </td>
+          </tr>
+          <tr *ngIf="filteredCognitivas.length === 0 && !loading">
+            <td colspan="7" class="empty-td">No hay sesiones de terapia cognitiva registradas con estos filtros.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 🕊️ TAB: ACOMPAÑAMIENTO ESPIRITUAL -->
+    <div class="table-container" *ngIf="activeTab === 'espiritual'">
+      <div class="loading-overlay" *ngIf="loading"><div class="spinner"></div></div>
+      <table class="premium-table">
+        <thead>
+          <tr>
+            <th>Residente</th>
+            <th>Sede</th>
+            <th>Fecha / Hora</th>
+            <th>Orientador / Consejero</th>
+            <th>Resumen Clínico-Espiritual</th>
+            <th>Evaluación e Intervención</th>
+            <th>Tarea Asignada</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of filteredEspirituales">
+            <td class="bold-td">{{ s.nombresr }} {{ s.apellidosr }}</td>
+            <td><span class="sede-badge">{{ s.nomfund || '—' }}</span></td>
+            <td class="date-td">{{ s.fecha | date:'dd/MM/yyyy' }} - {{ s.hora.slice(0, 5) }}</td>
+            <td class="orientador-td">{{ s.orientador || '—' }}</td>
+            <td class="text-td truncate-text" [title]="s.resumen">{{ s.resumen || '—' }}</td>
+            <td class="text-td truncate-text" [title]="s.evaluacion">{{ s.evaluacion || '—' }}</td>
+            <td class="text-td truncate-text" [title]="s.tarea">{{ s.tarea || '—' }}</td>
+            <td>
+              <button class="btn-edit" (click)="openEditEspiritual(s)">✏️ Editar</button>
+            </td>
+          </tr>
+          <tr *ngIf="filteredEspirituales.length === 0 && !loading">
+            <td colspan="8" class="empty-td">No hay sesiones de consejería espiritual registradas con estos filtros.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<!-- Modal 1: Terapia Cognitiva -->
+<div class="modal-backdrop" *ngIf="showCognitivaModal">
+  <div class="premium-modal">
+    <div class="modal-header">
+      <h2>🧩 {{ isEditing ? 'Editar' : 'Registrar' }} Sesión Cognitivo-Conductual</h2>
+      <button class="btn-close-modal" (click)="showCognitivaModal = false">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group" *ngIf="!isEditing">
+        <label>Residente *</label>
+        <select [(ngModel)]="cognitivaForm.idresidentes" class="modal-input">
+          <option value="">Seleccionar residente...</option>
+          <ng-container *ngFor="let r of residents">
+            <option *ngIf="r.estado === 'A' || r.estado === 'E'" [value]="r.idresidentes">
+              {{ r.nombresr }} {{ r.apellidosr }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="modal-grid">
+        <div class="form-group">
+          <label>Fecha de Sesión *</label>
+          <input type="date" [(ngModel)]="cognitivaForm.fecha" class="modal-input">
+        </div>
+        <div class="form-group">
+          <label>Colíder / Facilitador *</label>
+          <input type="text" [(ngModel)]="cognitivaForm.colider" class="modal-input" placeholder="Nombre del terapeuta o colíder">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Fallas Reportadas</label>
+        <textarea [(ngModel)]="cognitivaForm.fallas" class="modal-textarea" rows="3" placeholder="Fallas de comportamiento, actitudes..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Observaciones del Proceso</label>
+        <textarea [(ngModel)]="cognitivaForm.observaciones" class="modal-textarea" rows="3" placeholder="Avances, participación activa..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Ayudas / Tareas</label>
+        <textarea [(ngModel)]="cognitivaForm.ayudas" class="modal-textarea" rows="2" placeholder="Compromisos y ayudas cognitivas..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal-cancel" (click)="showCognitivaModal = false" [disabled]="saving">Cancelar</button>
+      <button class="btn-modal-save"
+        [disabled]="!cognitivaForm.idresidentes || !cognitivaForm.fecha || !cognitivaForm.colider || saving"
+        (click)="saveCognitiva()">
+        {{ saving ? 'Guardando...' : 'Guardar Sesión' }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2: Terapia Espiritual -->
+<div class="modal-backdrop" *ngIf="showEspiritualModal">
+  <div class="premium-modal">
+    <div class="modal-header">
+      <h2>🕊️ {{ isEditing ? 'Editar' : 'Registrar' }} Acompañamiento Espiritual</h2>
+      <button class="btn-close-modal" (click)="showEspiritualModal = false">✕</button>
+    </div>
+    <div class="modal-body scrollable-body">
+      <div class="form-group" *ngIf="!isEditing">
+        <label>Residente *</label>
+        <select [(ngModel)]="espiritualForm.idresidentes" class="modal-input">
+          <option value="">Seleccionar residente...</option>
+          <ng-container *ngFor="let r of residents">
+            <option *ngIf="r.estado === 'A' || r.estado === 'E'" [value]="r.idresidentes">
+              {{ r.nombresr }} {{ r.apellidosr }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="modal-grid">
+        <div class="form-group">
+          <label>Fecha de Sesión *</label>
+          <input type="date" [(ngModel)]="espiritualForm.fecha" class="modal-input">
+        </div>
+        <div class="form-group">
+          <label>Hora *</label>
+          <input type="time" [(ngModel)]="espiritualForm.hora" class="modal-input">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Orientador / Consejero *</label>
+        <select [(ngModel)]="espiritualForm.idusuarios" class="modal-input">
+          <option value="">Seleccionar orientador...</option>
+          <option *ngFor="let u of usersList" [value]="u.idusuarios">
+            {{ u.nombres }} {{ u.apellidos }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Resumen de la Sesión</label>
+        <textarea [(ngModel)]="espiritualForm.resumen" class="modal-textarea" rows="3" placeholder="Aspectos tratados, apertura espiritual..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Evaluación y Consejería</label>
+        <textarea [(ngModel)]="espiritualForm.evaluacion" class="modal-textarea" rows="3" placeholder="Orientación bíblica, consejería práctica..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Técnicas Espirituales Aplicadas</label>
+        <textarea [(ngModel)]="espiritualForm.tecnicas" class="modal-textarea" rows="2" placeholder="Ej: Oración guiada, lectura devocional..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Tarea / Devocional Asignado</label>
+        <textarea [(ngModel)]="espiritualForm.tarea" class="modal-textarea" rows="2" placeholder="Compromisos espirituales..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal-cancel" (click)="showEspiritualModal = false" [disabled]="saving">Cancelar</button>
+      <button class="btn-modal-save"
+        [disabled]="!espiritualForm.idresidentes || !espiritualForm.idusuarios || !espiritualForm.fecha || !espiritualForm.hora || saving"
+        (click)="saveEspiritual()">
+        {{ saving ? 'Guardando...' : 'Guardar Sesión' }}
+      </button>
+    </div>
+  </div>
+</div>

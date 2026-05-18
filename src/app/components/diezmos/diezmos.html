@@ -1,0 +1,247 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar glass">
+  <div class="logo">
+    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <div class="nav-items">
+    <!-- SECCIÓN: INICIO -->
+    <div class="nav-section">
+      <div class="nav-section-title">Inicio</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: CLÍNICA -->
+    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: FINANZAS -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+      <div class="nav-section-title">Finanzas</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ADMINISTRACIÓN -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Administración</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombres }}</p>
+    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+      </select>
+    </div>
+    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+    <button (click)="toggleTheme()" class="btn-theme-toggle">
+      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+    </button>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <header class="top-header">
+      <div class="header-title">
+        <h1>Gestión de Diezmos y Ofrendas</h1>
+        <p>Control del 10% espiritual sugerido de sedes y abonos contables consolidados</p>
+      </div>
+      
+    </header>
+
+    <!-- Rango de Fechas & Atajos Rápidos -->
+    <div class="filter-card">
+      <div class="filter-grid">
+        <div class="filter-item">
+          <label>Fecha Inicial</label>
+          <input type="date" [(ngModel)]="fechaini" (change)="calculateDiezmos()">
+        </div>
+        <div class="filter-item">
+          <label>Fecha Final</label>
+          <input type="date" [(ngModel)]="fechafin" (change)="calculateDiezmos()">
+        </div>
+        <div class="filter-item button-preset-group">
+          <label>Atajos Rápidos</label>
+          <div class="presets-row">
+            <button class="preset-btn" (click)="setPreset('current-month')">Mes Actual</button>
+            <button class="preset-btn" (click)="setPreset('last-month')">Mes Anterior</button>
+            <button class="preset-btn" (click)="setPreset('last-30')">Últimos 30 Días</button>
+            <button class="preset-btn" (click)="setPreset('current-year')">Año Actual</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indicador de Carga -->
+    <div class="loading-overlay" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Calculando ingresos de sedes...</p>
+    </div>
+
+    <!-- Tarjetas de Estadísticas Principales -->
+    <div class="stats-grid" *ngIf="!loading">
+      <!-- Roca Card -->
+      <div class="stat-card card-roca">
+        <span class="stat-icon">⛪</span>
+        <div class="stat-details">
+          <span class="stat-lbl">Ingresos Sede Roca</span>
+          <span class="stat-val">${{ calcResult.roca_ingresos | number:'1.0-0' }}</span>
+        </div>
+      </div>
+
+      <!-- Jorec Card -->
+      <div class="stat-card card-jorec">
+        <span class="stat-icon">🏫</span>
+        <div class="stat-details">
+          <span class="stat-lbl">Ingresos Sede Jorec</span>
+          <span class="stat-val">${{ calcResult.jorec_ingresos | number:'1.0-0' }}</span>
+        </div>
+      </div>
+
+      <!-- Unified Card -->
+      <div class="stat-card card-unified">
+        <span class="stat-icon">📊</span>
+        <div class="stat-details">
+          <span class="stat-lbl">Recaudación Unificada</span>
+          <span class="stat-val">${{ calcResult.total_ingresos | number:'1.0-0' }}</span>
+        </div>
+      </div>
+
+      <!-- SUGGESTED Diezmo Card -->
+      <div class="stat-card card-diezmo-sugerido">
+        <span class="stat-icon">✝️</span>
+        <div class="stat-details">
+          <span class="stat-lbl">Diezmo Teórico (10%)</span>
+          <span class="stat-val text-gold">${{ calcResult.diezmo_sugerido | number:'1.0-0' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Balance General de Diezmos del Rango -->
+    <div class="balance-section-card" *ngIf="!loading">
+      <div class="balance-header">
+        <h2>Resumen del Fondo Contable de Diezmos</h2>
+        <span class="status-badge" [class.paid-up]="calcResult.saldo_pendiente <= 0" [class.pending-debt]="calcResult.saldo_pendiente > 0">
+          {{ calcResult.saldo_pendiente <= 0 ? '🟢 Diezmos al Día' : '🔴 Pago de Diezmo Pendiente' }}
+        </span>
+      </div>
+
+      <div class="balance-grid-info">
+        <div class="balance-card-item">
+          <span class="lbl">Abonos Contabilizados</span>
+          <span class="val success-text">${{ calcResult.diezmo_pagado | number:'1.0-0' }}</span>
+          <p class="desc">Abonos registrados y retirados de cajas/bancos en este período</p>
+        </div>
+
+        <div class="balance-card-item">
+          <span class="lbl">Saldo Teórico por Pagar</span>
+          <span class="val danger-text">${{ calcResult.saldo_pendiente | number:'1.0-0' }}</span>
+          <p class="desc">Valor sugerido por girar para completar el 10% unificado</p>
+        </div>
+      </div>
+
+      <div class="balance-actions-row">
+        <button 
+          class="btn-abono-diezmo" 
+          [disabled]="calcResult.saldo_pendiente <= 0"
+          [class.disabled-btn]="calcResult.saldo_pendiente <= 0"
+          (click)="openAbonoModal()">
+          💰 Registrar Abono al Diezmo
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal: Registrar Abono a Diezmo -->
+<div class="modal-backdrop" *ngIf="showAbonoModal">
+  <div class="premium-modal">
+    <div class="modal-header">
+      <h2>✝️ Registrar Abono al Diezmo Contable</h2>
+      <button class="btn-close-modal" (click)="showAbonoModal = false">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-grid-stats duo-stats">
+        <div class="modal-stat-card">
+          <span class="stat-lbl">Diezmo Teórico Sugerido</span>
+          <span class="stat-val">${{ calcResult.diezmo_sugerido | number:'1.0-0' }}</span>
+        </div>
+        <div class="modal-stat-card">
+          <span class="stat-lbl">Saldo Pendiente</span>
+          <span class="stat-val alert-val">${{ calcResult.saldo_pendiente | number:'1.0-0' }}</span>
+        </div>
+      </div>
+
+      <div class="modal-grid">
+        <div class="form-group">
+          <label>Monto de Abono (COP)</label>
+          <input 
+            type="number" 
+            [(ngModel)]="abonoForm.abono" 
+            class="modal-input" 
+            placeholder="Ej: 25000"
+            min="1">
+        </div>
+        <div class="form-group">
+          <label>Fecha del Asiento</label>
+          <input type="date" [(ngModel)]="abonoForm.fecha" class="modal-input">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Canal Contable de Salida (Cuenta de Origen)</label>
+        <select [(ngModel)]="abonoForm.channel" class="modal-input">
+          <option value="roca">⛪ Sede Jesús es mi Roca (Caja Física)</option>
+          <option value="jorec">🏫 Sede JOREC (Caja Física)</option>
+          <option value="colombia">🏦 Bancolombia Rebuild</option>
+          <option value="colpatria">🏦 Cuenta Colpatria</option>
+          <option value="efectivo">💵 Caja General / Robert (Efectivo)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Detalle / Glosa Contable</label>
+        <input type="text" [(ngModel)]="abonoForm.detalle" placeholder="Ej: Abono diezmos" class="modal-input">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal-cancel" (click)="showAbonoModal = false" [disabled]="saving">Cancelar</button>
+      <button 
+        [disabled]="abonoForm.abono <= 0 || saving"
+        class="btn-modal-save" 
+        (click)="saveAbono()">
+        {{ saving ? 'Registrando Asiento...' : 'Confirmar y Asentar Contabilidad' }}
+      </button>
+    </div>
+  </div>
+</div>

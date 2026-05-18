@@ -1,0 +1,55 @@
+.timestamp {
+  font-family: monospace;
+  color: #666;
+  white-space: nowrap;
+}
+
+.user {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.badge.action {
+  background: #e1f5fe;
+  color: #01579b;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.details {
+  font-size: 0.9em;
+  color: #555;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ip {
+  font-family: monospace;
+  font-size: 0.85em;
+  color: #999;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-top: 1px solid #eee;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

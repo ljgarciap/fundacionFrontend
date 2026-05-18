@@ -1,0 +1,245 @@
+<div class="dashboard-layout">
+  <aside class="sidebar glass">
+  <div class="logo">
+    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <div class="nav-items">
+    <!-- SECCIÓN: INICIO -->
+    <div class="nav-section">
+      <div class="nav-section-title">Inicio</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: CLÍNICA -->
+    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: FINANZAS -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+      <div class="nav-section-title">Finanzas</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ADMINISTRACIÓN -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Administración</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombres }}</p>
+    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+      </select>
+    </div>
+    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+    <button (click)="toggleTheme()" class="btn-theme-toggle">
+      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+    </button>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</aside>
+
+  <main class="content">
+    <header>
+      <div class="header-main">
+        <h1>Minuta de Portería</h1>
+        <p class="subtitle">Seguimiento en tiempo real y registro de visitas a la fundación</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-primary" (click)="openModal()">+ Registrar Visita</button>
+      </div>
+    </header>
+
+    <div class="filters-bar glass">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          [(ngModel)]="searchQuery" 
+          (ngModelChange)="onSearchChange()" 
+          placeholder="Buscar por visitante, cédula o asunto..." 
+          class="search-input"
+        >
+      </div>
+    </div>
+
+    <div class="table-container glass">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Visitante</th>
+            <th>Cédula</th>
+            <th>Residente Visitado</th>
+            <th>Asunto / Observación</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (m of minutas; track m.idminutas) {
+            <tr>
+              <td><strong>{{ m.fecha }}</strong></td>
+              <td>{{ m.visitante }}</td>
+              <td><span class="cedula-badge">{{ m.cedula }}</span></td>
+              <td>
+                @if (m.residente) {
+                  {{ m.residente.nombresr }} {{ m.residente.apellidosr }}
+                } @else {
+                  <span class="no-res">No asignado (id: {{ m.idresidentes }})</span>
+                }
+              </td>
+              <td><p class="asunto-text" [title]="m.asunto">{{ m.asunto }}</p></td>
+            </tr>
+          }
+          @if (minutas.length === 0 && !loading) {
+            <tr>
+              <td colspan="5" class="empty-state">
+                <span class="empty-icon">📂</span>
+                <p>No se encontraron registros de visitas</p>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      @if (loading) {
+        <div class="loader-overlay">
+          <div class="spinner"></div>
+          <p>Cargando minuta...</p>
+        </div>
+      }
+    </div>
+
+    @if (lastPage > 1) {
+      <div class="pagination-bar glass">
+        <button [disabled]="page === 1" (click)="changePage(page - 1)" class="btn-page">◀ Anterior</button>
+        <span class="page-info">Página <strong>{{ page }}</strong> de {{ lastPage }}</span>
+        <button [disabled]="page === lastPage" (click)="changePage(page + 1)" class="btn-page">Siguiente ▶</button>
+      </div>
+    }
+
+    <!-- Registrar Visita Modal -->
+    @if (showModal) {
+      <div class="modal-overlay">
+        <div class="modal-content glass">
+          <header class="modal-header">
+            <h3>Registrar Entrada de Visita</h3>
+            <button class="btn-close" (click)="closeModal()">×</button>
+          </header>
+          
+          <form (submit)="submitMinuta()" #minutaForm="ngForm" class="modal-form">
+            <div class="grid">
+              <div class="form-group autocomplete-container">
+                <label>Nombre del Visitante</label>
+                <input 
+                  type="text" 
+                  [(ngModel)]="formData.visitante" 
+                  name="visitante" 
+                  (input)="onVisitanteInput()" 
+                  autocomplete="off"
+                  required 
+                  placeholder="Escriba el nombre..."
+                  class="form-control"
+                >
+                @if (showDropdown) {
+                  <ul class="autocomplete-dropdown glass">
+                    @for (v of filteredVisitantes; track v.cedula) {
+                      <li (click)="selectVisitante(v)">
+                        <strong>{{ v.visitante }}</strong> - <span class="sub-ced">{{ v.cedula }}</span>
+                      </li>
+                    }
+                  </ul>
+                }
+              </div>
+
+              <div class="form-group">
+                <label>Cédula / Documento</label>
+                <input 
+                  type="text" 
+                  [(ngModel)]="formData.cedula" 
+                  name="cedula" 
+                  required 
+                  placeholder="Número de cédula..."
+                  class="form-control"
+                >
+              </div>
+            </div>
+
+            <div class="grid">
+              <div class="form-group">
+                <label>Fecha de Entrada</label>
+                <input 
+                  type="date" 
+                  [(ngModel)]="formData.fecha" 
+                  name="fecha" 
+                  required 
+                  class="form-control"
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Residente a Visitar</label>
+                <select 
+                  [(ngModel)]="formData.idresidentes" 
+                  name="idresidentes" 
+                  required 
+                  class="form-control select-control"
+                >
+                  <option value="" disabled selected>Seleccione el residente...</option>
+                  @for (r of residents; track r.idresidentes) {
+                    <option [value]="r.idresidentes">{{ r.nombresr }} {{ r.apellidosr }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Asunto o Novedad de Ingreso</label>
+              <textarea 
+                [(ngModel)]="formData.asunto" 
+                name="asunto" 
+                required 
+                rows="4" 
+                placeholder="Detalle el motivo de la visita o novedades en portería..."
+                class="form-control textarea-control"
+              ></textarea>
+            </div>
+
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" (click)="closeModal()">Cancelar</button>
+              <button type="submit" [disabled]="!minutaForm.form.valid" class="btn-primary">Confirmar Registro</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    }
+  </main>
+</div>

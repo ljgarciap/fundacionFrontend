@@ -1,0 +1,78 @@
+.biometrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.canvas-container {
+  background: white;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.upload-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-zone {
+  width: 100%;
+  height: 250px;
+  border: 2px dashed #3498db;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: rgba(52, 152, 219, 0.05);
+  transition: all 0.3s ease;
+}
+
+.drop-zone:hover {
+  background: rgba(52, 152, 219, 0.1);
+  border-color: #2980b9;
+}
+
+.drop-zone .icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.info-alert {
+  padding: 10px;
+  background: #fdf6e3;
+  border-left: 4px solid #b58900;
+  font-size: 0.9em;
+  color: #657b83;
+}
+
+.btn-back {
+  text-decoration: none;
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.btn-back:hover {
+  color: #333;
+}

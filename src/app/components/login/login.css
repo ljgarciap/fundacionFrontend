@@ -1,0 +1,364 @@
+/* ─────────────────────────────────────────────────────────
+ * CORPORATE BRAND IDENTITY & PREMIUM STYLING FOR LOGIN
+ * Colors: Burgundy Red (#941524), Golden Highlights, Soft Frost
+ * Background: Blurred original background image + gradients
+ * ───────────────────────────────────────────────────────── */
+
+.login-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Rich corporate background: Burgundy red gradient combined with local asset background image */
+  background: 
+    linear-gradient(135deg, rgba(148, 21, 36, 0.93) 0%, rgba(76, 5, 25, 0.97) 100%), 
+    url('/assets/images/fondon.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Abstract Tech Overlay Grid to make the design feel premium, alive and deep */
+.tech-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 480px;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Glassmorphism card styled to absolute perfection */
+.login-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2rem;
+  padding: 3.5rem 2.5rem 2.5rem;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Brand logo styling */
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.logo-wrapper-img {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.25rem;
+  border-radius: 2rem;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.2),
+    0 0 0 4px rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.logo-img {
+  max-width: 120px;
+  height: auto;
+  display: block;
+}
+
+/* Titles styled with corporate colors and subtle golden glows */
+.header h1 {
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  color: #ffb7b2; /* Soft amber/gold hue */
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Form Styles */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Premium input wraps with icons */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1.25rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.input-wrapper input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.25rem;
+  padding: 1.1rem 1.25rem 1.1rem 3.2rem;
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.input-wrapper input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.input-wrapper input:focus {
+  background: rgba(0, 0, 0, 0.35);
+  border-color: #ffb7b2; /* Golden/Amber focus glow */
+  box-shadow: 
+    0 0 0 4px rgba(255, 183, 178, 0.15),
+    0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Custom premium primary button in Crimson Red */
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, #941524 0%, #b91c1c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 1.2rem;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 10px 20px rgba(148, 21, 36, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 15px 25px rgba(148, 21, 36, 0.5),
+    0 0 0 4px rgba(148, 21, 36, 0.1);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* Error banner style */
+.error-banner {
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  padding: 1rem;
+  border-radius: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.error-icon {
+  font-size: 1.2rem;
+}
+
+.error-msg {
+  color: #fca5a5;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Footer credits */
+.footer {
+  margin-top: 3rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.5rem;
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.72rem;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.spinner-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.spinner-inline::after {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive improvements */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 2.5rem 1.5rem 1.5rem;
+    border-radius: 1.5rem;
+  }
+  .header h1 {
+    font-size: 1.35rem;
+  }
+}
+
+/* Multi-Role Chooser Styles */
+.role-selection-view {
+  animation: slideUp 0.4s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.role-selection-view h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffb7b2;
+  margin: 0 0 0.5rem;
+}
+
+.role-intro {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.roles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.role-choice-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.25rem;
+  padding: 1.1rem 1.5rem;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.role-choice-btn:hover {
+  background: linear-gradient(135deg, rgba(148, 21, 36, 0.45) 0%, rgba(76, 5, 25, 0.6) 100%);
+  border-color: #ffb7b2;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(148, 21, 36, 0.35);
+}
+
+.role-badge-choice {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.45rem;
+  border-radius: 0.75rem;
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.role-name-text {
+  letter-spacing: 0.02em;
+}
+

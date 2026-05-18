@@ -1,0 +1,311 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar glass">
+  <div class="logo">
+    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <div class="nav-items">
+    <!-- SECCIÓN: INICIO -->
+    <div class="nav-section">
+      <div class="nav-section-title">Inicio</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: CLÍNICA -->
+    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: FINANZAS -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+      <div class="nav-section-title">Finanzas</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ADMINISTRACIÓN -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Administración</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombres }}</p>
+    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+      </select>
+    </div>
+    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+    <button (click)="toggleTheme()" class="btn-theme-toggle">
+      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+    </button>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <header class="top-header">
+      <div class="header-title">
+        <h1>Abastecimiento de Inventario</h1>
+        <p>Gestión integral de proveedores y facturación de compras para la tienda</p>
+      </div>
+      
+    </header>
+
+    <!-- Tab Switcher -->
+    <div class="tabs-container">
+      <button 
+        class="tab-btn" 
+        [class.active]="activeTab === 'pedidos'" 
+        (click)="setTab('pedidos')">
+        🧾 Facturas de Compra (Pedidos)
+      </button>
+      <button 
+        class="tab-btn" 
+        [class.active]="activeTab === 'proveedores'" 
+        (click)="setTab('proveedores')">
+        🤝 Catálogo de Proveedores
+      </button>
+    </div>
+
+    <!-- Tab 1: Pedidos / Facturas of Purchase -->
+    <div class="tab-content" *ngIf="activeTab === 'pedidos'">
+      <!-- Filter Bar -->
+      <div class="filter-card">
+        <div class="filter-grid">
+          <div class="filter-item">
+            <label>Buscar Factura / Proveedor</label>
+            <input 
+              type="text" 
+              [(ngModel)]="searchQuery" 
+              placeholder="Ej: FAC-123 o Nestlé..." 
+              (keyup.enter)="applyFilters()">
+          </div>
+          <div class="filter-item">
+            <label>Proveedor</label>
+            <select [(ngModel)]="selectedProveedorFilter" (change)="applyFilters()">
+              <option value="">Todos los proveedores</option>
+              <option *ngFor="let p of proveedores" [value]="p.idproveedores">
+                {{ p.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="filter-item">
+            <label>Desde</label>
+            <input type="date" [(ngModel)]="startDate" (change)="applyFilters()">
+          </div>
+          <div class="filter-item">
+            <label>Hasta</label>
+            <input type="date" [(ngModel)]="endDate" (change)="applyFilters()">
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button class="btn-clear" (click)="clearFilters()">🧹 Limpiar Filtros</button>
+          <button class="btn-search" (click)="applyFilters()">🔍 Buscar</button>
+          <button class="btn-new-pedido" (click)="openAddPedido()">➕ Registrar Factura</button>
+        </div>
+      </div>
+
+      <!-- Pedidos Table -->
+      <div class="table-container">
+        <div class="loading-overlay" *ngIf="loadingPedidos">
+          <div class="spinner"></div>
+        </div>
+
+        <table class="premium-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Factura #</th>
+              <th>Proveedor</th>
+              <th>Total Compra</th>
+              <th>Detalle Observaciones</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ped of pedidos">
+              <td class="bold-td">{{ ped.fecha | date:'dd/MM/yyyy' }}</td>
+              <td><span class="document-badge">📄 {{ ped.documento }}</span></td>
+              <td>{{ ped.proveedor?.nombre || 'Desconocido' }}</td>
+              <td class="amount-td bold-td">${{ ped.valor | number:'1.2-2' }}</td>
+              <td class="obs-td">{{ ped.observaciones || 'Sin observaciones' }}</td>
+              <td>
+                <a [routerLink]="['/compras', ped.idpedidos]" class="btn-action-edit">
+                  ⚙️ Ver / Cargar Ítems
+                </a>
+              </td>
+            </tr>
+            <tr *ngIf="pedidos.length === 0 && !loadingPedidos">
+              <td colspan="6" class="empty-td">No se encontraron facturas de compra.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination-container" *ngIf="lastPage > 1">
+          <button class="page-btn" [disabled]="page === 1" (click)="prevPage()">⬅️ Anterior</button>
+          <span class="page-info">Página {{ page }} de {{ lastPage }} (Total: {{ total }})</span>
+          <button class="page-btn" [disabled]="page === lastPage" (click)="nextPage()">Siguiente ➡️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Proveedores (Suppliers list) -->
+    <div class="tab-content" *ngIf="activeTab === 'proveedores'">
+      <div class="actions-header-tab">
+        <h3>Directorio de Proveedores</h3>
+        <button class="btn-new-pedido" (click)="openAddProveedor()">➕ Nuevo Proveedor</button>
+      </div>
+
+      <div class="table-container">
+        <div class="loading-overlay" *ngIf="loadingProveedores">
+          <div class="spinner"></div>
+        </div>
+
+        <table class="premium-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre del Proveedor</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prov of proveedores">
+              <td>#{{ prov.idproveedores }}</td>
+              <td class="bold-td">{{ prov.nombre }}</td>
+              <td>
+                <span class="status-badge" [class.active-badge]="prov.estado === 1" [class.inactive-badge]="prov.estado === 0">
+                  {{ prov.estado === 1 ? '🟢 Activo' : '🔴 Inactivo' }}
+                </span>
+              </td>
+              <td>
+                <div class="actions-group">
+                  <button (click)="openEditProveedor(prov)" class="btn-table-edit">✏️ Editar</button>
+                  <button 
+                    (click)="toggleProveedorStatus(prov)" 
+                    class="btn-table-toggle"
+                    [class.toggle-red]="prov.estado === 1"
+                    [class.toggle-green]="prov.estado === 0">
+                    {{ prov.estado === 1 ? '🔒 Desactivar' : '🔓 Activar' }}
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="proveedores.length === 0 && !loadingProveedores">
+              <td colspan="4" class="empty-td">No se registraron proveedores en la base de datos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Proveedor -->
+<div class="modal-backdrop" *ngIf="showProveedorModal">
+  <div class="premium-modal">
+    <div class="modal-header">
+      <h2>{{ isEditingProveedor ? '✏️ Editar Proveedor' : '🤝 Nuevo Proveedor' }}</h2>
+      <button class="btn-close-modal" (click)="showProveedorModal = false">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="provNombre">Razón Social / Nombre</label>
+        <input 
+          type="text" 
+          id="provNombre" 
+          [(ngModel)]="proveedorForm.nombre" 
+          placeholder="Ej: NESTLE COLOMBIA SAS..." 
+          class="modal-input"
+          autofocus>
+      </div>
+      <div class="form-group" *ngIf="isEditingProveedor">
+        <label for="provEstado">Estado</label>
+        <select id="provEstado" [(ngModel)]="proveedorForm.estado" class="modal-input">
+          <option [value]="1">🟢 Activo</option>
+          <option [value]="0">🔴 Inactivo</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal-cancel" (click)="showProveedorModal = false">Cancelar</button>
+      <button class="btn-modal-save" (click)="saveProveedor()">Guardar Proveedor</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Nuevo Pedido (Factura Compra) -->
+<div class="modal-backdrop" *ngIf="showPedidoModal">
+  <div class="premium-modal">
+    <div class="modal-header">
+      <h2>🧾 Registrar Factura de Compra</h2>
+      <button class="btn-close-modal" (click)="showPedidoModal = false">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div class="form-group">
+          <label for="pedFecha">Fecha de Compra</label>
+          <input type="date" id="pedFecha" [(ngModel)]="pedidoForm.fecha" class="modal-input">
+        </div>
+        <div class="form-group">
+          <label for="pedDoc">Número de Factura / Remisión</label>
+          <input type="text" id="pedDoc" [(ngModel)]="pedidoForm.documento" placeholder="Ej: FAC-44321..." class="modal-input">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="pedProv">Proveedor Emisor</label>
+        <select id="pedProv" [(ngModel)]="pedidoForm.idproveedores" class="modal-input">
+          <option value="">Selecciona un proveedor...</option>
+          <ng-container *ngFor="let p of proveedores">
+            <option *ngIf="p.estado === 1" [value]="p.idproveedores">
+              {{ p.nombre }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="pedObs">Observaciones Internas</label>
+        <textarea 
+          id="pedObs" 
+          [(ngModel)]="pedidoForm.observaciones" 
+          placeholder="Detalles sobre entrega, crédito, etc..." 
+          class="modal-textarea"
+          rows="3"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal-cancel" (click)="showPedidoModal = false">Cancelar</button>
+      <button class="btn-modal-save" (click)="savePedido()">Siguiente: Cargar Ítems ➡️</button>
+    </div>
+  </div>
+</div>

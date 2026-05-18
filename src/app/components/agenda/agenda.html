@@ -1,0 +1,206 @@
+<div class="dashboard-layout">
+  <aside class="sidebar glass">
+  <div class="logo">
+    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <div class="nav-items">
+    <!-- SECCIÓN: INICIO -->
+    <div class="nav-section">
+      <div class="nav-section-title">Inicio</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: CLÍNICA -->
+    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: FINANZAS -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+      <div class="nav-section-title">Finanzas</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ADMINISTRACIÓN -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Administración</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombres }}</p>
+    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+      </select>
+    </div>
+    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+    <button (click)="toggleTheme()" class="btn-theme-toggle">
+      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+    </button>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</aside>
+
+  <main class="content">
+    <header class="page-header">
+      <h1>Agenda y Citas</h1>
+      <div class="header-actions">
+        <div class="filters glass">
+          <select [(ngModel)]="filterEstado" (change)="loadAgenda()">
+            <option value="E">En Espera</option>
+            <option value="A">Atendidos</option>
+            <option value="N">No asistieron</option>
+          </select>
+        </div>
+        <button class="btn-primary" (click)="openModal()">+ Programar Cita</button>
+      </div>
+    </header>
+
+    <!-- Interactive Search / Pagination controls -->
+    <div class="search-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 0.75rem;">
+      <div class="search-input-wrapper" style="flex-grow: 1; margin-right: 1.5rem; display: flex; align-items: center; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 0.5rem 0.75rem; border-radius: 0.5rem;">
+        <span class="search-icon" style="margin-right: 0.5rem; font-size: 0.9rem;">🔍</span>
+        <input 
+          type="text" 
+          [(ngModel)]="searchText" 
+          (ngModelChange)="currentPage = 1" 
+          placeholder="Buscar por nombre o apellido del residente..."
+          style="background: none; border: none; color: white; width: 100%; outline: none; font-size: 0.9rem;"
+        >
+      </div>
+      <div class="page-size-selector" style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">
+        <label>Mostrar: </label>
+        <select [(ngModel)]="pageSize" (change)="currentPage = 1" class="size-select" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 0.4rem 0.6rem; border-radius: 0.4rem; outline: none;">
+          <option [value]="5">5</option>
+          <option [value]="10">10</option>
+          <option [value]="25">25</option>
+          <option [value]="50">50</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-container glass">
+      <table>
+        <thead>
+          <tr>
+            <th (click)="changeSort('fecha')" class="sortable" style="cursor: pointer; user-select: none;">
+              Fecha / Hora
+              <span class="sort-icon" style="margin-left: 0.3rem; font-size: 0.75rem; opacity: 0.7;">{{ sortKey === 'fecha' ? (sortDirection === 'asc' ? '▲' : '▼') : '↕' }}</span>
+            </th>
+            <th (click)="changeSort('residente')" class="sortable" style="cursor: pointer; user-select: none;">
+              Residente
+              <span class="sort-icon" style="margin-left: 0.3rem; font-size: 0.75rem; opacity: 0.7;">{{ sortKey === 'residente' ? (sortDirection === 'asc' ? '▲' : '▼') : '↕' }}</span>
+            </th>
+            <th (click)="changeSort('encargado')" class="sortable" style="cursor: pointer; user-select: none;">
+              Encargado
+              <span class="sort-icon" style="margin-left: 0.3rem; font-size: 0.75rem; opacity: 0.7;">{{ sortKey === 'encargado' ? (sortDirection === 'asc' ? '▲' : '▼') : '↕' }}</span>
+            </th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of getSortedAndPaginatedCitas()">
+            <td>
+              <div class="date-time">
+                <span class="date">{{ cita.fecha | date:'dd/MM/yyyy' }}</span>
+                <span class="hour">{{ cita.hora }}</span>
+              </div>
+            </td>
+            <td>{{ cita.nombresr }} {{ cita.apellidosr }}</td>
+            <td><span class="badge-role">{{ cita.encargado }}</span></td>
+            <td>
+              <span class="status-pill" [class]="cita.estado">
+                {{ cita.estado === 'E' ? 'En espera' : cita.estado === 'A' ? 'Atendido' : 'No asistió' }}
+              </span>
+            </td>
+            <td>
+              <div class="action-buttons" *ngIf="cita.estado === 'E'">
+                <button class="btn-sm btn-accent" (click)="updateStatus(cita, 'A')">Atender</button>
+                <button class="btn-sm btn-danger" (click)="updateStatus(cita, 'N')">Faltó</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="loading" class="loader">Cargando agenda...</div>
+      <div *ngIf="!loading && getFilteredCitas().length === 0" class="empty-state">No hay citas registradas con este criterio</div>
+
+      <!-- Pagination Footer -->
+      <div class="pagination-footer" *ngIf="totalPages() > 1" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0.5rem 0 0.5rem; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-top: 1rem;">
+        <button [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)" class="btn-page" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 0.4rem 1rem; border-radius: 0.3rem; cursor: pointer; font-size: 0.85rem; transition: all 0.2s ease;">◀ Anterior</button>
+        <span class="page-info" style="font-size: 0.85rem; color: var(--text-muted);">Página {{ currentPage }} de {{ totalPages() }} ({{ getFilteredCitas().length }} registros)</span>
+        <button [disabled]="currentPage === totalPages()" (click)="changePage(currentPage + 1)" class="btn-page" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: white; padding: 0.4rem 1rem; border-radius: 0.3rem; cursor: pointer; font-size: 0.85rem; transition: all 0.2s ease;">Siguiente ▶</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal for New Appointment -->
+  <div class="modal-overlay" *ngIf="showModal">
+    <div class="modal-content glass">
+      <h3>Programar Nueva Cita</h3>
+      
+      <div class="grid">
+        <div class="form-group">
+          <label>Fecha</label>
+          <input type="date" [(ngModel)]="formData.fecha">
+        </div>
+        <div class="form-group">
+          <label>Hora</label>
+          <input type="time" [(ngModel)]="formData.hora">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Residente</label>
+        <select [(ngModel)]="formData.idresidentes">
+          <option value="">Seleccione un residente</option>
+          <option *ngFor="let res of residents" [value]="res.idresidentes">
+            {{ res.nombresr }} {{ res.apellidosr }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Encargado / Área</label>
+        <select [(ngModel)]="formData.encargado">
+          <option value="PSICOLOGA">Psicología</option>
+          <option value="ESPIRITUAL">Espiritual</option>
+          <option value="ADMINISTRATIVO">Administrativo</option>
+        </select>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button class="btn-primary" (click)="submitCita()">Programar</button>
+      </div>
+    </div>
+  </div>
+</div>

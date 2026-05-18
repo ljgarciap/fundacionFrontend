@@ -1,0 +1,306 @@
+<div class="dashboard-layout">
+  <aside class="sidebar glass">
+  <div class="logo">
+    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <div class="nav-items">
+    <!-- SECCIÓN: INICIO -->
+    <div class="nav-section">
+      <div class="nav-section-title">Inicio</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: CLÍNICA -->
+    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: FINANZAS -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+      <div class="nav-section-title">Finanzas</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ADMINISTRACIÓN -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Administración</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombres }}</p>
+    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+      </select>
+    </div>
+    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+    <button (click)="toggleTheme()" class="btn-theme-toggle">
+      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+    </button>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</aside>
+
+  <main class="content">
+    <header>
+      <div class="header-main">
+        <h1>Libro de Ahorro General</h1>
+        <p class="subtitle">Administración unificada de los ahorros y diezmos internos de la fundación</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-primary" (click)="openModal()">+ Registrar Movimiento</button>
+      </div>
+    </header>
+
+    <!-- Stats Grid with running balance -->
+    <div class="stats-grid">
+      <div class="stat-card glass primary-accent">
+        <div class="stat-icon">💰</div>
+        <div class="stat-info">
+          <h3>{{ saldoActual | currency:'USD':'symbol':'1.0-0' }}</h3>
+          <p>Saldo Acumulado en Caja</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters-bar glass">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          [(ngModel)]="searchQuery" 
+          (ngModelChange)="onSearchChange()" 
+          placeholder="Buscar por concepto o residente..." 
+          class="search-input"
+        >
+      </div>
+    </div>
+
+    <div class="table-container glass">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Concepto</th>
+            <th>Detalle / Residente</th>
+            <th>Tipo</th>
+            <th>Entrada</th>
+            <th>Salida</th>
+            <th>Diezmo (10%)</th>
+            <th>Acumulado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (t of transacciones; track t.idasientosahorro) {
+            <tr>
+              <td><strong>{{ t.fecha }}</strong></td>
+              <td>{{ t.concepto }}</td>
+              <td><span class="res-detail">{{ t.detalle }}</span></td>
+              <td>
+                @if (t.idtipologia === 1) {
+                  <span class="badge type-in">Entrada</span>
+                } @else {
+                  <span class="badge type-out">Salida</span>
+                }
+              </td>
+              <td class="numeric-cell">
+                @if (t.ahorro && t.ahorro.valorentrada > 0) {
+                  <span class="amount-in">+{{ t.ahorro.valorentrada | currency:'USD':'symbol':'1.0-0' }}</span>
+                } @else {
+                  -
+                }
+              </td>
+              <td class="numeric-cell">
+                @if (t.ahorro && t.ahorro.valorsalida > 0) {
+                  <span class="amount-out">-{{ t.ahorro.valorsalida | currency:'USD':'symbol':'1.0-0' }}</span>
+                } @else {
+                  -
+                }
+              </td>
+              <td class="numeric-cell text-diezmo">
+                @if (t.ahorro && t.ahorro.diezmo > 0) {
+                  {{ t.ahorro.diezmo | currency:'USD':'symbol':'1.0-0' }}
+                } @else {
+                  -
+                }
+              </td>
+              <td class="numeric-cell font-bold">
+                @if (t.ahorro) {
+                  {{ t.ahorro.acumulado | currency:'USD':'symbol':'1.0-0' }}
+                } @else {
+                  -
+                }
+              </td>
+            </tr>
+          }
+          @if (transacciones.length === 0 && !loading) {
+            <tr>
+              <td colspan="8" class="empty-state">
+                <span class="empty-icon">📊</span>
+                <p>No se encontraron movimientos registrados</p>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      @if (loading) {
+        <div class="loader-overlay">
+          <div class="spinner"></div>
+          <p>Cargando registros contables...</p>
+        </div>
+      }
+    </div>
+
+    @if (lastPage > 1) {
+      <div class="pagination-bar glass">
+        <button [disabled]="page === 1" (click)="changePage(page - 1)" class="btn-page">◀ Anterior</button>
+        <span class="page-info">Página <strong>{{ page }}</strong> de {{ lastPage }}</span>
+        <button [disabled]="page === lastPage" (click)="changePage(page + 1)" class="btn-page">Siguiente ▶</button>
+      </div>
+    }
+
+    <!-- Registrar Transacción Modal -->
+    @if (showModal) {
+      <div class="modal-overlay">
+        <div class="modal-content glass">
+          <header class="modal-header">
+            <h3>Registrar Movimiento de Ahorro</h3>
+            <button class="btn-close" (click)="closeModal()">×</button>
+          </header>
+          
+          <form (submit)="submitAhorro()" #ahorroForm="ngForm" class="modal-form">
+            <div class="grid">
+              <div class="form-group">
+                <label>Tipo de Operación</label>
+                <div class="radio-selector">
+                  <label class="radio-btn">
+                    <input type="radio" [(ngModel)]="formData.idtipologia" name="idtipologia" value="1" checked>
+                    <span class="radio-label green-glow">📥 Entrada / Ahorro</span>
+                  </label>
+                  <label class="radio-btn">
+                    <input type="radio" [(ngModel)]="formData.idtipologia" name="idtipologia" value="2">
+                    <span class="radio-label red-glow">📤 Salida / Retiro</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Fecha de Operación</label>
+                <input 
+                  type="date" 
+                  [(ngModel)]="formData.fecha" 
+                  name="fecha" 
+                  required 
+                  class="form-control"
+                >
+              </div>
+            </div>
+
+            <div class="grid">
+              <div class="form-group">
+                <label>Concepto</label>
+                <input 
+                  type="text" 
+                  [(ngModel)]="formData.concepto" 
+                  name="concepto" 
+                  list="conceptos-datalist"
+                  required 
+                  placeholder="Ej. Saldo de pension, Ahorro..."
+                  class="form-control"
+                >
+                <datalist id="conceptos-datalist">
+                  @for (c of conceptosComunes; track c) {
+                    <option [value]="c"></option>
+                  }
+                </datalist>
+              </div>
+
+              <div class="form-group autocomplete-container">
+                <label>Detalle / Residente</label>
+                <input 
+                  type="text" 
+                  [(ngModel)]="formData.detalle" 
+                  name="detalle" 
+                  (input)="onDetalleInput()" 
+                  autocomplete="off"
+                  required 
+                  placeholder="Nombre de residente u origen..."
+                  class="form-control"
+                >
+                @if (showResDropdown) {
+                  <ul class="autocomplete-dropdown glass">
+                    @for (r of filteredResidents; track r.idresidentes) {
+                      <li (click)="selectResident(r)">
+                        <strong>{{ r.nombresr }} {{ r.apellidosr }}</strong> - <span class="sub-ced">{{ r.documentor }}</span>
+                      </li>
+                    }
+                  </ul>
+                }
+              </div>
+            </div>
+
+            <div class="grid">
+              <div class="form-group">
+                <label>Valor de la Operación ($)</label>
+                <input 
+                  type="number" 
+                  [(ngModel)]="formData.valor" 
+                  name="valor" 
+                  required 
+                  min="1" 
+                  placeholder="Monto en pesos..."
+                  class="form-control"
+                >
+              </div>
+              
+              <div class="form-group explain-group">
+                @if (formData.idtipologia === '1') {
+                  <p class="explain-text in-glow">
+                    💡 <strong>Diezmo Automático:</strong> Se calculará un 10% automático de diezmo contable (<strong>{{ (formData.valor * 0.10) | currency:'USD':'symbol':'1.0-0' }}</strong>) para esta entrada.
+                  </p>
+                } @else {
+                  <p class="explain-text out-glow">
+                    ⚠️ <strong>Retiro de Caja:</strong> Se debitará el valor completo de la caja general de ahorros. No aplica diezmo.
+                  </p>
+                }
+              </div>
+            </div>
+
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" (click)="closeModal()">Cancelar</button>
+              <button type="submit" [disabled]="!ahorroForm.form.valid" class="btn-primary">Confirmar Movimiento</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    }
+  </main>
+</div>

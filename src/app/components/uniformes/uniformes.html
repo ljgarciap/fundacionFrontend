@@ -1,0 +1,475 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar glass">
+  <div class="logo">
+    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <div class="nav-items">
+    <!-- SECCIÓN: INICIO -->
+    <div class="nav-section">
+      <div class="nav-section-title">Inicio</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: CLÍNICA -->
+    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: FINANZAS -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+      <div class="nav-section-title">Finanzas</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ADMINISTRACIÓN -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Administración</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombres }}</p>
+    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+      </select>
+    </div>
+    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+    <button (click)="toggleTheme()" class="btn-theme-toggle">
+      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+    </button>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <header class="top-header">
+      <div class="header-title">
+        <h1>Servicios y Dotaciones</h1>
+        <p>Control físico y contable de uniformes de residentes y cobros de lavandería</p>
+      </div>
+      
+    </header>
+
+    <!-- Tab Switcher -->
+    <div class="tabs-container">
+      <button 
+        class="tab-btn" 
+        [class.active]="activeTab === 'uniformes'" 
+        (click)="setTab('uniformes')">
+        👕 Dotación Física de Uniformes
+      </button>
+      <button 
+        class="tab-btn" 
+        [class.active]="activeTab === 'lavadas'" 
+        (click)="setTab('lavadas')">
+        🧼 Lavandería (Lavadas)
+      </button>
+    </div>
+
+    <!-- Tab 1: Dotación (Uniformes) -->
+    <div class="tab-content" *ngIf="activeTab === 'uniformes'">
+      <!-- Filter Bar -->
+      <div class="filter-card">
+        <div class="filter-grid">
+          <div class="filter-item">
+            <label>Buscar Residente</label>
+            <input 
+              type="text" 
+              [(ngModel)]="searchUniformQuery" 
+              placeholder="Escribe el nombre o apellido...">
+          </div>
+        </div>
+      </div>
+
+      <!-- Uniforms Table -->
+      <div class="table-container">
+        <div class="loading-overlay" *ngIf="loading">
+          <div class="spinner"></div>
+        </div>
+
+        <table class="premium-table">
+          <thead>
+            <tr>
+              <th>Residente</th>
+              <th>👕 Nuevo</th>
+              <th>👔 Antiguo</th>
+              <th>🚶 Visita</th>
+              <th>🧥 Buzo</th>
+              <th>Costo Dotación</th>
+              <th>Pendiente</th>
+              <th>Comentarios</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let unif of filteredUniforms">
+              <td class="bold-td">{{ unif.nombresr }} {{ unif.apellidosr }}</td>
+              <td>
+                <select 
+                  [ngModel]="unif.nuevo" 
+                  (ngModelChange)="updateUniformDelivery(unif, 'nuevo', $event)"
+                  class="table-select"
+                  [class.delivered-badge]="unif.nuevo === 'Entregado'"
+                  [class.pending-badge]="unif.nuevo === 'Pendiente'">
+                  <option value="Pendiente">⚠️ Pendiente</option>
+                  <option value="Entregado">🟢 Entregado</option>
+                </select>
+              </td>
+              <td>
+                <select 
+                  [ngModel]="unif.antiguo" 
+                  (ngModelChange)="updateUniformDelivery(unif, 'antiguo', $event)"
+                  class="table-select"
+                  [class.delivered-badge]="unif.antiguo === 'Entregado'"
+                  [class.pending-badge]="unif.antiguo === 'Pendiente'">
+                  <option value="Pendiente">⚠️ Pendiente</option>
+                  <option value="Entregado">🟢 Entregado</option>
+                </select>
+              </td>
+              <td>
+                <select 
+                  [ngModel]="unif.visita" 
+                  (ngModelChange)="updateUniformDelivery(unif, 'visita', $event)"
+                  class="table-select"
+                  [class.delivered-badge]="unif.visita === 'Entregado'"
+                  [class.pending-badge]="unif.visita === 'Pendiente'">
+                  <option value="Pendiente">⚠️ Pendiente</option>
+                  <option value="Entregado">🟢 Entregado</option>
+                </select>
+              </td>
+              <td>
+                <select 
+                  [ngModel]="unif.buzo" 
+                  (ngModelChange)="updateUniformDelivery(unif, 'buzo', $event)"
+                  class="table-select"
+                  [class.delivered-badge]="unif.buzo === 'Entregado'"
+                  [class.pending-badge]="unif.buzo === 'Pendiente'">
+                  <option value="Pendiente">⚠️ Pendiente</option>
+                  <option value="Entregado">🟢 Entregado</option>
+                </select>
+              </td>
+              <td>
+                <div class="price-edit-cell">
+                  <span class="bold-td">${{ unif.valorcobro | number:'1.0-0' }}</span>
+                  <button (click)="updateUniformPrice(unif)" class="btn-icon-edit" title="Editar valor de dotación">✏️</button>
+                </div>
+              </td>
+              <td>
+                <span class="balance-badge" [class.no-debt]="unif.saldo <= 0" [class.debt]="unif.saldo > 0">
+                  ${{ unif.saldo | number:'1.0-0' }}
+                </span>
+              </td>
+              <td>
+                <input 
+                  type="text" 
+                  [(ngModel)]="unif.comentario" 
+                  (blur)="updateUniformComment(unif)"
+                  placeholder="Sin comentarios..."
+                  class="table-comment-input">
+              </td>
+              <td>
+                <button (click)="openUniformAbonos(unif)" class="btn-action-edit">
+                  💰 Historial / Abonar
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="filteredUniforms.length === 0 && !loading">
+              <td colspan="9" class="empty-td">No se encontraron registros de uniformes.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 2: Lavandería (Lavadas) -->
+    <div class="tab-content" *ngIf="activeTab === 'lavadas'">
+      <!-- Filter and Action Bar -->
+      <div class="filter-card">
+        <div class="filter-grid">
+          <div class="filter-item">
+            <label>Buscar Cargo de Lavado</label>
+            <input 
+              type="text" 
+              [(ngModel)]="searchLaundryQuery" 
+              placeholder="Buscar por residente o fundación...">
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button class="btn-new-pedido" (click)="openAddLaundry()">➕ Registrar Cobro Lavada</button>
+        </div>
+      </div>
+
+      <!-- Laundry Table -->
+      <div class="table-container">
+        <div class="loading-overlay" *ngIf="loading">
+          <div class="spinner"></div>
+        </div>
+
+        <table class="premium-table">
+          <thead>
+            <tr>
+              <th>Fecha de Cobro</th>
+              <th>Residente</th>
+              <th>Fundación</th>
+              <th>Costo Lavado</th>
+              <th>Abonado</th>
+              <th>Saldo Pendiente</th>
+              <th>Último Pago</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lav of filteredLavadas">
+              <td class="bold-td">{{ lav.diacobro | date:'dd/MM/yyyy' }}</td>
+              <td class="bold-td">{{ lav.nombresr }} {{ lav.apellidosr }}</td>
+              <td><span class="document-badge">{{ lav.nomfund || 'Ninguna' }}</span></td>
+              <td class="amount-td">${{ lav.valorinicial | number:'1.0-0' }}</td>
+              <td class="amount-td success-td">${{ lav.abono | number:'1.0-0' }}</td>
+              <td>
+                <span class="balance-badge" [class.no-debt]="lav.nuevosaldo <= 0" [class.debt]="lav.nuevosaldo > 0">
+                  ${{ lav.nuevosaldo | number:'1.0-0' }}
+                </span>
+              </td>
+              <td>{{ lav.fechaabono ? (lav.fechaabono | date:'dd/MM/yyyy') : 'Sin abonos' }}</td>
+              <td>
+                <button 
+                  [disabled]="lav.nuevosaldo <= 0" 
+                  (click)="openPayLaundry(lav)" 
+                  class="btn-table-edit"
+                  [class.disabled-btn]="lav.nuevosaldo <= 0">
+                  {{ lav.nuevosaldo <= 0 ? '✅ Totalmente Pagado' : '💰 Registrar Abono' }}
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="filteredLavadas.length === 0 && !loading">
+              <td colspan="8" class="empty-td">No se registraron cargos de lavandería.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal 1: Historial de Abonos / Registrar Pago a Uniforme -->
+<div class="modal-backdrop" *ngIf="showUniformAbonosModal && selectedUniform">
+  <div class="premium-modal">
+    <div class="modal-header">
+      <h2>💰 Abonos a Dotación: {{ selectedUniform.residente.nombresr }} {{ selectedUniform.residente.apellidosr }}</h2>
+      <button class="btn-close-modal" (click)="showUniformAbonosModal = false">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Info Cards -->
+      <div class="modal-grid-stats">
+        <div class="modal-stat-card">
+          <span class="stat-lbl">Valor Dotación</span>
+          <span class="stat-val">${{ selectedUniform.valorcobro | number:'1.0-0' }}</span>
+        </div>
+        <div class="modal-stat-card">
+          <span class="stat-lbl">Total Abonado</span>
+          <span class="stat-val success-val">${{ selectedUniform.total_abonado | number:'1.0-0' }}</span>
+        </div>
+        <div class="modal-stat-card">
+          <span class="stat-lbl">Saldo Pendiente</span>
+          <span class="stat-val alert-val">${{ selectedUniform.saldo | number:'1.0-0' }}</span>
+        </div>
+      </div>
+
+      <!-- Abonos list -->
+      <div class="abonos-history-section">
+        <h3>Historial de Pagos</h3>
+        <div class="table-container abonos-history-table">
+          <table class="premium-table minimal-table">
+            <thead>
+              <tr>
+                <th>Fecha de Pago</th>
+                <th>Valor Recibido</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ab of selectedUniform.abonos">
+                <td>{{ ab.fechaabono | date:'dd/MM/yyyy' }}</td>
+                <td class="bold-td text-emerald">${{ ab.abono | number:'1.0-0' }}</td>
+              </tr>
+              <tr *ngIf="!selectedUniform.abonos || selectedUniform.abonos.length === 0">
+                <td colspan="2" class="empty-td text-center">No se han registrado abonos a esta dotación.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- New Abono form if balance > 0 -->
+      <div class="new-abono-form-section" *ngIf="selectedUniform.saldo > 0">
+        <h3>Registrar Nuevo Abono</h3>
+        <div class="modal-grid">
+          <div class="form-group">
+            <label>Valor del Abono (COP)</label>
+            <input 
+              type="number" 
+              [(ngModel)]="uniformAbonoForm.abono" 
+              class="modal-input" 
+              placeholder="Ej: 50000"
+              [max]="selectedUniform.saldo"
+              min="1">
+          </div>
+          <div class="form-group">
+            <label>Fecha de Recibo</label>
+            <input type="date" [(ngModel)]="uniformAbonoForm.fechaabono" class="modal-input">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Canal Contable (Integración de Caja/Bancos)</label>
+          <select [(ngModel)]="uniformAbonoForm.channel" class="modal-input">
+            <option value="none">⚠️ Ninguno (Solo registrar abono)</option>
+            <option value="efectivo">💵 Caja General / Efectivo</option>
+            <option value="colombia">🏦 Bancolombia Rebuild</option>
+            <option value="colpatria">🏦 Cuenta Colpatria</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal-cancel" (click)="showUniformAbonosModal = false">Cerrar</button>
+      <button 
+        *ngIf="selectedUniform.saldo > 0" 
+        [disabled]="uniformAbonoForm.abono <= 0 || uniformAbonoForm.abono > selectedUniform.saldo"
+        class="btn-modal-save" 
+        (click)="saveUniformAbono()">
+        Confirmar Pago
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2: Registrar Nuevo Cargo de Lavandería -->
+<div class="modal-backdrop" *ngIf="showAddLaundryModal">
+  <div class="premium-modal">
+    <div class="modal-header">
+      <h2>🧼 Registrar Cobro de Lavandería</h2>
+      <button class="btn-close-modal" (click)="showAddLaundryModal = false">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Residente Beneficiario</label>
+        <select [(ngModel)]="laundryForm.idresidentes" class="modal-input">
+          <option value="">Selecciona un residente...</option>
+          <ng-container *ngFor="let r of residents">
+            <option *ngIf="r.estado === 'A' || r.estado === 'E'" [value]="r.idresidentes">
+              {{ r.nombresr }} {{ r.apellidosr }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+      <div class="modal-grid">
+        <div class="form-group">
+          <label>Costo del Servicio (COP)</label>
+          <input type="number" [(ngModel)]="laundryForm.valorinicial" placeholder="Ej: 15000" class="modal-input">
+        </div>
+        <div class="form-group">
+          <label>Fecha de Cobro</label>
+          <input type="date" [(ngModel)]="laundryForm.diacobro" class="modal-input">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Fundación Asentada (Opcional)</label>
+        <input type="text" [(ngModel)]="laundryForm.nomfund" placeholder="Ej: JOREC" class="modal-input">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal-cancel" (click)="showAddLaundryModal = false">Cancelar</button>
+      <button 
+        [disabled]="!laundryForm.idresidentes || laundryForm.valorinicial <= 0"
+        class="btn-modal-save" 
+        (click)="saveLaundry()">
+        Guardar Cargo
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3: Registrar Abono a Lavandería -->
+<div class="modal-backdrop" *ngIf="showPayLaundryModal && selectedLaundry">
+  <div class="premium-modal">
+    <div class="modal-header">
+      <h2>💰 Abono a Lavada: {{ selectedLaundry.nombresr }} {{ selectedLaundry.apellidosr }}</h2>
+      <button class="btn-close-modal" (click)="showPayLaundryModal = false">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-grid-stats duo-stats">
+        <div class="modal-stat-card">
+          <span class="stat-lbl">Costo del Lavado</span>
+          <span class="stat-val">${{ selectedLaundry.valorinicial | number:'1.0-0' }}</span>
+        </div>
+        <div class="modal-stat-card">
+          <span class="stat-lbl">Saldo Pendiente</span>
+          <span class="stat-val alert-val">${{ selectedLaundry.nuevosaldo | number:'1.0-0' }}</span>
+        </div>
+      </div>
+
+      <div class="modal-grid">
+        <div class="form-group">
+          <label>Valor del Abono (COP)</label>
+          <input 
+            type="number" 
+            [(ngModel)]="laundryPayForm.abono" 
+            class="modal-input" 
+            placeholder="Ej: 10000"
+            [max]="selectedLaundry.nuevosaldo"
+            min="1">
+        </div>
+        <div class="form-group">
+          <label>Fecha de Pago</label>
+          <input type="date" [(ngModel)]="laundryPayForm.fechaabono" class="modal-input">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Canal Contable (Integración de Caja/Bancos)</label>
+        <select [(ngModel)]="laundryPayForm.channel" class="modal-input">
+          <option value="none">⚠️ Ninguno (Solo registrar abono)</option>
+          <option value="efectivo">💵 Caja General / Efectivo</option>
+          <option value="colombia">🏦 Bancolombia Rebuild</option>
+          <option value="colpatria">🏦 Cuenta Colpatria</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal-cancel" (click)="showPayLaundryModal = false">Cancelar</button>
+      <button 
+        [disabled]="laundryPayForm.abono <= 0 || laundryPayForm.abono > selectedLaundry.nuevosaldo"
+        class="btn-modal-save" 
+        (click)="saveLaundryPayment()">
+        Confirmar Abono
+      </button>
+    </div>
+  </div>
+</div>

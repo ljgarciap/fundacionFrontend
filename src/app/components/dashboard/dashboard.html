@@ -1,0 +1,707 @@
+<div class="dashboard-layout">
+  <aside class="sidebar glass">
+  <div class="logo">
+    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <div class="nav-items">
+    <!-- SECCIÓN: INICIO -->
+    <div class="nav-section">
+      <div class="nav-section-title">Inicio</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg> Dashboard
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> Admisión
+        </a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: CLÍNICA -->
+    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg> Psicología
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg> Terapias Estructuradas
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Agenda
+        </a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: FINANZAS -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+      <div class="nav-section-title">Finanzas</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Ahorros
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Tienda POS
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Contabilidad
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> Compras / Stock
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> Dotación / Lavadas
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Diezmos / Ofrendas
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg> Almuerzos Extra
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> Conceptos Contables
+        </a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ADMINISTRACIÓN -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Administración</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Usuarios
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg> Practicantes
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path></svg> Control de Salidas
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"></path><polyline points="17 6 23 6 23 12"></polyline></svg> Reportes
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Portería
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> Bitácora
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombres }}</p>
+    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+      </select>
+    </div>
+    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+    <button (click)="toggleTheme()" class="btn-theme-toggle">
+      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+    </button>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</aside>
+
+  <main class="content">
+    <header>
+      <div class="header-main">
+        <h1>Listado de Residentes</h1>
+        <div class="filters-row">
+          <select [(ngModel)]="filterStatus" (change)="loadResidents()" class="status-filter">
+            <option value="A">Activos</option>
+            <option value="I">Inactivos</option>
+            <option value="E">Especiales</option>
+          </select>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-secondary" (click)="printResidentBarcodes()" style="margin-right: 10px;">🖨️ Listado Barcodes</button>
+        <button class="btn-primary" routerLink="/ingreso">+ Nuevo Residente</button>
+      </div>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card glass">
+        <div class="stat-icon">👥</div>
+        <div class="stat-info">
+          <h3>{{ stats.active_residents }}</h3>
+          <p>Residentes Activos</p>
+          <span class="kpi-desc-badge">Residentes con estado activo en el centro</span>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-icon">💰</div>
+        <div class="stat-info">
+          <h3>{{ stats.monthly_income | currency:'USD':'symbol':'1.0-0' }}</h3>
+          <p>Recaudo Mes</p>
+          <span class="kpi-desc-badge">Dinero total abonado a pensiones en el mes actual</span>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-icon">🛒</div>
+        <div class="stat-info">
+          <h3>{{ stats.monthly_sales | currency:'USD':'symbol':'1.0-0' }}</h3>
+          <p>Ventas Tienda</p>
+          <span class="kpi-desc-badge">Ventas acumuladas de la tienda del mes actual</span>
+        </div>
+      </div>
+      <div class="stat-card glass">
+        <div class="stat-icon">📅</div>
+        <div class="stat-info">
+          <h3>{{ stats.pending_appointments }}</h3>
+          <p>Citas Pendientes</p>
+          <span class="kpi-desc-badge">Consultas y citas médicas agendadas pendientes</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Table Controls -->
+    <div class="table-controls glass">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" [(ngModel)]="searchText" placeholder="Buscar por nombre, apellido o documento..." class="search-input" (input)="currentPage = 1">
+      </div>
+      <div class="page-size-selector">
+        <label>Mostrar: </label>
+        <select [(ngModel)]="pageSize" (change)="currentPage = 1" class="size-select">
+          <option [value]="5">5</option>
+          <option [value]="10">10</option>
+          <option [value]="25">25</option>
+          <option [value]="50">50</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-container glass">
+      <table>
+        <thead>
+          <tr>
+            <th (click)="changeSort('nombresr')" class="sortable">
+              Nombre 
+              <span class="sort-icon">{{ sortKey === 'nombresr' ? (sortDirection === 'asc' ? '▲' : '▼') : '↕' }}</span>
+            </th>
+            <th (click)="changeSort('documentor')" class="sortable">
+              Documento
+              <span class="sort-icon">{{ sortKey === 'documentor' ? (sortDirection === 'asc' ? '▲' : '▼') : '↕' }}</span>
+            </th>
+            <th (click)="changeSort('estado')" class="sortable">
+              Estado
+              <span class="sort-icon">{{ sortKey === 'estado' ? (sortDirection === 'asc' ? '▲' : '▼') : '↕' }}</span>
+            </th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (res of getPaginatedResidents(); track res.idresidentes) {
+            <tr>
+              <td>{{ res.nombresr }} {{ res.apellidosr }}</td>
+              <td>{{ res.documentor }}</td>
+              <td>
+                <span class="badge" [class.active]="res.estado === 'A'" [class.special]="res.estado === 'E'">
+                  {{ res.estado === 'A' ? 'Activo' : res.estado === 'I' ? 'Inactivo' : 'Especial' }}
+                </span>
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn-icon" (click)="openDetailModal(res)" title="Ver detalle">
+                    <svg class="btn-svg" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  </button>
+                  <button class="btn-icon" (click)="openEditModal(res)" title="Editar Perfil / Formulario" style="color: var(--primary);">
+                    <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"></path></svg>
+                  </button>
+                  <button class="btn-icon" [routerLink]="['/biometricos', res.idresidentes]" title="Biometría">
+                    <svg class="btn-svg" viewBox="0 0 24 24"><path d="M12 2a15.3 15.3 0 0 1 4 7c0 .9-.3 1.6-1 2.1l-2.6 1.8a5 5 0 0 0-1.8 3.8v4.3"></path><path d="M8 9a11 11 0 0 1 8-2.5"></path><path d="M6 14a14 14 0 0 1 6-7"></path><path d="M9 22a9 9 0 0 1-5-3.5"></path><path d="M17 17a12 12 0 0 0 3-8"></path></svg>
+                  </button>
+                  <button class="btn-icon" (click)="printForm(res)" title="Imprimir Formulario">
+                    <svg class="btn-svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                  </button>
+                  <button class="btn-icon" (click)="printCarnet(res)" title="Imprimir Carnet">
+                    <svg class="btn-svg" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 8h10M7 12h6M7 16h2"></path></svg>
+                  </button>
+                  <button class="btn-icon" (click)="openStatusModal(res)" [title]="res.estado === 'I' ? 'Reactivar' : 'Inactivar'">
+                    <svg *ngIf="res.estado !== 'I'" class="btn-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+                    <svg *ngIf="res.estado === 'I'" class="btn-svg" viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4" style="text-align: center; padding: 20px; color: #999;">No se encontraron residentes.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      
+      @if (loading) {
+        <div class="loader">Cargando...</div>
+      }
+
+      <!-- Pagination Footer -->
+      <div class="pagination-footer" *ngIf="totalPages() > 1">
+        <button [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)" class="btn-page">◀ Anterior</button>
+        <span class="page-info">Página {{ currentPage }} de {{ totalPages() }} ({{ getFilteredResidents().length }} registros)</span>
+        <button [disabled]="currentPage === totalPages()" (click)="changePage(currentPage + 1)" class="btn-page">Siguiente ▶</button>
+      </div>
+    </div>
+
+  <!-- Status Change Modal -->
+  <div class="modal-overlay" *ngIf="showStatusModal">
+    <div class="modal-content glass">
+      <h3>{{ statusData.estado === 'I' ? 'Inactivar' : 'Reactivar' }} Residente</h3>
+      <p class="res-name">{{ selectedRes?.nombresr }} {{ selectedRes?.apellidosr }}</p>
+
+      <div class="form-group">
+        <label>Fecha</label>
+        <input type="date" [(ngModel)]="statusData.fecha">
+      </div>
+
+      <div class="form-group">
+        <label>Motivo</label>
+        <textarea [(ngModel)]="statusData.motivo" placeholder="Describa el motivo del cambio..."></textarea>
+      </div>
+
+      <div *ngIf="statusData.estado === 'A' || statusData.estado === 'E'" class="reactivation-fields">
+        <div class="grid">
+          <div class="form-group">
+            <label>Valor Pensión</label>
+            <input type="number" [(ngModel)]="statusData.valor_pension">
+          </div>
+          <div class="form-group">
+            <label>Día de Cobro</label>
+            <input type="number" [(ngModel)]="statusData.dia_cobro" min="1" max="31">
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-secondary" (click)="showStatusModal = false">Cancelar</button>
+        <button class="btn-primary" (click)="saveStatus()">Confirmar Cambio</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" *ngIf="showDetailModal">
+    <div class="modal-content glass" style="max-width: 520px; text-align: left; animation: fadeIn 0.3s ease-out; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main);">
+      <h3 style="margin-top: 0; color: var(--primary); text-transform: uppercase; border-bottom: 2px solid var(--primary); padding-bottom: 6px; font-size: 13pt;">Detalle del Residente</h3>
+      
+      <div style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; font-size: 9.5pt;">
+        <div>
+          <strong style="color: var(--text-muted); font-size: 8pt; text-transform: uppercase; opacity: 0.85;">Nombres</strong>
+          <p style="margin: 3px 0 8px 0; font-weight: bold; font-size: 10.5pt; color: var(--text-main);">{{ selectedResForDetail?.nombresr }}</p>
+        </div>
+        <div>
+          <strong style="color: var(--text-muted); font-size: 8pt; text-transform: uppercase; opacity: 0.85;">Apellidos</strong>
+          <p style="margin: 3px 0 8px 0; font-weight: bold; font-size: 10.5pt; color: var(--text-main);">{{ selectedResForDetail?.apellidosr }}</p>
+        </div>
+        <div>
+          <strong style="color: var(--text-muted); font-size: 8pt; text-transform: uppercase; opacity: 0.85;">Documento</strong>
+          <p style="margin: 3px 0 8px 0; color: var(--text-main); font-weight: 500;">{{ selectedResForDetail?.tipodocumento || 'C.C.' }} {{ selectedResForDetail?.documentor }}</p>
+        </div>
+        <div>
+          <strong style="color: var(--text-muted); font-size: 8pt; text-transform: uppercase; opacity: 0.85;">EPS / Seguro</strong>
+          <p style="margin: 3px 0 8px 0; color: var(--text-main); font-weight: 500;">{{ selectedResForDetail?.eps || 'N/A' }}</p>
+        </div>
+        <div>
+          <strong style="color: var(--text-muted); font-size: 8pt; text-transform: uppercase; opacity: 0.85;">Tipo Sanguíneo (RH)</strong>
+          <p style="margin: 3px 0 8px 0; color: var(--text-main); font-weight: bold; font-size: 10.5pt;">{{ selectedResForDetail?.tipo_sanguineo || 'N/A' }}</p>
+        </div>
+        <div>
+          <strong style="color: var(--text-muted); font-size: 8pt; text-transform: uppercase; opacity: 0.85;">Ciudad</strong>
+          <p style="margin: 3px 0 8px 0; color: var(--text-main); font-weight: 500;">{{ selectedResForDetail?.ciudad || 'N/A' }}</p>
+        </div>
+        <div>
+          <strong style="color: var(--text-muted); font-size: 8pt; text-transform: uppercase; opacity: 0.85;">Estado actual</strong>
+          <p style="margin: 3px 0 8px 0;">
+            <span class="badge" [class.active]="selectedResForDetail?.estado === 'A'" [class.special]="selectedResForDetail?.estado === 'E'">
+              {{ selectedResForDetail?.estado === 'A' ? 'Activo' : selectedResForDetail?.estado === 'I' ? 'Inactivo' : 'Especial' }}
+            </span>
+          </p>
+        </div>
+        <div style="grid-column: span 2; margin-top: 4px;">
+          <strong style="color: var(--text-muted); font-size: 8pt; text-transform: uppercase; opacity: 0.85;">Medicación del Residente</strong>
+          <p style="margin: 4px 0 4px 0; color: #b45309; font-weight: bold; background: rgba(217, 119, 6, 0.08); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(217, 119, 6, 0.15); font-size: 9.5pt; line-height: 1.4;">
+            {{ selectedResForDetail?.historial_medico?.medicamentos || 'Ninguno / No registrado' }}
+          </p>
+        </div>
+      </div>
+      
+      <div style="margin-top: 12px; font-size: 9.5pt; border-top: 1px solid var(--border-color); padding-top: 12px;">
+        <strong style="color: var(--text-muted); font-size: 8pt; text-transform: uppercase; opacity: 0.85;">Dirección del Residente</strong>
+        <p style="margin: 3px 0 0 0; color: var(--text-main); font-weight: 500;">{{ selectedResForDetail?.direccionf || 'N/A' }}</p>
+      </div>
+ 
+      <!-- Sección de Acudiente -->
+      <div style="margin-top: 12px; font-size: 9.5pt; border-top: 1px solid var(--border-color); padding-top: 12px;" *ngIf="selectedResForDetail?.acudientes?.length > 0">
+        <strong style="color: var(--text-muted); font-size: 8pt; text-transform: uppercase; display: block; margin-bottom: 6px; opacity: 0.85;">Información del Acudiente</strong>
+        <div *ngFor="let acudiente of selectedResForDetail.acudientes" style="background: rgba(0, 0, 0, 0.02); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; margin-bottom: 8px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px;">
+            <div>
+              <strong style="color: var(--text-muted); font-size: 7.5pt; text-transform: uppercase; opacity: 0.8;">Nombre</strong>
+              <p style="margin: 2px 0; color: var(--text-main); font-weight: 600; font-size: 9pt;">{{ acudiente.nombres }} {{ acudiente.apellidos }}</p>
+            </div>
+            <div>
+              <strong style="color: var(--text-muted); font-size: 7.5pt; text-transform: uppercase; opacity: 0.8;">Parentesco</strong>
+              <p style="margin: 2px 0; color: var(--text-main); font-weight: 500; font-size: 9pt;">
+                {{ acudiente.pivot?.parentesco || 'Acudiente' }}
+              </p>
+            </div>
+            <div>
+              <strong style="color: var(--text-muted); font-size: 7.5pt; text-transform: uppercase; opacity: 0.8;">Documento</strong>
+              <p style="margin: 2px 0; color: var(--text-main); font-weight: 500; font-size: 9pt;">{{ acudiente.documento || 'N/A' }}</p>
+            </div>
+            <div>
+              <strong style="color: var(--text-muted); font-size: 7.5pt; text-transform: uppercase; opacity: 0.8; color: var(--primary); font-weight: bold;">Números de Contacto</strong>
+              <p style="margin: 2px 0; color: var(--text-main); font-weight: bold; font-size: 9.5pt;">{{ acudiente.telefono || 'N/A' }}</p>
+            </div>
+            <div style="grid-column: span 2;">
+              <strong style="color: var(--text-muted); font-size: 7.5pt; text-transform: uppercase; opacity: 0.8;">Email</strong>
+              <p style="margin: 2px 0; color: var(--text-main); font-weight: 500; font-size: 9pt; word-break: break-all;">{{ acudiente.email || 'N/A' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 12px; font-size: 9.5pt; border-top: 1px solid var(--border-color); padding-top: 12px;" *ngIf="!selectedResForDetail?.acudientes || selectedResForDetail?.acudientes?.length === 0">
+        <strong style="color: var(--text-muted); font-size: 8pt; text-transform: uppercase; opacity: 0.85;">Información del Acudiente</strong>
+        <p style="margin: 3px 0 0 0; color: var(--text-muted); font-style: italic;">No hay acudientes registrados para este residente.</p>
+      </div>
+ 
+      <div class="modal-actions" style="margin-top: 24px; border-top: 1px solid var(--border-color); padding-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+        <button class="btn-secondary" (click)="openEditModal(selectedResForDetail)" style="min-width: 110px; display: flex; align-items: center; gap: 6px;">
+          <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; color: var(--primary);"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"></path></svg>
+          Editar Datos
+        </button>
+        <button class="btn-primary" (click)="showDetailModal = false" style="min-width: 100px;">Cerrar</button>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Residente Modal -->
+  <div class="modal-overlay" *ngIf="showEditModal">
+    <div class="modal-content glass" style="max-width: 750px; width: 90%; max-height: 90vh; display: flex; flex-direction: column; text-align: left; animation: fadeIn 0.3s ease-out; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); padding: 1.8rem; border-radius: 1.2rem;">
+      <h3 style="margin-top: 0; margin-bottom: 10px; color: var(--primary); text-transform: uppercase; border-bottom: 2px solid var(--primary); padding-bottom: 6px; font-size: 13pt; display: flex; justify-content: space-between; align-items: center; letter-spacing: 0.5px; flex-shrink: 0;">
+        <span>Editar Residente e Ingreso</span>
+        <span style="font-size: 9pt; color: var(--text-muted); text-transform: none; font-weight: normal;">C.C. {{ editData.resident_data?.documentor }}</span>
+      </h3>
+
+      <!-- Tabbed Navigation inside Edit Modal -->
+      <div style="display: flex; gap: 8px; margin: 5px 0 15px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; flex-shrink: 0;">
+        <button (click)="activeEditTab = 'residente'" style="background: none; border: none; padding: 6px 12px; font-size: 9.5pt; font-weight: 600; cursor: pointer; color: var(--text-main); border-bottom: 2px solid transparent; transition: all 0.2s;" [style.color]="activeEditTab === 'residente' ? 'var(--primary)' : 'var(--text-muted)'" [style.border-bottom-color]="activeEditTab === 'residente' ? 'var(--primary)' : 'transparent'">
+          Datos Personales y Salud
+        </button>
+        <button (click)="activeEditTab = 'acudiente'" style="background: none; border: none; padding: 6px 12px; font-size: 9.5pt; font-weight: 600; cursor: pointer; color: var(--text-main); border-bottom: 2px solid transparent; transition: all 0.2s;" [style.color]="activeEditTab === 'acudiente' ? 'var(--primary)' : 'var(--text-muted)'" [style.border-bottom-color]="activeEditTab === 'acudiente' ? 'var(--primary)' : 'transparent'">
+          Acudiente (Contacto)
+        </button>
+        <button (click)="activeEditTab = 'ingreso'" style="background: none; border: none; padding: 6px 12px; font-size: 9.5pt; font-weight: 600; cursor: pointer; color: var(--text-main); border-bottom: 2px solid transparent; transition: all 0.2s;" [style.color]="activeEditTab === 'ingreso' ? 'var(--primary)' : 'var(--text-muted)'" [style.border-bottom-color]="activeEditTab === 'ingreso' ? 'var(--primary)' : 'transparent'">
+          Historial y Antecedentes
+        </button>
+      </div>
+
+      <!-- Scrollable Tab Content Area -->
+      <div style="flex: 1; overflow-y: auto; padding-right: 8px; margin-bottom: 10px;">
+        
+        <!-- Tab content: Residente y Salud -->
+        <div *ngIf="activeEditTab === 'residente'" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; font-size: 9.5pt;">
+          
+          <h4 style="grid-column: span 2; margin: 5px 0; color: var(--primary); font-size: 9.5pt; text-transform: uppercase; border-bottom: 1px dashed var(--border-color); padding-bottom: 4px; letter-spacing: 0.5px;">
+            Datos Básicos
+          </h4>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Nombres</label>
+            <input type="text" [(ngModel)]="editData.resident_data.nombresr" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Apellidos</label>
+            <input type="text" [(ngModel)]="editData.resident_data.apellidosr" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Tipo Documento</label>
+            <select [(ngModel)]="editData.resident_data.tipodocumento" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="C.C">Cédula de Ciudadanía (C.C)</option>
+              <option value="T.I">Tarjeta de Identidad (T.I)</option>
+              <option value="R.C">Registro Civil (R.C)</option>
+              <option value="C.E">Cédula de Extranjería (C.E)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Documento</label>
+            <input type="text" [(ngModel)]="editData.resident_data.documentor" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Expedido en</label>
+            <input type="text" [(ngModel)]="editData.resident_data.expedicionr" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Fecha de Nacimiento</label>
+            <input type="date" [(ngModel)]="editData.resident_data.fechanacimiento" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+
+          <h4 style="grid-column: span 2; margin: 15px 0 5px 0; color: var(--primary); font-size: 9.5pt; text-transform: uppercase; border-bottom: 1px dashed var(--border-color); padding-bottom: 4px; letter-spacing: 0.5px;">
+            Información de Contacto y Ubicación
+          </h4>
+          <div class="form-group" style="grid-column: span 2;">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Dirección Familiar</label>
+            <input type="text" [(ngModel)]="editData.resident_data.direccionf" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Ciudad</label>
+            <input type="text" [(ngModel)]="editData.resident_data.ciudad" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Teléfono Fijo</label>
+            <input type="text" [(ngModel)]="editData.resident_data.telefono" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Celular</label>
+            <input type="text" [(ngModel)]="editData.resident_data.celular" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Correo Electrónico</label>
+            <input type="email" [(ngModel)]="editData.resident_data.email" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+
+          <h4 style="grid-column: span 2; margin: 15px 0 5px 0; color: var(--primary); font-size: 9.5pt; text-transform: uppercase; border-bottom: 1px dashed var(--border-color); padding-bottom: 4px; letter-spacing: 0.5px;">
+            Perfil Socio-Demográfico
+          </h4>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Estado Civil</label>
+            <select [(ngModel)]="editData.resident_data.estadocivil" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="Soltero">Soltero(a)</option>
+              <option value="Casado">Casado(a)</option>
+              <option value="Unión Libre">Unión Libre</option>
+              <option value="Divorciado">Divorciado(a)</option>
+              <option value="Viudo">Viudo(a)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Cónyuge (Si aplica)</label>
+            <input type="text" [(ngModel)]="editData.resident_data.conyuge" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Nombre del Padre</label>
+            <input type="text" [(ngModel)]="editData.resident_data.padre" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Nombre de la Madre</label>
+            <input type="text" [(ngModel)]="editData.resident_data.madre" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Nivel de Estudios</label>
+            <select [(ngModel)]="editData.resident_data.estudios" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="Ninguno">Ninguno</option>
+              <option value="Primaria Incompleta">Primaria Incompleta</option>
+              <option value="Primaria Completa">Primaria Completa</option>
+              <option value="Secundaria Incompleta">Secundaria Incompleta</option>
+              <option value="Secundaria Completa">Secundaria Completa</option>
+              <option value="Técnico/Tecnólogo">Técnico/Tecnólogo</option>
+              <option value="Universitario">Universitario</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Profesión / Ocupación</label>
+            <input type="text" [(ngModel)]="editData.resident_data.profesion" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+
+          <h4 style="grid-column: span 2; margin: 15px 0 5px 0; color: var(--primary); font-size: 9.5pt; text-transform: uppercase; border-bottom: 1px dashed var(--border-color); padding-bottom: 4px; letter-spacing: 0.5px;">
+            Datos de Salud y Seguro
+          </h4>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">EPS / Seguro</label>
+            <input type="text" [(ngModel)]="editData.resident_data.eps" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Tipo Sanguíneo (RH)</label>
+            <input type="text" [(ngModel)]="editData.resident_data.tipo_sanguineo" placeholder="Ej: O+, A-, AB+" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Padece alguna enfermedad</label>
+            <input type="text" [(ngModel)]="editData.medical_data.enfermedades" placeholder="Ej: Diabetes, Hipertensión, ninguna" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Fecha Último Examen Físico</label>
+            <input type="date" [(ngModel)]="editData.medical_data.fechaexamen" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Estado General de Salud</label>
+            <select [(ngModel)]="editData.medical_data.estadosalud" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="Excelente">Excelente</option>
+              <option value="Bueno">Bueno</option>
+              <option value="Regular">Regular</option>
+              <option value="Malo">Malo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">¿Vacunas al día?</label>
+            <select [(ngModel)]="editData.medical_data.vacunas" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="Si">Sí</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">¿Ha sido hospitalizado?</label>
+            <select [(ngModel)]="editData.medical_data.hospitalizado" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="Si">Sí</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Detalles de Hospitalización (Si aplica)</label>
+            <input type="text" [(ngModel)]="editData.medical_data.descripcion" placeholder="Describa motivos y fechas..." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Diagnóstico Clínico / Psicológico</label>
+            <input type="text" [(ngModel)]="editData.medical_data.diagnosis" placeholder="Diagnóstico formal si existe..." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Medicación Actual</label>
+            <textarea [(ngModel)]="editData.medical_data.medicamentos" rows="2" placeholder="Describa los medicamentos y dosis..." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main); font-family: inherit; resize: vertical;"></textarea>
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Alergias / Restricciones Médicas</label>
+            <input type="text" [(ngModel)]="editData.medical_data.alergias" placeholder="Ej: Penicilina, mariscos, ninguna" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+        </div>
+
+        <!-- Tab content: Acudiente -->
+        <div *ngIf="activeEditTab === 'acudiente'" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; font-size: 9.5pt;">
+          
+          <h4 style="grid-column: span 2; margin: 5px 0; color: var(--primary); font-size: 9.5pt; text-transform: uppercase; border-bottom: 1px dashed var(--border-color); padding-bottom: 4px; letter-spacing: 0.5px;">
+            Información del Acudiente Principal
+          </h4>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Nombres</label>
+            <input type="text" [(ngModel)]="editData.guardian_data.nombres" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Apellidos</label>
+            <input type="text" [(ngModel)]="editData.guardian_data.apellidos" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Documento de Identidad</label>
+            <input type="text" [(ngModel)]="editData.guardian_data.documento" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Lugar de Expedición</label>
+            <input type="text" [(ngModel)]="editData.guardian_data.expedicion" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Parentesco / Relación</label>
+            <input type="text" [(ngModel)]="editData.guardian_data.parentesco" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+
+          <h4 style="grid-column: span 2; margin: 15px 0 5px 0; color: var(--primary); font-size: 9.5pt; text-transform: uppercase; border-bottom: 1px dashed var(--border-color); padding-bottom: 4px; letter-spacing: 0.5px;">
+            Medios de Contacto y Autorizaciones
+          </h4>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px; color: var(--primary); font-weight: bold;">Teléfono de Contacto (¡Lo más importante!)</label>
+            <input type="text" [(ngModel)]="editData.guardian_data.telefono" placeholder="Número celular o fijo" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 2px solid var(--primary); background: rgba(0,0,0,0.02); color: var(--text-main); font-weight: bold;">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Correo Electrónico</label>
+            <input type="email" [(ngModel)]="editData.guardian_data.email" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Autorización de uso de imagen y datos</label>
+            <select [(ngModel)]="editData.guardian_data.autorizacion" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="SI">SÍ (Autoriza)</option>
+              <option value="NO">NO (No autoriza)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Tab content: Historial de Ingreso -->
+        <div *ngIf="activeEditTab === 'ingreso'" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; font-size: 9.5pt;">
+          
+          <h4 style="grid-column: span 2; margin: 5px 0; color: var(--primary); font-size: 9.5pt; text-transform: uppercase; border-bottom: 1px dashed var(--border-color); padding-bottom: 4px; letter-spacing: 0.5px;">
+            Detalles de Admisión y Finanzas
+          </h4>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Fecha de Ingreso</label>
+            <input type="date" [(ngModel)]="editData.history_data.fechaingreso" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+              <div>
+                <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Pensión ($)</label>
+                <input type="number" [(ngModel)]="editData.financial_data.pension" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+              </div>
+              <div>
+                <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Uniforme ($)</label>
+                <input type="number" [(ngModel)]="editData.financial_data.uniforme" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+              </div>
+            </div>
+          </div>
+
+          <h4 style="grid-column: span 2; margin: 15px 0 5px 0; color: var(--primary); font-size: 9.5pt; text-transform: uppercase; border-bottom: 1px dashed var(--border-color); padding-bottom: 4px; letter-spacing: 0.5px;">
+            Antecedentes de Adicciones y Consumo
+          </h4>
+          <div class="form-group" style="grid-column: span 2;">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Motivo de Ingreso</label>
+            <textarea [(ngModel)]="editData.history_data.motivoi" rows="2" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main); font-family: inherit; resize: vertical;"></textarea>
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Tiempo de Consumo/Adicción</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="number" [(ngModel)]="editData.history_data.tiempoadiccion" style="width: 40%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+              <select [(ngModel)]="editData.history_data.medidatiempo" style="width: 60%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="Años">Años</option>
+                <option value="Meses">Meses</option>
+                <option value="Semanas">Semanas</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Sustancias Usadas</label>
+            <input type="text" [(ngModel)]="editData.history_data.drogasusadas" placeholder="Ej: Alcohol, Cocaína, etc." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+
+          <h4 style="grid-column: span 2; margin: 15px 0 5px 0; color: var(--primary); font-size: 9.5pt; text-transform: uppercase; border-bottom: 1px dashed var(--border-color); padding-bottom: 4px; letter-spacing: 0.5px;">
+            Historial Judicial y de Rehabilitación
+          </h4>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Problemas con la ley</label>
+            <select [(ngModel)]="editData.history_data.problemas" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="Sí">Sí</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">¿Estuvo en la cárcel?</label>
+            <select [(ngModel)]="editData.history_data.carcel" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="Sí">Sí</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Fundaciones Anteriores</label>
+            <input type="text" [(ngModel)]="editData.history_data.fundaciones" placeholder="Nombres de fundaciones anteriores..." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Motivo de Retiro (Fundaciones Previas)</label>
+            <input type="text" [(ngModel)]="editData.history_data.motivos" placeholder="Ej: Abandono, alta, expulsión, etc." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">¿Cómo se enteró de la Fundación?</label>
+            <input type="text" [(ngModel)]="editData.history_data.referido" placeholder="Ej: Internet, recomendado por un amigo, iglesia, etc." style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer Actions -->
+      <div class="modal-actions" style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 16px; display: flex; justify-content: flex-end; gap: 12px; flex-shrink: 0;">
+        <button class="btn-secondary" (click)="showEditModal = false" style="min-width: 100px;">Cancelar</button>
+        <button class="btn-primary" (click)="saveEdit()" style="min-width: 120px; display: flex; align-items: center; gap: 6px; justify-content: center;">
+          <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+          Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </div>
+
+  </main>
+</div>

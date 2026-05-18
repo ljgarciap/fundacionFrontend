@@ -1,0 +1,189 @@
+<div class="dashboard-container">
+  <aside class="sidebar glass">
+  <div class="logo">
+    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
+  </div>
+  <div class="nav-items">
+    <!-- SECCIÓN: INICIO -->
+    <div class="nav-section">
+      <div class="nav-section-title">Inicio</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: CLÍNICA -->
+    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
+      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: FINANZAS -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+      <div class="nav-section-title">Finanzas</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: ADMINISTRACIÓN -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Administración</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <p class="user-name">{{ user?.nombres }}</p>
+    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
+      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
+        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
+      </select>
+    </div>
+    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
+    <button (click)="toggleTheme()" class="btn-theme-toggle">
+      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
+      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
+    </button>
+    <button (click)="logout()" class="btn-logout">Salir</button>
+  </div>
+</aside>
+
+  <main class="main-content">
+    <header class="top-header">
+      <div class="header-title">
+        <h1>Conceptos Contables</h1>
+        <p>Catálogo de conceptos usados en el libro diario de asientos (Caja / Bancos)</p>
+      </div>
+      
+    </header>
+
+    <div class="page-grid">
+
+      <!-- LEFT: Conceptos -->
+      <div class="card main-card">
+        <div class="card-header-row">
+          <h2 class="card-title">📋 Conceptos</h2>
+          <span class="count-badge">{{ conceptos.length }} registrados</span>
+        </div>
+
+        <!-- Agregar nuevo inline -->
+        <div class="add-row">
+          <input
+            type="text"
+            [(ngModel)]="nuevoNombre"
+            class="add-input"
+            placeholder="Nuevo concepto (Ej: COMBUSTIBLE, ARRENDAMIENTO...)"
+            (keyup.enter)="addConcepto()"
+            [disabled]="saving">
+          <button class="btn-add" (click)="addConcepto()" [disabled]="!nuevoNombre.trim() || saving">
+            {{ saving ? '...' : '+ Agregar' }}
+          </button>
+        </div>
+
+        <!-- Search -->
+        <div class="search-row">
+          <input type="text" [(ngModel)]="searchQuery" class="search-input" placeholder="🔍 Filtrar conceptos...">
+        </div>
+
+        <!-- List -->
+        <div class="concept-list">
+          <div class="loading-state" *ngIf="loading">
+            <div class="spinner"></div>
+          </div>
+
+          <div class="concept-item" *ngFor="let c of filtered">
+            <!-- Vista normal -->
+            <div class="concept-view" *ngIf="editingId !== c.idconceptos">
+              <span class="concept-tag">{{ c.nombre }}</span>
+              <div class="concept-actions">
+                <button class="btn-edit" (click)="startEdit(c)" title="Editar">✏️</button>
+                <button class="btn-delete" (click)="confirmDelete(c)" title="Eliminar">🗑️</button>
+              </div>
+            </div>
+            <!-- Vista edición inline -->
+            <div class="concept-edit" *ngIf="editingId === c.idconceptos">
+              <input type="text" [(ngModel)]="editNombre" class="edit-input"
+                (keyup.enter)="saveEdit(c)" (keyup.escape)="cancelEdit()">
+              <div class="edit-actions">
+                <button class="btn-save-edit" (click)="saveEdit(c)" [disabled]="saving">✓</button>
+                <button class="btn-cancel-edit" (click)="cancelEdit()">✕</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="empty-state" *ngIf="filtered.length === 0 && !loading">
+            <p>No hay conceptos que coincidan con la búsqueda.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Tipologías + info -->
+      <div class="side-cards">
+
+        <!-- Tipologías (solo lectura) -->
+        <div class="card">
+          <div class="card-header-row">
+            <h2 class="card-title">📂 Tipologías</h2>
+            <span class="count-badge">{{ tipologias.length }}</span>
+          </div>
+          <p class="card-subtitle">Las tipologías son estáticas en el sistema. Clasifican cada asiento contable como entrada o salida.</p>
+          <div class="tipologia-list">
+            <div class="tipologia-item" *ngFor="let t of tipologias">
+              <span class="tipologia-icon">{{ t.idtipologia === 1 ? '📈' : '📉' }}</span>
+              <span class="tipologia-name">{{ t.nombre }}</span>
+              <span class="tipologia-id">#{{ t.idtipologia }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info card -->
+        <div class="card info-card">
+          <h2 class="card-title">ℹ️ Información</h2>
+          <ul class="info-list">
+            <li>Los conceptos se usan al registrar movimientos en <strong>Caja, Bancos, Roca y Jorec</strong>.</li>
+            <li>No se puede eliminar un concepto que ya tenga asientos históricos asociados.</li>
+            <li>Los nombres se guardan en <strong>MAYÚSCULAS</strong> automáticamente.</li>
+            <li>La tabla <strong>tipologia</strong> es de solo lectura (Entrada / Salida).</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal confirmación eliminar -->
+<div class="modal-backdrop" *ngIf="showDeleteModal">
+  <div class="confirm-modal">
+    <div class="modal-icon">⚠️</div>
+    <h3>Eliminar Concepto</h3>
+    <p>¿Confirmas que deseas eliminar <strong>"{{ deletingConcepto?.nombre }}"</strong>?</p>
+    <div class="delete-error" *ngIf="deleteError">{{ deleteError }}</div>
+    <div class="modal-footer">
+      <button class="btn-modal-cancel" (click)="showDeleteModal = false" [disabled]="deleting">Cancelar</button>
+      <button class="btn-modal-delete" (click)="doDelete()" [disabled]="deleting">
+        {{ deleting ? 'Eliminando...' : 'Eliminar' }}
+      </button>
+    </div>
+  </div>
+</div>

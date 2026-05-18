@@ -1,0 +1,68 @@
+.header-actions {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.date-time {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-time .date {
+  font-weight: 600;
+  color: white;
+}
+
+.date-time .hour {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.badge-role {
+  padding: 0.2rem 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.status-pill {
+  padding: 0.3rem 0.8rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-pill.E {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+}
+
+.status-pill.A {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+}
+
+.status-pill.N {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.empty-state {
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}

@@ -1,0 +1,515 @@
+/* ==========================================================================
+   PRIMARY PREMIUM DESIGN SYSTEM — FUNDACIÓN REBUILD
+   Supports: Light Theme (Default) & Dark Theme
+   ========================================================================== */
+
+/* ☀️ LIGHT THEME VARIABLES (Default) */
+:root {
+  --primary: #941524;            /* Burgundy Corporate Color */
+  --primary-hover: #7a0f1b;
+  --bg-dark: #f8fafc;            /* Clean Slate-50 background */
+  --bg-card: #ffffff;            /* Pure White Card */
+  --text-main: #0f172a;          /* Slate-900 main text */
+  --text-muted: #64748b;         /* Slate-500 muted text */
+  --accent: #10b981;             /* Emerald Accent */
+  --danger: #ef4444;             /* Soft Red */
+  --sidebar-bg: #ffffff;         /* Snow sidebar */
+  --border-color: rgba(0, 0, 0, 0.08);
+  --shadow-premium: 0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
+/* 🌙 DARK THEME VARIABLES */
+body.dark-theme {
+  --primary: #c22b3e;            /* Brighter Burgundy for dark theme */
+  --primary-hover: #941524;
+  --bg-dark: #0b0f19;            /* Rich Midnight Blue */
+  --bg-card: #121826;            /* Sleek Midnight Card */
+  --text-main: #f1f5f9;          /* Bright Slate-50 main text */
+  --text-muted: #94a3b8;         /* Bright Slate-300 muted text */
+  --accent: #10b981;
+  --danger: #f87171;
+  --sidebar-bg: rgba(18, 24, 38, 0.85);
+  --border-color: rgba(255, 255, 255, 0.07);
+  --shadow-premium: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Base Body Styles */
+body {
+  margin: 0;
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Layout and Top Level Containers Overrides */
+.dashboard-layout, .dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, var(--bg-dark), var(--bg-dark)) !important;
+  color: var(--text-main) !important;
+  transition: all 0.3s ease;
+}
+
+.content {
+  flex: 1;
+  padding: 3rem;
+  overflow-y: auto;
+}
+
+/* Sidebar Styling & Aesthetics */
+.sidebar, .sidebar.glass {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  background: var(--sidebar-bg) !important;
+  border-right: 1px solid var(--border-color) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: var(--shadow-premium) !important;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+/* Logo Management — Compact and High End */
+.logo, .logo-area {
+  margin-bottom: 2.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-logo, .logo-img {
+  max-height: 44px !important;
+  max-width: 150px !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+  display: block !important;
+  transition: all 0.3s ease !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05)) !important;
+}
+
+body.dark-theme .sidebar-logo, body.dark-theme .logo-img {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15)) !important;
+}
+
+/* Navigation Links */
+.nav-items {
+  flex: 1;
+}
+
+.nav-items a, .nav-item {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--text-muted) !important;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+}
+
+.nav-items a.active, .nav-items a:hover, .nav-item:hover, .nav-item.active {
+  background: rgba(148, 21, 36, 0.06) !important;
+  color: var(--primary) !important;
+  border-left: 3px solid var(--primary) !important;
+}
+
+body.dark-theme .nav-items a.active, body.dark-theme .nav-items a:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: white !important;
+  border-left: 3px solid var(--primary) !important;
+}
+
+/* User Info Section (Sidebar Bottom) */
+.user-info {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.user-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.user-role-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Role Switcher Contained Select */
+.role-switcher-container {
+  width: 100%;
+}
+
+.sidebar-role-select {
+  width: 100%;
+  background: rgba(148, 21, 36, 0.08);
+  border: 1px solid rgba(148, 21, 36, 0.15);
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23941524'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 0.95rem;
+  padding-right: 2rem;
+  transition: all 0.2s ease;
+}
+
+body.dark-theme .sidebar-role-select {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #ffb7b2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+}
+
+.sidebar-role-select:hover {
+  background-color: rgba(148, 21, 36, 0.15);
+  border-color: var(--primary);
+}
+
+.sidebar-role-select option {
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Premium Theme Switcher Button */
+.btn-theme-toggle {
+  background: rgba(148, 21, 36, 0.08);
+  border: 1px dashed rgba(148, 21, 36, 0.2);
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  width: 100%;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-theme-toggle:hover {
+  background: var(--primary);
+  color: white;
+  border-style: solid;
+  box-shadow: 0 4px 12px rgba(148, 21, 36, 0.2);
+}
+
+body.dark-theme .btn-theme-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  color: #ffb7b2;
+}
+
+body.dark-theme .btn-theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+/* Premium Logout Button */
+.btn-logout {
+  background: none;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  background-color: var(--danger);
+  color: white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* Premium Card & Element Overrides Globally */
+.card, .stat-card, .filter-card, .balance-section-card, .premium-modal, .modal-content, .confirm-modal {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-premium) !important;
+  color: var(--text-main) !important;
+  border-radius: 16px !important;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Headings Overrides */
+h1, h2, h3, h4, h5, h6, .header-title h1, header h1 {
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  color: var(--text-main) !important;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+}
+
+p, .subtitle, .header-title p, header p {
+  color: var(--text-muted) !important;
+}
+
+/* Form Elements globally */
+input, select, textarea {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-main) !important;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px rgba(148, 21, 36, 0.1) !important;
+}
+
+/* Tables Styling */
+.table-container, table, tr, th, td {
+  border-color: var(--border-color) !important;
+}
+
+th {
+  color: var(--text-muted) !important;
+  background: rgba(0, 0, 0, 0.02) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+body.dark-theme th {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+td {
+  color: var(--text-main) !important;
+}
+
+/* Primary Premium Button */
+.btn-primary {
+  background-color: var(--primary) !important;
+  color: white !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(148, 21, 36, 0.3) !important;
+}
+
+/* ==========================================================================
+   ADMISSION (INGRESO) MODULE & GLASS OVERRIDES
+   ========================================================================== */
+.ingreso-container {
+  background: radial-gradient(circle at top left, var(--bg-dark), var(--bg-dark)) !important;
+}
+
+.form-card, .form-card.glass {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-premium) !important;
+  color: var(--text-main) !important;
+  border-radius: 24px !important;
+  padding: 3rem !important;
+  transition: all 0.3s ease;
+}
+
+.step-content h3 {
+  color: var(--text-main) !important;
+  border-left-color: var(--primary) !important;
+}
+
+.step {
+  background: var(--bg-card) !important;
+  color: var(--text-muted) !important;
+  border: 2px solid var(--border-color) !important;
+}
+
+.step.active {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: white !important;
+  box-shadow: 0 0 15px rgba(148, 21, 36, 0.4) !important;
+}
+
+.line {
+  background: var(--border-color) !important;
+}
+
+label {
+  color: var(--text-muted) !important;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.88rem;
+}
+
+/* Glass Panels and Glass Overrides globally */
+.glass, .success-overlay.glass {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  color: var(--text-main) !important;
+  box-shadow: var(--shadow-premium) !important;
+}
+
+h1, h2, h3, h4, h5, h6, .header-title h1, .header h1, header h1 {
+  background: none !important;
+  -webkit-text-fill-color: initial !important;
+  color: var(--text-main) !important;
+}
+
+/* Sidebar Nav Section Styling & Accordion Behavior */
+.nav-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.nav-section-title {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted) !important;
+  margin: 1rem 0.75rem 0.4rem 0.75rem !important;
+  opacity: 0.65;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Premium indicator chevron on each header */
+.nav-section-title::after {
+  content: '▼';
+  font-size: 0.5rem;
+  transition: transform 0.3s ease;
+  opacity: 0.5;
+}
+
+/* Collapse the links by default */
+.nav-section-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding-left: 0.25rem;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+/* Expand the active section that has the active menu item */
+.nav-section:has(.active) .nav-section-content {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 0.25rem;
+}
+
+/* Rotate Chevron for the expanded active section */
+.nav-section:has(.active) .nav-section-title::after {
+  transform: rotate(-180deg);
+  opacity: 1;
+  color: var(--primary);
+}
+
+.nav-section:has(.active) .nav-section-title {
+  opacity: 0.95;
+  color: var(--text-main) !important;
+}
+
+/* Hover over collapsed sections to auto-reveal their menus fluidly */
+.nav-section:hover .nav-section-content {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 0.25rem;
+}
+
+.nav-section:hover .nav-section-title::after {
+  transform: rotate(-180deg);
+  opacity: 0.8;
+}
+
+.nav-section:hover .nav-section-title {
+  opacity: 0.9;
+}
+
+/* Premium Global Icon Styles */
+.menu-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  vertical-align: -1px;
+  display: inline-block;
+}
+
+.btn-svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: none;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-muted) !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  margin-right: 0.4rem;
+}
+
+.btn-icon:hover {
+  background: rgba(148, 21, 36, 0.08) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+
+
