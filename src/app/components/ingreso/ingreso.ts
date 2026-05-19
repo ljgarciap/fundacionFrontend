@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Api } from '../../services/api';
@@ -8,11 +8,12 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-ingreso',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './ingreso.html',
   styleUrl: './ingreso.css'
 })
 export class Ingreso implements OnInit {
+  @Output() onBack = new EventEmitter<void>();
   currentStep = 1;
   ingresoForm!: FormGroup;
   loading = false;
@@ -43,6 +44,7 @@ export class Ingreso implements OnInit {
         apellidosr: ['', Validators.required],
         fechan: ['', Validators.required],
         eps: [''],
+        tipo_sanguineo: ['O+', Validators.required],
         documentor: ['', Validators.required],
         expedicionr: ['PIEDECUESTA'],
         tipodocumento: ['C.C'],
@@ -245,12 +247,12 @@ export class Ingreso implements OnInit {
   downloadPdf() {
     if (!this.newResidenteId) return;
     
-    const url = `${this.api.baseUrl}/ingresos/${this.newResidenteId}/pdf`;
+    const url = `${this.api.baseUrl}/ingresos/${this.newResidenteId}/pdf?token=${this.auth.getToken()}`;
     window.open(url, '_blank');
   }
 
   goToDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.onBack.emit();
   }
 
   switchRole(newRole: string) {

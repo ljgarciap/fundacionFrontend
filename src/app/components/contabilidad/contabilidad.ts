@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Api } from '../../services/api';
 import { Auth } from '../../services/auth';
@@ -34,6 +34,7 @@ export class Contabilidad implements OnInit {
   page = 1;
   lastPage = 1;
   total = 0;
+  limit = 10;
 
   // Modal / Transaction state
   showModal = false;
@@ -45,13 +46,14 @@ export class Contabilidad implements OnInit {
     concepto: '',
     detalle: '',
     tipologia: '1', // 1 = Entrada (Debito), 2 = Salida (Credito)
-    valor: 0
+    valor: 0,
+    channel: 'colombia'
   };
 
   // Autocomplete state
-  residents: any[] = [];
-  filteredResidents: any[] = [];
-  showResDropdown = false;
+  actores: any[] = [];
+  filteredActores: any[] = [];
+  showActorDropdown = false;
 
   conceptosComunes = [
     'ABONO PENSION',
@@ -71,30 +73,38 @@ export class Contabilidad implements OnInit {
   constructor(
     private api: Api,
     private auth: Auth,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
     this.user = this.auth.getUser();
     this.loadBalances();
     this.loadMovements();
-    this.loadResidents();
+    this.loadActores();
+    this.loadConceptos();
   }
 
   loadBalances() {
     this.loadingBalances = true;
+    this.cdr.detectChanges();
     this.api.get('contabilidad/balances').subscribe({
       next: (res: any) => {
         this.balances = res;
         this.loadingBalances = false;
+        this.cdr.detectChanges();
       },
-      error: () => this.loadingBalances = false
+      error: () => {
+        this.loadingBalances = false;
+        this.cdr.detectChanges();
+      }
     });
   }
 
   loadMovements() {
     this.loadingMovements = true;
-    let url = `contabilidad/movimientos?channel=${this.selectedChannel}&page=${this.page}`;
+    this.cdr.detectChanges();
+    let url = `contabilidad/movimientos?channel=${this.selectedChannel}&page=${this.page}&limit=${this.limit}`;
     if (this.searchQuery) {
       url += `&search=${encodeURIComponent(this.searchQuery)}`;
     }
@@ -111,15 +121,29 @@ export class Contabilidad implements OnInit {
         this.lastPage = res.last_page;
         this.total = res.total;
         this.loadingMovements = false;
+        this.cdr.detectChanges();
       },
-      error: () => this.loadingMovements = false
+      error: () => {
+        this.loadingMovements = false;
+        this.cdr.detectChanges();
+      }
     });
   }
 
-  loadResidents() {
-    this.api.get('residentes').subscribe({
+  loadActores() {
+    this.api.get('actores').subscribe({
       next: (data: any) => {
-        this.residents = data;
+        this.actores = data;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  loadConceptos() {
+    this.api.get('conceptos').subscribe({
+      next: (data: any) => {
+        this.conceptosComunes = data.map((c: any) => c.nombre);
+        this.cdr.detectChanges();
       }
     });
   }
@@ -128,11 +152,13 @@ export class Contabilidad implements OnInit {
     this.selectedChannel = channel;
     this.page = 1;
     this.loadMovements();
+    this.cdr.detectChanges();
   }
 
   onFilterChange() {
     this.page = 1;
     this.loadMovements();
+    this.cdr.detectChanges();
   }
 
   clearFilters() {
@@ -141,35 +167,38 @@ export class Contabilidad implements OnInit {
     this.endDate = '';
     this.page = 1;
     this.loadMovements();
+    this.cdr.detectChanges();
   }
 
   changePage(newPage: number) {
     if (newPage >= 1 && newPage <= this.lastPage) {
       this.page = newPage;
       this.loadMovements();
+      this.cdr.detectChanges();
     }
   }
 
   onDetalleInput() {
     const term = this.formData.detalle.toLowerCase();
     if (!term) {
-      this.filteredResidents = [];
-      this.showResDropdown = false;
+      this.filteredActores = [];
+      this.showActorDropdown = false;
+      this.cdr.detectChanges();
       return;
     }
 
-    this.filteredResidents = this.residents.filter(r => 
-      r.nombresr.toLowerCase().includes(term) || 
-      r.apellidosr.toLowerCase().includes(term) ||
-      r.documentor.includes(term)
+    this.filteredActores = this.actores.filter(a => 
+      a.nombre.toLowerCase().includes(term)
     ).slice(0, 5);
 
-    this.showResDropdown = this.filteredResidents.length > 0;
+    this.showActorDropdown = this.filteredActores.length > 0;
+    this.cdr.detectChanges();
   }
 
-  selectResident(r: any) {
-    this.formData.detalle = `${r.nombresr} ${r.apellidosr}`;
-    this.showResDropdown = false;
+  selectActor(a: any) {
+    this.formData.detalle = a.nombre;
+    this.showActorDropdown = false;
+    this.cdr.detectChanges();
   }
 
   openNewModal() {
@@ -180,10 +209,13 @@ export class Contabilidad implements OnInit {
       concepto: '',
       detalle: '',
       tipologia: '1',
-      valor: 0
+      valor: 0,
+      channel: this.selectedChannel
     };
-    this.showResDropdown = false;
+    this.showActorDropdown = false;
+    this.filteredActores = [];
     this.showModal = true;
+    this.cdr.detectChanges();
   }
 
   openEditModal(m: any) {
@@ -194,20 +226,23 @@ export class Contabilidad implements OnInit {
       concepto: m.concepto,
       detalle: m.detalle === 'N/A' ? '' : m.detalle,
       tipologia: m.entrada > 0 ? '1' : '2',
-      valor: m.entrada > 0 ? m.entrada : m.salida
+      valor: m.entrada > 0 ? m.entrada : m.salida,
+      channel: this.selectedChannel
     };
-    this.showResDropdown = false;
+    this.showActorDropdown = false;
+    this.filteredActores = [];
     this.showModal = true;
+    this.cdr.detectChanges();
   }
 
   closeModal() {
     this.showModal = false;
+    this.cdr.detectChanges();
   }
 
   submitForm() {
     const payload = {
-      ...this.formData,
-      channel: this.selectedChannel
+      ...this.formData
     };
 
     if (this.isEditing && this.editingId !== null) {
@@ -216,8 +251,12 @@ export class Contabilidad implements OnInit {
           this.closeModal();
           this.loadBalances();
           this.loadMovements();
+          this.cdr.detectChanges();
         },
-        error: (err: any) => alert('Error al actualizar transacción: ' + (err.error?.message || err.message))
+        error: (err: any) => {
+          alert('Error al actualizar transacción: ' + (err.error?.message || err.message));
+          this.cdr.detectChanges();
+        }
       });
     } else {
       this.api.post('contabilidad/movimientos', payload).subscribe({
@@ -225,10 +264,20 @@ export class Contabilidad implements OnInit {
           this.closeModal();
           this.loadBalances();
           this.loadMovements();
+          this.cdr.detectChanges();
         },
-        error: (err: any) => alert('Error al registrar transacción: ' + (err.error?.message || err.message))
+        error: (err: any) => {
+          alert('Error al registrar transacción: ' + (err.error?.message || err.message));
+          this.cdr.detectChanges();
+        }
       });
     }
+  }
+
+  onLimitChange(newLimit: number) {
+    this.limit = newLimit;
+    this.page = 1;
+    this.loadMovements();
   }
 
   switchRole(newRole: string) {

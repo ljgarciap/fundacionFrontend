@@ -14,9 +14,8 @@ import { Minuta } from './components/minuta/minuta';
 import { Contabilidad } from './components/contabilidad/contabilidad';
 import { Compras } from './components/compras/compras';
 import { ComprasDetalle } from './components/compras/compras-detalle';
-import { Uniformes } from './components/uniformes/uniformes';
+import { Servicios } from './components/servicios/servicios';
 import { Diezmos } from './components/diezmos/diezmos';
-import { Almuerzos } from './components/almuerzos/almuerzos';
 import { Practicantes } from './components/practicantes/practicantes';
 import { Conceptos } from './components/conceptos/conceptos';
 import { Permisos } from './components/permisos/permisos';
@@ -28,7 +27,7 @@ export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'ingreso', component: Ingreso },
     { path: 'pagos', component: Pagos },
-    { path: 'psicologia', component: Psicologia },
+    { path: 'psicologia', redirectTo: '/terapias', pathMatch: 'full' },
     { path: 'agenda', component: Agenda },
     { path: 'tienda', component: Tienda },
     { path: 'reportes', component: Reportes },
@@ -39,9 +38,10 @@ export const routes: Routes = [
     { path: 'contabilidad', component: Contabilidad },
     { path: 'compras', component: Compras },
     { path: 'compras/:id', component: ComprasDetalle },
-    { path: 'uniformes', component: Uniformes },
+    { path: 'servicios', component: Servicios },
+    { path: 'uniformes', redirectTo: '/servicios', pathMatch: 'full' },
     { path: 'diezmos', component: Diezmos },
-    { path: 'almuerzos', component: Almuerzos },
+    { path: 'almuerzos', redirectTo: '/servicios', pathMatch: 'full' },
     { path: 'practicantes', component: Practicantes },
     { path: 'conceptos', component: Conceptos },
     { path: 'permisos', component: Permisos },

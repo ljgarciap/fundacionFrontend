@@ -5,10 +5,12 @@ import { Auth } from '../../services/auth';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Ingreso } from '../ingreso/ingreso';
+import { Pagos } from '../pagos/pagos';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule, Ingreso, Pagos],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -17,6 +19,17 @@ export class DashboardComponent implements OnInit {
   user: any = null;
   loading = true;
   filterStatus = 'A'; // Activos by default
+  selectedResidentIds = new Set<number>();
+
+  // Inline dynamic subviews
+  currentSubview: 'LIST' | 'INGRESO' | 'PAGOS' | 'SISTEMA' = 'LIST';
+  selectedPensionResidentId: number | null = null;
+
+  // System Diagnostics and Notifications Dashboard
+  systemStatus: any = null;
+  systemNotifications: any[] = [];
+  fixingSystem = false;
+  loadingSystem = false;
 
   // Reactive Table Properties
   searchText = '';
@@ -69,6 +82,17 @@ export class DashboardComponent implements OnInit {
     console.log('[Dashboard] Invoking loadResidents and loadStats');
     this.loadResidents();
     this.loadStats();
+    this.loadSystemNotifications();
+
+    // Check if subview is passed in query parameters for direct navigation
+    try {
+      const urlTree = this.router.parseUrl(this.router.url);
+      if (urlTree.queryParams && urlTree.queryParams['subview'] === 'SISTEMA') {
+        this.setSubview('SISTEMA');
+      }
+    } catch (e) {
+      console.error('[Dashboard] Error parsing subview query param:', e);
+    }
   }
 
   loadStats() {
@@ -91,8 +115,9 @@ export class DashboardComponent implements OnInit {
 
   loadResidents() {
     console.log('[Dashboard] loadResidents() called, filterStatus:', this.filterStatus);
+    this.selectedResidentIds.clear();
     this.loading = true;
-    this.api.get(`residentes?estado=${this.filterStatus}`).subscribe({
+    this.api.get(`residentes?estado=${this.filterStatus}&with_relations=true`).subscribe({
       next: (data) => {
         console.log('[Dashboard] loadResidents success, count:', data?.length);
         this.residents = data;
@@ -320,8 +345,62 @@ export class DashboardComponent implements OnInit {
     window.open(`${this.api.getBaseUrl()}/formatos/carnet/${res.idresidentes}?token=${this.auth.getToken()}`, '_blank');
   }
 
+  toggleSelect(res: any) {
+    if (this.selectedResidentIds.has(res.idresidentes)) {
+      this.selectedResidentIds.delete(res.idresidentes);
+    } else {
+      this.selectedResidentIds.add(res.idresidentes);
+    }
+    this.cdr.detectChanges();
+  }
+
+  isAllSelected(): boolean {
+    const paginated = this.getPaginatedResidents();
+    if (paginated.length === 0) return false;
+    return paginated.every(r => this.selectedResidentIds.has(r.idresidentes));
+  }
+
+  toggleSelectAll() {
+    const paginated = this.getPaginatedResidents();
+    if (this.isAllSelected()) {
+      paginated.forEach(r => this.selectedResidentIds.delete(r.idresidentes));
+    } else {
+      paginated.forEach(r => this.selectedResidentIds.add(r.idresidentes));
+    }
+    this.cdr.detectChanges();
+  }
+
+  isSelected(res: any): boolean {
+    return this.selectedResidentIds.has(res.idresidentes);
+  }
+
+  printSelectedCarnets() {
+    if (this.selectedResidentIds.size === 0) {
+      Swal.fire({
+        title: 'Atención',
+        text: 'Debe seleccionar al menos un residente para imprimir sus carnets.',
+        icon: 'warning',
+        confirmButtonColor: 'var(--primary)',
+        background: 'var(--bg-card)',
+        color: 'var(--text-main)',
+        customClass: {
+          popup: 'swal-premium-popup',
+          title: 'swal-premium-title',
+          htmlContainer: 'swal-premium-text'
+        }
+      });
+      return;
+    }
+    const ids = Array.from(this.selectedResidentIds).join(',');
+    window.open(`${this.api.getBaseUrl()}/formatos/carnet/multiple?ids=${ids}&token=${this.auth.getToken()}`, '_blank');
+  }
+
+  printResidentsReport() {
+    window.open(`${this.api.getBaseUrl()}/formatos/residentes/reporte?estado=${this.filterStatus}&token=${this.auth.getToken()}`, '_blank');
+  }
+
   printResidentBarcodes() {
-    window.open(`${this.api.getBaseUrl()}/formatos/barcodes/residentes?token=${this.auth.getToken()}`, '_blank');
+    this.printResidentsReport();
   }
 
   switchRole(newRole: string) {
@@ -397,6 +476,155 @@ export class DashboardComponent implements OnInit {
       this.currentPage = page;
       this.cdr.detectChanges();
     }
+  }
+
+  openIngresoInline() {
+    this.currentSubview = 'INGRESO';
+    this.cdr.detectChanges();
+  }
+
+  openPagosInline(residentId: number) {
+    this.selectedPensionResidentId = residentId;
+    this.currentSubview = 'PAGOS';
+    this.cdr.detectChanges();
+  }
+
+  closeInlineViews() {
+    this.currentSubview = 'LIST';
+    this.selectedPensionResidentId = null;
+    this.loadResidents(); // Reload list to capture new residents or changes
+    this.cdr.detectChanges();
+  }
+
+  setSubview(view: 'LIST' | 'INGRESO' | 'PAGOS' | 'SISTEMA') {
+    this.currentSubview = view;
+    if (view === 'SISTEMA') {
+      this.loadSystemStatus();
+      this.loadSystemNotifications();
+    }
+    this.cdr.detectChanges();
+  }
+
+  loadSystemStatus() {
+    this.loadingSystem = true;
+    this.api.get('system/status').subscribe({
+      next: (data) => {
+        this.systemStatus = data;
+        this.loadingSystem = false;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('[Dashboard] loadSystemStatus error:', err);
+        this.loadingSystem = false;
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  loadSystemNotifications() {
+    this.api.get('system/notifications').subscribe({
+      next: (data: any) => {
+        this.systemNotifications = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('[Dashboard] loadSystemNotifications error:', err);
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  autoFixSystem() {
+    Swal.fire({
+      title: '¿Confirmar Auto-corrección?',
+      text: 'El sistema asociará un acudiente genérico y creará registros históricos por defecto para los residentes que tengan datos incompletos. Esto dejará alertas en el módulo de notificaciones.',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, Auto-reparar',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+        popup: 'swal-premium-popup',
+        title: 'swal-premium-title',
+        htmlContainer: 'swal-premium-text'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.fixingSystem = true;
+        this.cdr.detectChanges();
+        this.api.post('system/autofix', {}).subscribe({
+          next: (res: any) => {
+            this.fixingSystem = false;
+            Swal.fire({
+              title: 'Reparación Completada',
+              html: `Se repararon: <br><b>${res.fixed_acudiente_count}</b> acudientes faltantes.<br><b>${res.fixed_historial_count}</b> historiales faltantes.`,
+              icon: 'success',
+              customClass: {
+                popup: 'swal-premium-popup',
+                title: 'swal-premium-title',
+                htmlContainer: 'swal-premium-text'
+              }
+            });
+            this.loadSystemStatus();
+            this.loadSystemNotifications();
+            this.cdr.detectChanges();
+          },
+          error: (err) => {
+            this.fixingSystem = false;
+            console.error('[Dashboard] autoFixSystem error:', err);
+            Swal.fire({
+              title: 'Error de Reparación',
+              text: 'Ocurrió un error al procesar la auto-corrección.',
+              icon: 'error',
+              customClass: {
+                popup: 'swal-premium-popup',
+                title: 'swal-premium-title',
+                htmlContainer: 'swal-premium-text'
+              }
+            });
+            this.cdr.detectChanges();
+          }
+        });
+      }
+    });
+  }
+
+  dismissNotification(id: number) {
+    this.api.post(`system/notifications/${id}/dismiss`, {}).subscribe({
+      next: () => {
+        this.loadSystemNotifications();
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('[Dashboard] dismissNotification error:', err);
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  dismissAllNotifications() {
+    Swal.fire({
+      title: '¿Descartar todas las alertas?',
+      text: 'Esto marcará todas las anotaciones y notificaciones de corrección como entendidas.',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, descartar todas',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#4f46e5'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.api.post('system/notifications/dismiss-all', {}).subscribe({
+          next: () => {
+            this.loadSystemNotifications();
+            this.cdr.detectChanges();
+            Swal.fire('Descartadas', 'Todas las notificaciones han sido descartadas.', 'success');
+          },
+          error: (err) => {
+            console.error('[Dashboard] dismissAllNotifications error:', err);
+            this.cdr.detectChanges();
+          }
+        });
+      }
+    });
   }
 
   logout() {

@@ -511,5 +511,28 @@ h1, h2, h3, h4, h5, h6, .header-title h1, .header h1, header h1 {
   color: var(--primary) !important;
 }
 
+/* Hide Tienda navigation section globally from the sidebar lateral menu */
+.nav-section:has(a[routerLink="/tienda"]), 
+.nav-section:has(a[href="/tienda"]),
+.nav-section:has(a[routerLink="/compras"]), 
+.nav-section:has(a[href="/compras"]) {
+  display: none !important;
+}
+
+/* Light Theme Overrides for Reports Component to fix white-on-white text */
+body:not(.dark-theme) .gc-val {
+  color: #0f172a !important;
+}
+body:not(.dark-theme) .ms-v {
+  color: #0f172a !important;
+}
+body:not(.dark-theme) .bold-td {
+  color: #0f172a !important;
+}
+body:not(.dark-theme) .bar-count {
+  color: #1e293b !important;
+}
+
+
 
 

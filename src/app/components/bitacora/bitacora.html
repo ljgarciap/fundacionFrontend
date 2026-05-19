@@ -8,18 +8,22 @@
     <div class="nav-section">
       <div class="nav-section-title">Inicio</div>
       <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg> Dashboard
+        </a>
       </div>
     </div>
 
     <!-- SECCIÓN: CLÍNICA -->
     <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
-      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-title">Terapia</div>
       <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg> Terapias
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Agenda
+        </a>
       </div>
     </div>
 
@@ -27,27 +31,74 @@
     <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
       <div class="nav-section-title">Finanzas</div>
       <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Ahorros
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Contabilidad
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> Conceptos Contables
+        </a>
       </div>
     </div>
-
-    <!-- SECCIÓN: ADMINISTRACIÓN -->
+      <!-- SECCIÓN: FUNDACIÓN -->
+      <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+        <div class="nav-section-title">Fundación</div>
+        <div class="nav-section-content">
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/servicios" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> Servicios
+          </a>
+          
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path></svg> Control de Salidas
+          </a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Portería
+          </a>
+        </div>
+      </div>
+      <!-- SECCIÓN: TIENDA -->
+      <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+        <div class="nav-section-title">Tienda</div>
+        <div class="nav-section-content">
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Tienda POS
+          </a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> Compras / Stock
+          </a>
+        </div>
+      </div>
+      <!-- SECCIÓN: ADMINISTRACIÓN -->
     <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
       <div class="nav-section-title">Administración</div>
       <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Usuarios
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg> Practicantes
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"></path><polyline points="17 6 23 6 23 12"></polyline></svg> Reportes
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Diezmos / Ofrendas
+        </a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: SISTEMA -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Sistema</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> Bitácora
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/dashboard" [queryParams]="{subview: 'SISTEMA'}" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Estado del Sistema
+        </a>
       </div>
     </div>
   </div>
@@ -69,43 +120,189 @@
 </aside>
 
   <main class="content">
-    <header>
-      <h1>Bitácora de Movimientos</h1>
-      <p>Registro histórico de todas las acciones realizadas en el sistema.</p>
+    <header class="bitacora-header">
+      <div class="header-text">
+        <h1>Bitácora de Auditoría del Sistema</h1>
+        <p>Registro completo y en tiempo real de todas las peticiones, respuestas y acciones de los usuarios.</p>
+      </div>
     </header>
 
-    <div class="table-container glass">
-      <table>
+    <!-- Barra de Filtros y Búsqueda -->
+    <div class="filters-card glass">
+      <div class="search-box">
+        <input 
+          type="text" 
+          [(ngModel)]="searchQuery" 
+          (keyup.enter)="searchLogs()" 
+          placeholder="Buscar por URL, datos del request o respuesta..." 
+          class="search-input"
+        />
+        <button (click)="searchLogs()" class="btn-search">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          Buscar
+        </button>
+      </div>
+
+      <div class="filter-selectors">
+        <div class="filter-group">
+          <label>Método</label>
+          <select [(ngModel)]="selectedMethod" (change)="searchLogs()" class="filter-select">
+            <option value="">Todos</option>
+            <option value="GET">GET (Consulta)</option>
+            <option value="POST">POST (Creación)</option>
+            <option value="PUT">PUT (Actualización)</option>
+            <option value="DELETE">DELETE (Eliminación)</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Estado HTTP</label>
+          <select [(ngModel)]="selectedStatus" (change)="searchLogs()" class="filter-select">
+            <option value="">Todos</option>
+            <option value="200">Exitoso (2xx)</option>
+            <option value="400">Error Cliente (4xx)</option>
+            <option value="500">Error Servidor (5xx)</option>
+          </select>
+        </div>
+
+        <button (click)="resetFilters()" class="btn-reset">
+          Limpiar Filtros
+        </button>
+      </div>
+    </div>
+
+    <!-- Indicador de Carga -->
+    <div class="loading-overlay" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Cargando registros de auditoría...</p>
+    </div>
+
+    <div class="table-container glass" *ngIf="!loading">
+      <table class="bitacora-table">
         <thead>
           <tr>
             <th>Fecha y Hora</th>
             <th>Usuario</th>
-            <th>Acción</th>
-            <th>Módulo</th>
-            <th>Detalles</th>
-            <th>IP</th>
+            <th>Método</th>
+            <th>Ruta / Endpoint</th>
+            <th>Estado</th>
+            <th>Dirección IP</th>
+            <th class="text-right">Acción</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let log of logs">
-            <td class="timestamp">{{ log.created_at | date:'dd/MM/yyyy HH:mm:ss' }}</td>
-            <td class="user">{{ log.user?.nombres }} {{ log.user?.apellidos }}</td>
-            <td><span class="badge action">{{ log.action }}</span></td>
-            <td>{{ log.model }}</td>
-            <td class="details">{{ formatDetails(log.details) }}</td>
-            <td class="ip">{{ log.ip_address }}</td>
+          <tr *ngFor="let log of logs" class="log-row">
+            <td class="timestamp">
+              <span class="date-part">{{ log.created_at | date:'dd/MM/yyyy' }}</span>
+              <span class="time-part">{{ log.created_at | date:'HH:mm:ss' }}</span>
+            </td>
+            <td class="user-cell">
+              <div class="avatar" [style.background-color]="log.user ? '#4f46e5' : '#6b7280'">
+                {{ log.user ? log.user.nombres.charAt(0) + log.user.apellidos.charAt(0) : 'S' }}
+              </div>
+              <div class="user-details">
+                <span class="user-fullname">{{ log.user ? log.user.nombres + ' ' + log.user.apellidos : 'Sistema / Anónimo' }}</span>
+                <span class="user-role" *ngIf="log.user">{{ log.user.email }}</span>
+              </div>
+            </td>
+            <td>
+              <span class="badge method-badge" [ngClass]="getMethodClass(log.method)">
+                {{ log.method }}
+              </span>
+            </td>
+            <td class="url-cell">
+              <code class="url-text">{{ log.url }}</code>
+            </td>
+            <td>
+              <span class="badge status-badge" [ngClass]="getStatusClass(log.response_status)">
+                {{ log.response_status }}
+              </span>
+            </td>
+            <td class="ip-cell">{{ log.ip_address }}</td>
+            <td class="text-right">
+              <button (click)="viewLogDetails(log)" class="btn-action-view">
+                Detalles
+              </button>
+            </td>
           </tr>
           <tr *ngIf="logs.length === 0 && !loading">
-            <td colspan="6" class="text-center">No hay registros en la bitácora.</td>
+            <td colspan="7" class="text-center empty-cell">
+              <div class="empty-state">
+                <p>No se encontraron registros que coincidan con la búsqueda.</p>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
 
+      <!-- Paginación -->
       <div class="pagination" *ngIf="totalPages > 1">
-        <button [disabled]="currentPage === 1" (click)="loadLogs(currentPage - 1)">Anterior</button>
-        <span>Página {{ currentPage }} de {{ totalPages }}</span>
-        <button [disabled]="currentPage === totalPages" (click)="loadLogs(currentPage + 1)">Siguiente</button>
+        <button [disabled]="currentPage === 1" (click)="loadLogs(currentPage - 1)" class="btn-pag">Anterior</button>
+        <span class="pag-info">Página {{ currentPage }} de {{ totalPages }}</span>
+        <button [disabled]="currentPage === totalPages" (click)="loadLogs(currentPage + 1)" class="btn-pag">Siguiente</button>
       </div>
     </div>
   </main>
+
+  <!-- Modal Detallado de Bitácora -->
+  <div class="modal-backdrop" *ngIf="selectedLog" (click)="closeLogDetails()"></div>
+  <div class="modal-container glass" *ngIf="selectedLog">
+    <div class="modal-header">
+      <h2>Detalle del Log de Auditoría</h2>
+      <button class="modal-close" (click)="closeLogDetails()">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <!-- Grid de Metadatos -->
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span class="meta-label">Fecha y Hora:</span>
+          <span class="meta-value">{{ selectedLog.created_at | date:'dd/MM/yyyy HH:mm:ss' }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">IP del Cliente:</span>
+          <span class="meta-value">{{ selectedLog.ip_address }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Método HTTP:</span>
+          <span class="badge method-badge" [ngClass]="getMethodClass(selectedLog.method)">{{ selectedLog.method }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Estado de Respuesta:</span>
+          <span class="badge status-badge" [ngClass]="getStatusClass(selectedLog.response_status)">{{ selectedLog.response_status }}</span>
+        </div>
+        <div class="meta-item full-width">
+          <span class="meta-label">Ruta Completa:</span>
+          <code class="meta-code-url">{{ selectedLog.url }}</code>
+        </div>
+        <div class="meta-item full-width">
+          <span class="meta-label">Usuario Responsable:</span>
+          <span class="meta-value" *ngIf="selectedLog.user">
+            {{ selectedLog.user.nombres }} {{ selectedLog.user.apellidos }} ({{ selectedLog.user.email }})
+          </span>
+          <span class="meta-value text-muted" *ngIf="!selectedLog.user">Sistema / Petición Anónima</span>
+        </div>
+      </div>
+
+      <!-- JSON del Request -->
+      <div class="json-section">
+        <div class="json-header">
+          <h3>Cuerpo de la Petición (Request Body)</h3>
+        </div>
+        <pre class="json-code"><code>{{ formatJson(selectedLog.request_body) }}</code></pre>
+      </div>
+
+      <!-- JSON del Response -->
+      <div class="json-section">
+        <div class="json-header">
+          <h3>Cuerpo de la Respuesta (Response Body)</h3>
+        </div>
+        <pre class="json-code"><code>{{ formatJson(selectedLog.response_body) }}</code></pre>
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button (click)="closeLogDetails()" class="btn-modal-close">Cerrar Inspector</button>
+    </div>
+  </div>
 </div>

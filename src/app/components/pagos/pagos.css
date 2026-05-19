@@ -105,3 +105,85 @@ textarea {
   color: white;
   min-height: 80px;
 }
+
+.btn-info {
+  background: rgba(14, 165, 233, 0.15);
+  color: #0ea5e9;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+.btn-info:hover {
+  background: #0ea5e9;
+  color: white;
+}
+
+.modal-content.history-modal-content {
+  max-width: 800px;
+  width: 90vw;
+}
+
+.history-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.history-stat-card {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.history-stat-card h4 {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.history-stat-card p {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.history-stat-card.debt-card p {
+  color: var(--danger);
+}
+
+.history-stat-card.income-card p {
+  color: #22c55e;
+}
+
+.history-table-container {
+  max-height: 380px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.history-table-container table {
+  width: 100%;
+}
+
+.history-table-container th {
+  position: sticky;
+  top: 0;
+  background: #111827; /* Dark sticky th background for contrast */
+  z-index: 10;
+}
+
+.badge-charge {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #ef4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.badge-payment {
+  background: rgba(34, 197, 94, 0.1) !important;
+  color: #22c55e !important;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}

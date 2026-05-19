@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { from, Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
@@ -55,14 +55,26 @@ export class OfflineManager {
     );
   }
 
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
+
   private sendRequests(actions: StoredRequest[]): Observable<any> {
+    const headers = this.getHeaders();
     const requests = actions.map(action => {
       if (action.type === 'POST') {
-        return this.http.post(action.url, action.data);
+        return this.http.post(action.url, action.data, { headers });
       } else if (action.type === 'PUT') {
-        return this.http.put(action.url, action.data);
+        return this.http.put(action.url, action.data, { headers });
+      } else if (action.type === 'PATCH') {
+        return this.http.patch(action.url, action.data, { headers });
       } else {
-        return this.http.delete(action.url);
+        return this.http.delete(action.url, { headers });
       }
     });
 

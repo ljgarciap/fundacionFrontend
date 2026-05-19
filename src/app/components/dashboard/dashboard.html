@@ -8,24 +8,18 @@
     <div class="nav-section">
       <div class="nav-section-title">Inicio</div>
       <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" (click)="closeInlineViews()" [class.active]="currentSubview === 'LIST'" class="nav-item">
           <svg class="menu-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg> Dashboard
-        </a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">
-          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> Admisión
         </a>
       </div>
     </div>
 
     <!-- SECCIÓN: CLÍNICA -->
     <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
-      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-title">Terapia</div>
       <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">
-          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg> Psicología
-        </a>
         <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">
-          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg> Terapias Estructuradas
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg> Terapias
         </a>
         <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">
           <svg class="menu-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Agenda
@@ -40,31 +34,43 @@
         <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">
           <svg class="menu-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Ahorros
         </a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">
-          <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Tienda POS
-        </a>
         <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">
           <svg class="menu-icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Contabilidad
-        </a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">
-          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> Compras / Stock
-        </a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">
-          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> Dotación / Lavadas
-        </a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">
-          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Diezmos / Ofrendas
-        </a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">
-          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg> Almuerzos Extra
         </a>
         <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">
           <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> Conceptos Contables
         </a>
       </div>
     </div>
-
-    <!-- SECCIÓN: ADMINISTRACIÓN -->
+      <!-- SECCIÓN: FUNDACIÓN -->
+      <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+        <div class="nav-section-title">Fundación</div>
+        <div class="nav-section-content">
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/servicios" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> Servicios
+          </a>
+          
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path></svg> Control de Salidas
+          </a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Portería
+          </a>
+        </div>
+      </div>
+      <!-- SECCIÓN: TIENDA -->
+      <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+        <div class="nav-section-title">Tienda</div>
+        <div class="nav-section-content">
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Tienda POS
+          </a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> Compras / Stock
+          </a>
+        </div>
+      </div>
+      <!-- SECCIÓN: ADMINISTRACIÓN -->
     <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
       <div class="nav-section-title">Administración</div>
       <div class="nav-section-content">
@@ -74,17 +80,24 @@
         <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">
           <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg> Practicantes
         </a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">
-          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path></svg> Control de Salidas
-        </a>
         <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">
           <svg class="menu-icon" viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"></path><polyline points="17 6 23 6 23 12"></polyline></svg> Reportes
         </a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">
-          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Portería
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Diezmos / Ofrendas
         </a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: SISTEMA -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Sistema</div>
+      <div class="nav-section-content">
         <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">
           <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> Bitácora
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" (click)="setSubview('SISTEMA')" [class.active]="currentSubview === 'SISTEMA'" class="nav-item" style="cursor: pointer;">
+          <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Estado del Sistema
         </a>
       </div>
     </div>
@@ -107,6 +120,22 @@
 </aside>
 
   <main class="content">
+    <!-- Real-time Warning Banner for Active System Notifications -->
+    <div *ngIf="systemNotifications.length > 0 && currentSubview !== 'SISTEMA'" class="system-warning-banner glass" style="margin-bottom: 20px; animation: slideDown 0.3s ease-out; display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap;">
+      <div class="banner-content">
+        <span class="banner-icon">⚠️</span>
+        <div class="banner-text">
+          <strong>Hay {{ systemNotifications.length }} alertas activas de registros incompletos en el sistema.</strong>
+          <span>Algunos residentes no tienen acudiente o historial de ingreso. Esto puede causar fallos al imprimir reportes.</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <button (click)="setSubview('SISTEMA')" class="btn-banner-action">Ir al Panel del Sistema →</button>
+        <button (click)="dismissAllNotifications()" class="btn-banner-action" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 8px 16px; font-weight: 700; cursor: pointer; transition: all 0.2s;">Descartar Alertas 🗑️</button>
+      </div>
+    </div>
+
+    <div *ngIf="currentSubview === 'LIST'" style="display: contents;">
     <header>
       <div class="header-main">
         <h1>Listado de Residentes</h1>
@@ -119,8 +148,13 @@
         </div>
       </div>
       <div class="header-actions">
-        <button class="btn-secondary" (click)="printResidentBarcodes()" style="margin-right: 10px;">🖨️ Listado Barcodes</button>
-        <button class="btn-primary" routerLink="/ingreso">+ Nuevo Residente</button>
+        <button class="btn-secondary" (click)="printSelectedCarnets()" [disabled]="selectedResidentIds.size === 0" style="margin-right: 10px;">
+          Imprimir Carnets ({{ selectedResidentIds.size }})
+        </button>
+        <button class="btn-secondary" (click)="printResidentsReport()" style="margin-right: 10px;">
+          Imprimir {{ filterStatus === 'I' ? 'Inactivos' : 'Activos' }}
+        </button>
+        <button class="btn-primary" (click)="openIngresoInline()">+ Nuevo Residente</button>
       </div>
     </header>
 
@@ -172,6 +206,7 @@
           <option [value]="10">10</option>
           <option [value]="25">25</option>
           <option [value]="50">50</option>
+          <option [value]="100">100</option>
         </select>
       </div>
     </div>
@@ -180,6 +215,9 @@
       <table>
         <thead>
           <tr>
+            <th style="width: 40px; text-align: center; padding: 10px;">
+              <input type="checkbox" (change)="toggleSelectAll()" [checked]="isAllSelected()">
+            </th>
             <th (click)="changeSort('nombresr')" class="sortable">
               Nombre 
               <span class="sort-icon">{{ sortKey === 'nombresr' ? (sortDirection === 'asc' ? '▲' : '▼') : '↕' }}</span>
@@ -198,6 +236,9 @@
         <tbody>
           @for (res of getPaginatedResidents(); track res.idresidentes) {
             <tr>
+              <td style="text-align: center; padding: 10px;">
+                <input type="checkbox" (change)="toggleSelect(res)" [checked]="isSelected(res)">
+              </td>
               <td>{{ res.nombresr }} {{ res.apellidosr }}</td>
               <td>{{ res.documentor }}</td>
               <td>
@@ -222,6 +263,9 @@
                   <button class="btn-icon" (click)="printCarnet(res)" title="Imprimir Carnet">
                     <svg class="btn-svg" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M7 8h10M7 12h6M7 16h2"></path></svg>
                   </button>
+                  <button class="btn-icon" (click)="openPagosInline(res.idresidentes)" title="Abonos y Pensiones" style="color: #2ecc71;">
+                    <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                  </button>
                   <button class="btn-icon" (click)="openStatusModal(res)" [title]="res.estado === 'I' ? 'Reactivar' : 'Inactivar'">
                     <svg *ngIf="res.estado !== 'I'" class="btn-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
                     <svg *ngIf="res.estado === 'I'" class="btn-svg" viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
@@ -231,7 +275,7 @@
             </tr>
           } @empty {
             <tr>
-              <td colspan="4" style="text-align: center; padding: 20px; color: #999;">No se encontraron residentes.</td>
+              <td colspan="5" style="text-align: center; padding: 20px; color: #999;">No se encontraron residentes.</td>
             </tr>
           }
         </tbody>
@@ -515,7 +559,16 @@
           </div>
           <div class="form-group">
             <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Tipo Sanguíneo (RH)</label>
-            <input type="text" [(ngModel)]="editData.resident_data.tipo_sanguineo" placeholder="Ej: O+, A-, AB+" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.02); color: var(--text-main);">
+            <select [(ngModel)]="editData.resident_data.tipo_sanguineo" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="O+">O Positivo (O+)</option>
+              <option value="O-">O Negativo (O-)</option>
+              <option value="A+">A Positivo (A+)</option>
+              <option value="A-">A Negativo (A-)</option>
+              <option value="B+">B Positivo (B+)</option>
+              <option value="B-">B Negativo (B-)</option>
+              <option value="AB+">AB Positivo (AB+)</option>
+              <option value="AB-">AB Negativo (AB-)</option>
+            </select>
           </div>
           <div class="form-group" style="grid-column: span 2;">
             <label style="color: var(--text-muted); font-size: 8.5pt; font-weight: 600; display: block; margin-bottom: 4px;">Padece alguna enfermedad</label>
@@ -699,6 +752,182 @@
           <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
           Guardar Cambios
         </button>
+      </div>
+    </div>
+  </div>
+  </div> <!-- Closes currentSubview === 'LIST' -->
+
+  <!-- Inline subview for Admission -->
+  <div *ngIf="currentSubview === 'INGRESO'" style="animation: fadeIn 0.3s ease-out; width: 100%;">
+    <app-ingreso (onBack)="closeInlineViews()"></app-ingreso>
+  </div>
+
+  <!-- Inline subview for Pagos and Pensiones -->
+  <div *ngIf="currentSubview === 'PAGOS'" style="animation: fadeIn 0.3s ease-out; width: 100%;">
+    <app-pagos [selectedResidentId]="selectedPensionResidentId" (onBack)="closeInlineViews()"></app-pagos>
+  </div>
+
+  <!-- Inline subview for System Diagnostics and Notifications -->
+  <div *ngIf="currentSubview === 'SISTEMA'" class="system-dashboard-view" style="animation: fadeIn 0.3s ease-out; width: 100%;">
+    <div class="system-header glass">
+      <div class="header-left">
+        <h2>🛠️ Panel de Control y Diagnóstico del Sistema</h2>
+        <p class="subtitle">Diagnóstico automático de base de datos, relaciones de residentes, cobros pendientes y alertas.</p>
+      </div>
+      <button (click)="closeInlineViews()" class="btn-back-premium">
+        <span>← Volver al Dashboard</span>
+      </button>
+    </div>
+
+    <!-- Active Notifications Panel -->
+    <div class="notifications-section glass">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+        <div style="flex: 1; min-width: 250px;">
+          <h3 style="margin: 0;">🔔 Notificaciones y Anotaciones del Sistema ({{ systemNotifications.length }})</h3>
+          <p class="section-desc" style="margin: 5px 0 0 0;">Historial de correcciones automáticas y pendientes por revisar manualmente.</p>
+        </div>
+        <button *ngIf="systemNotifications.length > 0" (click)="dismissAllNotifications()" class="btn-dismiss-all" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #ef4444; padding: 10px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;">
+          🗑️ Descartar Todas
+        </button>
+      </div>
+      
+      <div *ngIf="systemNotifications.length === 0" class="no-notifications">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <p>Todo en orden. No hay alertas de datos incompletos activas en este momento.</p>
+      </div>
+
+      <div class="notifications-grid" *ngIf="systemNotifications.length > 0">
+        <div *ngFor="let notif of systemNotifications" class="notif-card glass border-warning">
+          <div class="notif-header">
+            <span class="badge warning">⚠️ {{ notif.titulo }}</span>
+            <span class="notif-time">{{ notif.fecha_creacion }}</span>
+          </div>
+          <p class="notif-desc">{{ notif.descripcion }}</p>
+          <div class="notif-footer">
+            <span *ngIf="notif.residente" class="resident-ref">👤 Residente: <b>{{ notif.residente.nombresr }} {{ notif.residente.apellidosr }}</b></span>
+            <button (click)="dismissNotification(notif.idnotificaciones)" class="btn-dismiss">Entendido / Descartar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Diagnostic Cards Grid -->
+    <div class="system-stats-grid">
+      <div class="stat-card warning-gradient glass">
+        <div class="stat-icon">👤🚫</div>
+        <div class="stat-details">
+          <h3>{{ systemStatus?.incomplete_acudiente_count ?? 0 }}</h3>
+          <p>Residentes sin Acudiente</p>
+          <small>Relaciones huérfanas en la tabla de asociación.</small>
+        </div>
+      </div>
+
+      <div class="stat-card danger-gradient glass">
+        <div class="stat-icon">📄🚫</div>
+        <div class="stat-details">
+          <h3>{{ systemStatus?.incomplete_historial_count ?? 0 }}</h3>
+          <p>Residentes sin Historial</p>
+          <small>Registros faltantes en la tabla historial.</small>
+        </div>
+      </div>
+
+      <div class="stat-card success-gradient glass">
+        <div class="stat-icon">💵🧼</div>
+        <div class="stat-details">
+          <h3>${{ systemStatus?.laundry_outstanding_balance | number:'1.0-0' }} COP</h3>
+          <p>Por Cobrar (Lavandería)</p>
+          <small>Saldo acumulado pendiente en lavadas.</small>
+        </div>
+      </div>
+
+      <div class="stat-card info-gradient glass">
+        <div class="stat-icon">🏠💰</div>
+        <div class="stat-details">
+          <h3>{{ systemStatus?.active_with_pension ?? 0 }} / {{ systemStatus?.total_active_residents ?? 0 }}</h3>
+          <p>Activos con Pensión Configurada</p>
+          <small>Residentes con tarifa mensual definida.</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Auto-Fix Panel -->
+    <div class="autofix-panel glass" *ngIf="(systemStatus?.incomplete_acudiente_count > 0) || (systemStatus?.incomplete_historial_count > 0)">
+      <div class="autofix-info">
+        <h3>⚡ Herramienta de Reparación Automática (Auto-Fix)</h3>
+        <p>
+          Se han detectado registros huérfanos o incompletos. Esta herramienta asignará automáticamente un **Acudiente Genérico** 
+          y creará una **Ficha de Historial por defecto** en blanco para que puedas visualizar, descargar reportes y operar con estos residentes de forma inmediata.
+        </p>
+        <p class="warning-text">
+          ⚠️ <b>Nota:</b> Cada corrección dejará una notificación activa arriba para recordarte que debes editar y rellenar los datos reales del residente posteriormente.
+        </p>
+      </div>
+      <button (click)="autoFixSystem()" class="btn-autofix" [disabled]="fixingSystem">
+        <span *ngIf="!fixingSystem">🔧 Ejecutar Auto-Reparación de Relaciones</span>
+        <span *ngIf="fixingSystem" class="spinner">⚙️ Procesando Reparación...</span>
+      </button>
+    </div>
+
+    <!-- Incomplete Lists Detail -->
+    <div class="incomplete-details-grid">
+      <!-- Table for Missing Acudientes -->
+      <div class="detail-block glass">
+        <h3>Residentes sin Acudiente Asociado ({{ systemStatus?.incomplete_acudiente_count ?? 0 }})</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Residente</th>
+                <th>Documento</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let r of systemStatus?.incomplete_acudiente_list">
+                <td><b>{{ r.nombresr }} {{ r.apellidosr }}</b></td>
+                <td>{{ r.documentor }}</td>
+                <td>
+                  <span class="badge" [class.badge-active]="r.estado === 'A'" [class.badge-inactive]="r.estado === 'I'">
+                    {{ r.estado === 'A' ? 'Activo' : 'Inactivo' }}
+                  </span>
+                </td>
+              </tr>
+              <tr *ngIf="!systemStatus?.incomplete_acudiente_list || systemStatus?.incomplete_acudiente_list.length === 0">
+                <td colspan="3" class="text-center text-muted">Excelente! Ningún residente huérfano de acudiente.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Table for Missing Historial -->
+      <div class="detail-block glass">
+        <h3>Residentes sin Historial de Ingreso ({{ systemStatus?.incomplete_historial_count ?? 0 }})</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Residente</th>
+                <th>Documento</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let r of systemStatus?.incomplete_historial_list">
+                <td><b>{{ r.nombresr }} {{ r.apellidosr }}</b></td>
+                <td>{{ r.documentor }}</td>
+                <td>
+                  <span class="badge" [class.badge-active]="r.estado === 'A'" [class.badge-inactive]="r.estado === 'I'">
+                    {{ r.estado === 'A' ? 'Activo' : 'Inactivo' }}
+                  </span>
+                </td>
+              </tr>
+              <tr *ngIf="!systemStatus?.incomplete_historial_list || systemStatus?.incomplete_historial_list.length === 0">
+                <td colspan="3" class="text-center text-muted">Excelente! Ningún residente huérfano de historial.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

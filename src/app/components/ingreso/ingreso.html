@@ -1,75 +1,4 @@
-<div class="dashboard-layout">
-  <aside class="sidebar glass">
-    <div class="logo">
-      <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
-    </div>
-    <div class="nav-items">
-      <!-- SECCIÓN: INICIO -->
-      <div class="nav-section">
-        <div class="nav-section-title">Inicio</div>
-        <div class="nav-section-content">
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
-        </div>
-      </div>
-
-      <!-- SECCIÓN: CLÍNICA -->
-      <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
-        <div class="nav-section-title">Clínica</div>
-        <div class="nav-section-content">
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
-        </div>
-      </div>
-
-      <!-- SECCIÓN: FINANZAS -->
-      <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
-        <div class="nav-section-title">Finanzas</div>
-        <div class="nav-section-content">
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
-        </div>
-      </div>
-
-      <!-- SECCIÓN: ADMINISTRACIÓN -->
-      <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
-        <div class="nav-section-title">Administración</div>
-        <div class="nav-section-content">
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
-          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="user-info">
-      <p class="user-name">{{ user?.nombres }}</p>
-      <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
-        <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
-          <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
-        </select>
-      </div>
-      <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
-      <button (click)="toggleTheme()" class="btn-theme-toggle">
-        <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
-        <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
-      </button>
-      <button (click)="logout()" class="btn-logout">Salir</button>
-    </div>
-  </aside>
-
-  <main class="content" style="padding: 1.5rem; display: flex; justify-content: center; align-items: flex-start; min-height: calc(100vh - 3rem);">
-    <div class="form-card glass" style="width: 100%; max-width: 900px; padding: 2.5rem; border-radius: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-color); box-shadow: var(--shadow-premium);">
+<div class="form-card glass" style="width: 100%; max-width: 900px; padding: 2.5rem; border-radius: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-color); box-shadow: var(--shadow-premium); margin: 0 auto;">
       <div class="header" style="margin-bottom: 2rem; text-align: center;">
         <h1 style="color: var(--primary); text-transform: uppercase; font-size: 16pt; letter-spacing: 0.5px; border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin: 0 0 1.5rem 0;">Formulario de Ingreso del Residente</h1>
         <div class="stepper" style="display: flex; justify-content: center; align-items: center; gap: 15px; margin: 20px 0;">
@@ -143,6 +72,19 @@
             <div class="form-group">
               <label style="color: var(--text-muted); font-weight: 600;">Seguro Social / EPS</label>
               <input type="text" formControlName="eps" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <div class="form-group">
+              <label style="color: var(--text-muted); font-weight: 600;">Tipo de Sangre / RH</label>
+              <select formControlName="tipo_sanguineo" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="O+">O Positivo (O+)</option>
+                <option value="O-">O Negativo (O-)</option>
+                <option value="A+">A Positivo (A+)</option>
+                <option value="A-">A Negativo (A-)</option>
+                <option value="B+">B Positivo (B+)</option>
+                <option value="B-">B Negativo (B-)</option>
+                <option value="AB+">AB Positivo (AB+)</option>
+                <option value="AB-">AB Negativo (AB-)</option>
+              </select>
             </div>
             <div class="form-group">
               <label style="color: var(--text-muted); font-weight: 600;">Número de Documento</label>
@@ -406,5 +348,3 @@
         </div>
       </div>
     </div>
-  </main>
-</div>

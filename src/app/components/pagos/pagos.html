@@ -1,153 +1,179 @@
-<div class="dashboard-layout">
-  <aside class="sidebar glass">
-  <div class="logo">
-    <img src="assets/images/logob.png" alt="Logo" class="sidebar-logo">
-  </div>
-  <div class="nav-items">
-    <!-- SECCIÓN: INICIO -->
-    <div class="nav-section">
-      <div class="nav-section-title">Inicio</div>
-      <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+<div class="pagos-container">
+  <!-- STATE A: GENERAL RESIDENT PENSION LIST (when selectedPensionForHistory is null) -->
+  <div *ngIf="!selectedPensionForHistory">
+    <header class="page-header">
+      <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+        <button type="button" class="btn-secondary" (click)="onBack.emit()" style="display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 9.5pt; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); cursor: pointer;">
+          <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;"><polyline points="15 18 9 12 15 6"></polyline></svg> Volver al Dashboard
+        </button>
+        <h1 style="margin: 0; font-size: 16pt; color: var(--primary); text-transform: uppercase;">Gestión de Pagos y Pensiones</h1>
       </div>
-    </div>
+          <div class="filters glass">
+            <label>Filtrar por Estado:</label>
+            <select [(ngModel)]="filterState" (change)="applyFilter()">
+              <option value="ALL">Todos los Activos</option>
+              <option value="A">Contabilizar (A)</option>
+              <option value="E">Especiales - No Contabilizar (E)</option>
+            </select>
+          </div>
+        </header>
 
-    <!-- SECCIÓN: CLÍNICA -->
-    <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
-      <div class="nav-section-title">Clínica</div>
-      <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+        <div class="table-container glass">
+          <table>
+            <thead>
+              <tr>
+                <th>Estado</th>
+                <th>Residente</th>
+                <th>Fundación</th>
+                <th>Día Pago</th>
+                <th>Costo Pensión</th>
+                <th>Saldo Pendiente</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of filteredPensiones" [class.special]="p.estado === 'E'">
+                <td>
+                  <span class="badge" [class.active]="p.estado === 'A'" [class.special]="p.estado === 'E'">
+                    {{ p.estado === 'A' ? 'Contabilizar' : 'No Contabilizar' }}
+                  </span>
+                </td>
+                <td>{{ p.nombresr }} {{ p.apellidosr }}</td>
+                <td>{{ p.nomfund }}</td>
+                <td>{{ p.diacobro }}</td>
+                <td>{{ p.valorcobro | currency }}</td>
+                <td [class.debt]="(p.total_cobrado - p.total_abonado) > 0">
+                  {{ (p.total_cobrado - p.total_abonado) | currency }}
+                </td>
+                <td>
+                  <div class="action-buttons">
+                    <button class="btn-sm btn-info" (click)="openHistory(p)">
+                      <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Historial
+                    </button>
+                    <button class="btn-sm btn-primary" (click)="openModal(p, 'ABONO')">
+                      <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Abonar
+                    </button>
+                    <button class="btn-sm btn-secondary" (click)="openModal(p, 'CARGO')">
+                      <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Cargar Mes
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="loading" class="loader">Cargando datos...</div>
+        </div>
       </div>
-    </div>
 
-    <!-- SECCIÓN: FINANZAS -->
-    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
-      <div class="nav-section-title">Finanzas</div>
-      <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
-      </div>
-    </div>
-
-    <!-- SECCIÓN: ADMINISTRACIÓN -->
-    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
-      <div class="nav-section-title">Administración</div>
-      <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="user-info">
-    <p class="user-name">{{ user?.nombres }}</p>
-    <div class="role-switcher-container" *ngIf="user?.roles?.length > 1">
-      <select (change)="switchRole(roleSelect.value)" #roleSelect class="sidebar-role-select">
-        <option *ngFor="let r of user?.roles" [value]="r" [selected]="r === user?.role">🎭 {{ r }}</option>
-      </select>
-    </div>
-    <p class="user-role-label" *ngIf="!user?.roles || user?.roles?.length <= 1">💼 {{ user?.role }}</p>
-    <button (click)="toggleTheme()" class="btn-theme-toggle">
-      <span *ngIf="isDarkTheme()">☀️ Modo Claro</span>
-      <span *ngIf="!isDarkTheme()">🌙 Modo Oscuro</span>
-    </button>
-    <button (click)="logout()" class="btn-logout">Salir</button>
-  </div>
-</aside>
-
-  <main class="content">
-    <div class="pagos-container">
-  <header class="page-header">
-    <h1>Gestión de Pagos y Pensiones</h1>
-    <div class="filters glass">
-      <label>Filtrar por Estado:</label>
-      <select [(ngModel)]="filterState" (change)="applyFilter()">
-        <option value="ALL">Todos los Activos</option>
-        <option value="A">Contabilizar (A)</option>
-        <option value="E">Especiales - No Contabilizar (E)</option>
-      </select>
-    </div>
-  </header>
-
-  <div class="table-container glass">
-    <table>
-      <thead>
-        <tr>
-          <th>Estado</th>
-          <th>Residente</th>
-          <th>Fundación</th>
-          <th>Día Pago</th>
-          <th>Costo Pensión</th>
-          <th>Saldo Pendiente</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let p of filteredPensiones" [class.special]="p.estado === 'E'">
-          <td>
-            <span class="badge" [class.active]="p.estado === 'A'" [class.special]="p.estado === 'E'">
-              {{ p.estado === 'A' ? 'Contabilizar' : 'No Contabilizar' }}
-            </span>
-          </td>
-          <td>{{ p.nombresr }} {{ p.apellidosr }}</td>
-          <td>{{ p.nomfund }}</td>
-          <td>{{ p.diacobro }}</td>
-          <td>{{ p.valorcobro | currency }}</td>
-          <td [class.debt]="(p.total_cobrado - p.total_abonado) > 0">
-            {{ (p.total_cobrado - p.total_abonado) | currency }}
-          </td>
-          <td>
-            <div class="action-buttons">
-              <button class="btn-sm btn-primary" (click)="openModal(p, 'ABONO')">Abonar</button>
-              <button class="btn-sm btn-secondary" (click)="openModal(p, 'CARGO')">Cargar Mes</button>
+      <!-- STATE B: DETAILED FULL-PAGE HISTORY (when selectedPensionForHistory is NOT null) -->
+      <div *ngIf="selectedPensionForHistory">
+        <header class="page-header history-header" style="display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
+          <div class="header-left" style="display: flex; align-items: center; gap: 1.5rem;">
+            <button class="btn-secondary" (click)="closeHistory()" style="display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 500; padding: 6px 12px; border-radius: 6px; cursor: pointer;">
+              <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"><polyline points="15 18 9 12 15 6"></polyline></svg> Volver al Listado
+            </button>
+            <div class="header-titles">
+              <h1 style="margin: 0; font-size: 1.8rem; font-weight: 700;">Historial de Pensiones y Abonos</h1>
+              <p class="residente-name" style="margin: 0.2rem 0 0 0; font-size: 1.15rem; color: #2ecc71; font-weight: 600;">
+                {{ selectedPensionForHistory?.nombresr }} {{ selectedPensionForHistory?.apellidosr }}
+              </p>
             </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div *ngIf="loading" class="loader">Cargando datos...</div>
-  </div>
+          </div>
+          <div class="header-right">
+            <button class="btn-primary" (click)="openAbonoFromHistory()" style="display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; padding: 0.75rem 1.25rem; font-size: 0.95rem;">
+              <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Registrar Nuevo Abono
+            </button>
+          </div>
+        </header>
 
-  <!-- Modal for Abono/Cargo -->
-  <div class="modal-overlay" *ngIf="showModal">
-    <div class="modal-content glass">
-      <h3>{{ modalType === 'ABONO' ? 'Registrar Abono' : 'Generar Cargo Mensual' }}</h3>
-      <p class="residente-name">{{ selectedPension?.nombresr }} {{ selectedPension?.apellidosr }}</p>
-      
-      <div class="form-group">
-        <label>{{ modalType === 'ABONO' ? 'Valor del Abono' : 'Valor del Cargo' }}</label>
-        <input type="number" [(ngModel)]="formData.valor">
-      </div>
-      
-      <div class="form-group">
-        <label>Fecha</label>
-        <input type="date" [(ngModel)]="formData.fecha">
-      </div>
-      
-      <div class="form-group">
-        <label>Comentario</label>
-        <textarea [(ngModel)]="formData.comentario" placeholder="Opcional..."></textarea>
+        <div *ngIf="loadingHistory" class="loader">Cargando historial...</div>
+
+        <div *ngIf="!loadingHistory">
+          <!-- Summarizing stats in the main page area -->
+          <div class="history-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="history-stat-card glass">
+              <h4 style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Total Cargado (Pensiones)</h4>
+              <p style="margin: 0; font-size: 1.8rem; font-weight: 700; color: var(--text);">{{ selectedPensionForHistory?.total_cobrado | currency }}</p>
+            </div>
+            <div class="history-stat-card income-card glass" style="border-left: 4px solid #22c55e;">
+              <h4 style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Total Abonado (Pagos)</h4>
+              <p style="margin: 0; font-size: 1.8rem; font-weight: 700; color: #22c55e;">{{ selectedPensionForHistory?.total_abonado | currency }}</p>
+            </div>
+            <div class="history-stat-card debt-card glass" style="border-left: 4px solid #ef4444;">
+              <h4 style="margin: 0 0 0.5rem 0; font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Saldo Pendiente</h4>
+              <p style="margin: 0; font-size: 1.8rem; font-weight: 700; color: #ef4444;">{{ (selectedPensionForHistory?.total_cobrado - selectedPensionForHistory?.total_abonado) | currency }}</p>
+            </div>
+          </div>
+
+          <!-- History Records Table -->
+          <div class="table-container glass" style="margin-top: 1.5rem;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Concepto / Tipo</th>
+                  <th>Cargo / Valor inicial</th>
+                  <th>Abono / Pago</th>
+                  <th>Saldo al día</th>
+                  <th>Comentario</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let r of getPaginatedHistory()">
+                  <td>{{ r.fechaabono | date:'yyyy-MM-dd' }}</td>
+                  <td>
+                    <span class="badge" [class.badge-charge]="r.valorinicial > 0" [class.badge-payment]="r.abono > 0" [style.background-color]="r.valorinicial > 0 ? '#fee2e2' : '#dcfce7'" [style.color]="r.valorinicial > 0 ? '#ef4444' : '#22c55e'">
+                      {{ r.valorinicial > 0 ? 'Cargo Pensión' : 'Abono Pago' }}
+                    </span>
+                  </td>
+                  <td style="color: #ef4444; font-weight: 500;">{{ r.valorinicial > 0 ? (r.valorinicial | currency) : '-' }}</td>
+                  <td style="color: #22c55e; font-weight: 500;">{{ r.abono > 0 ? (r.abono | currency) : '-' }}</td>
+                  <td style="font-weight: 600;">{{ r.saldoAlDia | currency }}</td>
+                  <td style="font-size: 0.9rem; color: var(--text-muted);">{{ r.comentario || 'N/A' }}</td>
+                </tr>
+                <tr *ngIf="historyRecords.length === 0">
+                  <td colspan="6" style="text-align: center; padding: 3rem; color: var(--text-muted); font-size: 1.1rem;">
+                    No hay registros de pensiones ni abonos para este residente.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <!-- Pagination Footer for History Records -->
+            <div class="pagination-footer" *ngIf="historyTotalPages() > 1" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: rgba(255, 255, 255, 0.02); border-top: 1px solid rgba(255, 255, 255, 0.05);">
+              <button [disabled]="historyCurrentPage === 1" (click)="changeHistoryPage(historyCurrentPage - 1)" class="btn-page" style="padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600;">Anterior</button>
+              <span class="page-info" style="font-size: 0.95rem; color: var(--text-muted);">Página {{ historyCurrentPage }} de {{ historyTotalPages() }} ({{ historyRecords.length }} registros)</span>
+              <button [disabled]="historyCurrentPage === historyTotalPages()" (click)="changeHistoryPage(historyCurrentPage + 1)" class="btn-page" style="padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600;">Siguiente</button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="modal-actions">
-        <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
-        <button class="btn-primary" (click)="submitAction()">Confirmar</button>
+      <!-- Sleek Modal for Abono/Cargo (always overlayed when showModal is true) -->
+      <div class="modal-overlay" *ngIf="showModal">
+        <div class="modal-content glass" style="max-width: 450px;">
+          <h3>{{ modalType === 'ABONO' ? 'Registrar Abono' : 'Generar Cargo Mensual' }}</h3>
+          <p class="residente-name">{{ selectedPension?.nombresr }} {{ selectedPension?.apellidosr }}</p>
+          
+          <div class="form-group">
+            <label>{{ modalType === 'ABONO' ? 'Valor del Abono' : 'Valor del Cargo' }}</label>
+            <input type="number" [(ngModel)]="formData.valor">
+          </div>
+          
+          <div class="form-group">
+            <label>Fecha</label>
+            <input type="date" [(ngModel)]="formData.fecha">
+          </div>
+          
+          <div class="form-group">
+            <label>Comentario</label>
+            <textarea [(ngModel)]="formData.comentario" placeholder="Opcional..."></textarea>
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-secondary" (click)="closeModal()">Cancelar</button>
+            <button class="btn-primary" (click)="submitAction()">Confirmar</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-    </div>
-  </main>
-</div>

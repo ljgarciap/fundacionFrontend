@@ -8,18 +8,22 @@
     <div class="nav-section">
       <div class="nav-section-title">Inicio</div>
       <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">🏠 Dashboard</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA'" routerLink="/ingreso" routerLinkActive="active" class="nav-item">📋 Admisión</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO' || user?.role === 'MINUTA'" routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg> Dashboard
+        </a>
       </div>
     </div>
 
     <!-- SECCIÓN: CLÍNICA -->
     <div class="nav-section" *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'">
-      <div class="nav-section-title">Clínica</div>
+      <div class="nav-section-title">Terapia</div>
       <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/psicologia" routerLinkActive="active" class="nav-item">🧠 Psicología</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">🍀 Terapias Estructuradas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">📅 Agenda</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/terapias" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg> Terapias
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/agenda" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Agenda
+        </a>
       </div>
     </div>
 
@@ -27,27 +31,71 @@
     <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
       <div class="nav-section-title">Finanzas</div>
       <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">💰 Ahorros</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">🛒 Tienda POS</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">📊 Contabilidad</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">📦 Compras / Stock</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/uniformes" routerLinkActive="active" class="nav-item">👕 Dotación / Lavadas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">✝️ Diezmos / Ofrendas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/almuerzos" routerLinkActive="active" class="nav-item">🍽️ Almuerzos Extra</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">🏷️ Conceptos Contables</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/ahorro" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Ahorros
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/contabilidad" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> Contabilidad
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/conceptos" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> Conceptos Contables
+        </a>
       </div>
     </div>
-
-    <!-- SECCIÓN: ADMINISTRACIÓN -->
+      <!-- SECCIÓN: FUNDACIÓN -->
+      <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+        <div class="nav-section-title">Fundación</div>
+        <div class="nav-section-content">
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/servicios" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg> Servicios
+          </a>
+          
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path></svg> Control de Salidas
+          </a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> Portería
+          </a>
+        </div>
+      </div>
+      <!-- SECCIÓN: TIENDA -->
+      <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE' && user?.role !== 'MINUTA' && user?.role !== 'PSICOLOGO' && user?.role !== 'PRACTICANTE' && user?.role !== 'TERAPEUTA_G' && user?.role !== 'PSICO'">
+        <div class="nav-section-title">Tienda</div>
+        <div class="nav-section-content">
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/tienda" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Tienda POS
+          </a>
+          <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/compras" routerLinkActive="active" class="nav-item">
+            <svg class="menu-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> Compras / Stock
+          </a>
+        </div>
+      </div>
+      <!-- SECCIÓN: ADMINISTRACIÓN -->
     <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
       <div class="nav-section-title">Administración</div>
       <div class="nav-section-content">
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">👥 Usuarios</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">🎓 Practicantes</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/permisos" routerLinkActive="active" class="nav-item">🚪 Control de Salidas</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">📈 Reportes</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/minuta" routerLinkActive="active" class="nav-item">📝 Portería</a>
-        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">📜 Bitácora</a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/usuarios" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> Usuarios
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/practicantes" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg> Practicantes
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA'" routerLink="/reportes" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"></path><polyline points="17 6 23 6 23 12"></polyline></svg> Reportes
+        </a>
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'CAJERO'" routerLink="/diezmos" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> Diezmos / Ofrendas
+        </a>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: SISTEMA -->
+    <div class="nav-section" *ngIf="user?.role !== 'RESIDENTE' && user?.role !== 'ACUDIENTE'">
+      <div class="nav-section-title">Sistema</div>
+      <div class="nav-section-content">
+        <a *ngIf="user?.role === 'SADMIN' || user?.role === 'ADMIN' || user?.role === 'BDA' || user?.role === 'MINUTA' || user?.role === 'PLANTA' || user?.role === 'CAJERO' || user?.role === 'PSICOLOGO' || user?.role === 'PRACTICANTE' || user?.role === 'TERAPEUTA_G' || user?.role === 'PSICO'" routerLink="/bitacora" routerLinkActive="active" class="nav-item">
+          <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> Bitácora
+        </a>
       </div>
     </div>
   </div>
@@ -73,15 +121,23 @@
       <section class="residents-list glass">
         <header>
           <h3>Residentes</h3>
+          <div class="search-box">
+            <input type="text" [(ngModel)]="searchQuery" (input)="currentPage = 1" placeholder="Buscar residente...">
+          </div>
         </header>
         <div class="list-container">
-          <div *ngFor="let res of residents" 
+          <div *ngFor="let res of getPaginatedResidents()" 
                class="resident-item" 
                [class.active]="selectedResident?.idresidentes === res.idresidentes"
                (click)="viewSeguimientos(res)">
             <p class="name">{{ res.nombresr }} {{ res.apellidosr }}</p>
             <p class="meta">{{ res.documentor }} - {{ res.eps }}</p>
           </div>
+        </div>
+        <div class="sidebar-pagination" *ngIf="totalPages() > 1">
+          <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="btn-page">◀</button>
+          <span class="page-info">{{ currentPage }} / {{ totalPages() }}</span>
+          <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages()" class="btn-page">▶</button>
         </div>
       </section>
 

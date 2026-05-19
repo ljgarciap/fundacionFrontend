@@ -19,6 +19,11 @@ export class Psicologia implements OnInit {
   seguimientos: any[] = [];
   loading = true;
   showModal = false;
+
+  // Search and Pagination
+  searchQuery = '';
+  currentPage = 1;
+  pageSize = 15;
   
   formData = {
     resumen: '',
@@ -28,6 +33,32 @@ export class Psicologia implements OnInit {
     fecha: new Date().toISOString().split('T')[0],
     hora: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
   };
+
+  getFilteredResidents() {
+    if (!this.residents) return [];
+    const q = this.searchQuery.toLowerCase().trim();
+    if (!q) return this.residents;
+    return this.residents.filter(r =>
+      `${r.nombresr || ''} ${r.apellidosr || ''}`.toLowerCase().includes(q) ||
+      (r.documentor || '').toLowerCase().includes(q)
+    );
+  }
+
+  getPaginatedResidents() {
+    const filtered = this.getFilteredResidents();
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return filtered.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  totalPages() {
+    return Math.ceil(this.getFilteredResidents().length / this.pageSize);
+  }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage = page;
+    }
+  }
 
   constructor(
     private api: Api,
